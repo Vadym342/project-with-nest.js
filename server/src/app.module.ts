@@ -1,4 +1,3 @@
-import { TestService } from './testGraphQl/test.service';
 import { TestModule } from './testGraphQl/test.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
