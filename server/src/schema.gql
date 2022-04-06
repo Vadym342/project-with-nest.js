@@ -2,10 +2,51 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type User {
+  id: Int!
+  name: String
+  email: String!
+  password: String!
+  role: String!
+}
+
+type Order {
+  id: Int!
+  creatorId: Int!
+  status: String!
+}
+
+type Organization {
+  id: Int!
+  name: String!
+}
+
 type Test {
   word: String!
 }
 
 type Query {
   test: [Test!]!
+  getAll: [User!]!
+  getUser(id: Int!): User!
+  getAllOrganizations: [Organization!]!
+}
+
+type Mutation {
+  createUser(userDto: CreateUserDto!): User!
+  createOrganization(organizationDto: CreateOrganizationDto!): Organization!
+  createOrder(orderDto: CreateOrderDto!): Order!
+}
+
+input CreateUserDto {
+  email: String!
+  password: String!
+}
+
+input CreateOrganizationDto {
+  name: String!
+}
+
+input CreateOrderDto {
+  creatorId: Float!
 }
