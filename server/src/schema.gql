@@ -7,46 +7,36 @@ type User {
   name: String
   email: String!
   password: String!
-  role: String!
+  role: Roles!
 }
 
-type Order {
-  id: Int!
-  creatorId: Int!
-  status: String!
-}
-
-type Organization {
-  id: Int!
-  name: String!
-}
-
-type Test {
-  word: String!
+enum Roles {
+  USER
+  ADMIN
 }
 
 type Query {
-  test: [Test!]!
-  getAll: [User!]!
-  getUser(id: Int!): User!
-  getAllOrganizations: [Organization!]!
+  getAllUsers: [User!]!
+  getOneUser(id: Int!): User!
 }
 
 type Mutation {
-  createUser(userDto: CreateUserDto!): User!
-  createOrganization(organizationDto: CreateOrganizationDto!): Organization!
-  createOrder(orderDto: CreateOrderDto!): Order!
+  createUser(userDto: CreateUserInput!): User!
+  updateUser(updateUserDto: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
 }
 
-input CreateUserDto {
+input CreateUserInput {
+  name: String!
   email: String!
   password: String!
+  role: Roles!
 }
 
-input CreateOrganizationDto {
-  name: String!
-}
-
-input CreateOrderDto {
-  creatorId: Float!
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  role: Roles
+  id: Int!
 }
