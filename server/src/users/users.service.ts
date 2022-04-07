@@ -8,9 +8,9 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(@InjectModel(User) private userRepository: typeof User) { }
 
-  async createUser(dto: CreateUserInput): Promise<User> {
+  async createUser(userDto: CreateUserInput): Promise<User> {
     try {
-      const user = await this.userRepository.create(dto);
+      const user = await this.userRepository.create(userDto);
       return user;
     } catch (e) {
       throw Error(e);

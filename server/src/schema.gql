@@ -8,6 +8,7 @@ type User {
   email: String!
   password: String!
   role: Roles!
+  organizationId: Int!
 }
 
 enum Roles {
@@ -15,15 +16,25 @@ enum Roles {
   ADMIN
 }
 
+type Organization {
+  id: Int!
+  name: String!
+}
+
 type Query {
   getAllUsers: [User!]!
   getOneUser(id: Int!): User!
+  getAllOrganizations: [Organization!]!
+  getOneOrganization(id: Int!): Organization!
 }
 
 type Mutation {
   createUser(userDto: CreateUserInput!): User!
   updateUser(updateUserDto: UpdateUserInput!): User!
   removeUser(id: Int!): User!
+  createOrganization(organizationDto: CreateOrganizationInput!): Organization!
+  updateOrganization(updateOrganizationInput: UpdateOrganizationInput!): Organization!
+  removeOrganization(id: Int!): Organization!
 }
 
 input CreateUserInput {
@@ -38,5 +49,14 @@ input UpdateUserInput {
   email: String
   password: String
   role: Roles
+  id: Int!
+}
+
+input CreateOrganizationInput {
+  name: String!
+}
+
+input UpdateOrganizationInput {
+  name: String
   id: Int!
 }
