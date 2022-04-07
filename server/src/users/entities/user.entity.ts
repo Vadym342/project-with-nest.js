@@ -1,6 +1,7 @@
+import { Order } from './../../orders/entities/order.entity';
 import { Organization } from './../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from "@nestjs/graphql";
-import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table } from "sequelize-typescript";
 
 interface UserCreationAttrs {
   email: string;
@@ -36,15 +37,19 @@ export class User extends Model<User, UserCreationAttrs>{
   @Field()
   password: string;
 
-  @Column({ type: DataType.ENUM({ values: Object.keys(Roles)}), allowNull:false, defaultValue: Roles.USER})
+  // @Column({ type: DataType.ENUM({ values: Object.keys(Roles)}), defaultValue: Roles.USER})
+  @Column
   @Field(() => Roles)
-  role: Roles
+  role: Roles;
 
   @ForeignKey(() => Organization)
   @Column({ type: DataType.INTEGER})
   @Field(type => Int)
-  organizationId: number
+  organizationId: number;
 
   @BelongsTo(()=> Organization)
-  organization: Organization
+  organization: Organization;
+
+  @HasMany(()=>Order)
+  orders: Order[];
 }

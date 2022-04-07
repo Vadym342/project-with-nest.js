@@ -2,6 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Order {
+  id: Int!
+  creatorId: Int!
+  status: Statuses!
+}
+
+enum Statuses {
+  PENDING
+  REJECTED
+  ACCEPTED
+}
+
 type User {
   id: Int!
   name: String
@@ -26,6 +38,8 @@ type Query {
   getOneUser(id: Int!): User!
   getAllOrganizations: [Organization!]!
   getOneOrganization(id: Int!): Organization!
+  getAllOrders: [Order!]!
+  getOneOrder(id: Int!): Order!
 }
 
 type Mutation {
@@ -35,6 +49,9 @@ type Mutation {
   createOrganization(organizationDto: CreateOrganizationInput!): Organization!
   updateOrganization(updateOrganizationInput: UpdateOrganizationInput!): Organization!
   removeOrganization(id: Int!): Organization!
+  createOrder(orderDto: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
 }
 
 input CreateUserInput {
@@ -58,5 +75,16 @@ input CreateOrganizationInput {
 
 input UpdateOrganizationInput {
   name: String
+  id: Int!
+}
+
+input CreateOrderInput {
+  creatorId: Int!
+  status: Statuses!
+}
+
+input UpdateOrderInput {
+  creatorId: Int
+  status: Statuses
   id: Int!
 }

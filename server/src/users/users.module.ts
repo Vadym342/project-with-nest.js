@@ -8,6 +8,6 @@ import { User } from './entities/user.entity';
   imports: [
     SequelizeModule.forFeature([User]),
   ],
-  providers: [UsersResolver, UsersService]
+  providers: [UsersResolver, UsersService],
 })
 export class UsersModule { }

@@ -7,6 +7,8 @@ import { join } from 'path';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/entities/user.entity';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -19,12 +21,13 @@ import { OrganizationsModule } from './organizations/organizations.module';
       port: 5432,
       username: 'postgres',
       password: 'root',
-      database: 'nest-practice',
-      models: [User,Organization],
+      database: 'nestjs',
+      models: [User, Organization, Order],
       autoLoadModels: true,
     }),
     UsersModule,
     OrganizationsModule,
+    OrdersModule,
   ],
 })
 export class AppModule { }
