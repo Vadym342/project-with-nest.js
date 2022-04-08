@@ -39,7 +39,6 @@ export class User extends Model<User, UserCreationAttrs> {
   @Field()
   password: string;
 
-  //@Column({ type: DataType.ENUM({ values: Object.keys(Roles)}), allowNull:false, defaultValue: Roles.USER})
   @Column
   @Field(() => Roles)
   role: Roles;
