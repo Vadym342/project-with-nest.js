@@ -6,7 +6,7 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userRepository: typeof User) { }
+  constructor(@InjectModel(User) private userRepository: typeof User) {}
 
   async createUser(dto: CreateUserInput): Promise<User> {
     try {
@@ -34,7 +34,10 @@ export class UsersService {
     }
   }
 
-  async updateUser(id: number, updateUserInput: UpdateUserInput): Promise<User> {
+  async updateUser(
+    id: number,
+    updateUserInput: UpdateUserInput,
+  ): Promise<User> {
     try {
       const user = await this.userRepository.findByPk(id);
       if (user) {
