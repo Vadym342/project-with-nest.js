@@ -6,11 +6,18 @@ import { Organization } from './entities/organization.entity';
 
 @Injectable()
 export class OrganizationsService {
-  constructor(@InjectModel(Organization) private organizationRepository: typeof Organization) { }
+  constructor(
+    @InjectModel(Organization)
+    private organizationRepository: typeof Organization,
+  ) {}
 
-  async createOrganization(organizationDto: CreateOrganizationInput): Promise<Organization> {
+  async createOrganization(
+    organizationDto: CreateOrganizationInput,
+  ): Promise<Organization> {
     try {
-      const organization = await this.organizationRepository.create(organizationDto);
+      const organization = await this.organizationRepository.create(
+        organizationDto,
+      );
       return organization;
     } catch (e) {
       throw Error(e);
@@ -31,7 +38,10 @@ export class OrganizationsService {
     }
   }
 
-  async updateOrganization(id: number, updateOrganizationInput: UpdateOrganizationInput): Promise<Organization>  {
+  async updateOrganization(
+    id: number,
+    updateOrganizationInput: UpdateOrganizationInput,
+  ): Promise<Organization> {
     try {
       const organization = await this.organizationRepository.findByPk(id);
       if (organization) {
@@ -44,7 +54,7 @@ export class OrganizationsService {
     }
   }
 
-  async removeOrganization(id: number): Promise<Organization>  {
+  async removeOrganization(id: number): Promise<Organization> {
     try {
       const organization = await this.organizationRepository.findByPk(id);
       if (organization) {
@@ -56,4 +66,3 @@ export class OrganizationsService {
     }
   }
 }
-

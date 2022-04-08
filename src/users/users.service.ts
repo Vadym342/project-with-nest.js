@@ -6,21 +6,21 @@ import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userRepository: typeof User) { }
+  constructor(@InjectModel(User) private userRepository: typeof User) {}
 
   async createUser(userDto: CreateUserInput): Promise<User> {
-      const user = await this.userRepository.create(userDto);
-      return user;
+    const user = await this.userRepository.create(userDto);
+    return user;
   }
-  
+
   async getAllUsers(): Promise<User[]> {
-      const users = await this.userRepository.findAll();
-      return users;
+    const users = await this.userRepository.findAll();
+    return users;
   }
 
   async getOneUser(id: number): Promise<User> {
-      const user = await this.userRepository.findByPk(id);
-      return user;
+    const user = await this.userRepository.findByPk(id);
+    return user;
   }
 
   async updateUser(
