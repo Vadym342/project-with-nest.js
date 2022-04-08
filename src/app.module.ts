@@ -16,7 +16,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     TestModule,
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`
+      envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -27,8 +27,9 @@ import { ConfigModule } from '@nestjs/config';
       database: process.env.POSTGRES_DB,
       models: [],
       autoLoadModels: true,
-    }),],
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

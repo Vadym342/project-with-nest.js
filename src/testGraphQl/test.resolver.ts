@@ -1,13 +1,13 @@
 import { TestService } from './test.service';
-import { Resolver ,Query } from "@nestjs/graphql";
+import { Resolver, Query } from '@nestjs/graphql';
 import { Test } from './test.entity';
 
-@Resolver(of => Test)
+@Resolver((of) => Test)
 export class TestResolver {
-    constructor(private testService: TestService) { }
+  constructor(private testService: TestService) {}
 
-    @Query(returns => [Test])
-    test(): Promise<Test[]> {
-        return this.testService.returnTest();
-    }
+  @Query((returns) => [Test])
+  test(): Promise<Test[]> {
+    return this.testService.returnTest();
+  }
 }

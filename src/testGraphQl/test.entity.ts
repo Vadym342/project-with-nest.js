@@ -1,7 +1,7 @@
-import { Field, ObjectType } from "@nestjs/graphql";
+import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class Test {
-    @Field()
-    word : string;
+  @Field()
+  word: string;
 }
