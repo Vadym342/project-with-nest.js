@@ -1,5 +1,5 @@
-import { Field, InputType, Int } from "@nestjs/graphql";
-import { Statuses } from "../entities/order.entity";
+import { Field, InputType, Int } from '@nestjs/graphql';
+import { Statuses } from '../entities/order.entity';
 
 @InputType()
 export class CreateOrderInput {

@@ -54,14 +54,13 @@ export class User extends Model<User, UserCreationAttrs> {
   role: Roles;
 
   @ForeignKey(() => Organization)
-  @Column({ type: DataType.INTEGER})
-  @Field(type => Int)
+  @Column({ type: DataType.INTEGER })
+  @Field((type) => Int)
   organizationId: number;
 
-  @BelongsTo(()=> Organization)
+  @BelongsTo(() => Organization)
   organization: Organization;
 
-  @HasMany(()=>Order)
+  @HasMany(() => Order)
   orders: Order[];
 }
-

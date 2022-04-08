@@ -6,10 +6,13 @@ import { UpdateOrderInput } from './dto/update-order.input';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-  constructor(private readonly ordersService: OrdersService) { }
+  constructor(private readonly ordersService: OrdersService) {}
 
   @Mutation(() => Order)
-  createOrder(@Args('orderDto', { type: () => CreateOrderInput }) orderDto: CreateOrderInput) {
+  createOrder(
+    @Args('orderDto', { type: () => CreateOrderInput })
+    orderDto: CreateOrderInput,
+  ) {
     return this.ordersService.createOrder(orderDto);
   }
 
@@ -24,8 +27,14 @@ export class OrdersResolver {
   }
 
   @Mutation(() => Order)
-  updateOrder(@Args('updateOrderInput', { type: () => UpdateOrderInput }) updateOrderInput: UpdateOrderInput) {
-    return this.ordersService.updateOrder(updateOrderInput.id, updateOrderInput);
+  updateOrder(
+    @Args('updateOrderInput', { type: () => UpdateOrderInput })
+    updateOrderInput: UpdateOrderInput,
+  ) {
+    return this.ordersService.updateOrder(
+      updateOrderInput.id,
+      updateOrderInput,
+    );
   }
 
   @Mutation(() => Order)

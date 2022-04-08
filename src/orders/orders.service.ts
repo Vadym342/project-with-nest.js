@@ -9,12 +9,14 @@ import { User } from 'src/users/entities/user.entity';
 export class OrdersService {
   constructor(
     @InjectModel(Order) private orderRepository: typeof Order,
-    @InjectModel(User) private userRepository: typeof User
-  ) { }
+    @InjectModel(User) private userRepository: typeof User,
+  ) {}
 
   async createOrder(orderDto: CreateOrderInput): Promise<Order> {
     try {
-      const user = await this.userRepository.findOne({ where: { id: orderDto.creatorId } });
+      const user = await this.userRepository.findOne({
+        where: { id: orderDto.creatorId },
+      });
       if (user) {
         const order = await this.orderRepository.create(orderDto);
         return order;
@@ -42,7 +44,10 @@ export class OrdersService {
     }
   }
 
-  async updateOrder(id: number, updateOrderInput: UpdateOrderInput): Promise<Order> {
+  async updateOrder(
+    id: number,
+    updateOrderInput: UpdateOrderInput,
+  ): Promise<Order> {
     try {
       const order = await this.orderRepository.findByPk(id);
       if (order) {

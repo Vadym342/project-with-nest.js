@@ -7,9 +7,7 @@ import { User } from 'src/users/entities/user.entity';
 import { Organization } from 'src/organizations/entities/organization.entity';
 
 @Module({
-  imports: [
-    SequelizeModule.forFeature([Order,User,Organization]),
-  ],
+  imports: [SequelizeModule.forFeature([Order, User, Organization])],
   providers: [OrdersResolver, OrdersService],
 })
 export class OrdersModule {}
