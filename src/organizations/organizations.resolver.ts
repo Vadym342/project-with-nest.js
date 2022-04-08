@@ -6,10 +6,13 @@ import { UpdateOrganizationInput } from './dto/update-organization.input';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
-  constructor(private readonly organizationsService: OrganizationsService) { }
+  constructor(private readonly organizationsService: OrganizationsService) {}
 
   @Mutation(() => Organization)
-  createOrganization(@Args('organizationDto', { type: () => CreateOrganizationInput }) organizationDto: CreateOrganizationInput) {
+  createOrganization(
+    @Args('organizationDto', { type: () => CreateOrganizationInput })
+    organizationDto: CreateOrganizationInput,
+  ) {
     return this.organizationsService.createOrganization(organizationDto);
   }
 
@@ -24,8 +27,14 @@ export class OrganizationsResolver {
   }
 
   @Mutation(() => Organization)
-  updateOrganization(@Args('updateOrganizationInput') updateOrganizationInput: UpdateOrganizationInput) {
-    return this.organizationsService.updateOrganization(updateOrganizationInput.id, updateOrganizationInput);
+  updateOrganization(
+    @Args('updateOrganizationInput')
+    updateOrganizationInput: UpdateOrganizationInput,
+  ) {
+    return this.organizationsService.updateOrganization(
+      updateOrganizationInput.id,
+      updateOrganizationInput,
+    );
   }
 
   @Mutation(() => Organization)
