@@ -13,7 +13,7 @@ import { ConfigModule } from '@nestjs/config';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`
+      envFilePath: `.${process.env.NODE_ENV}.env`,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
@@ -28,4 +28,4 @@ import { ConfigModule } from '@nestjs/config';
     UsersModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}
