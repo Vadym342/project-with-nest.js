@@ -1,7 +1,6 @@
 import { Organization } from './../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from "@nestjs/graphql";
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
-
 interface UserCreationAttrs {
   email: string;
   password: string;
@@ -18,10 +17,14 @@ registerEnumType(Roles, {
 
 @ObjectType()
 @Table({ tableName: 'users' })
-export class User extends Model<User, UserCreationAttrs>{
-
-  @Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
-  @Field(type => Int)
+export class User extends Model<User, UserCreationAttrs> {
+  @Column({
+    type: DataType.INTEGER,
+    unique: true,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  @Field((type) => Int)
   id: number;
 
   @Column({ type: DataType.STRING })
@@ -36,7 +39,7 @@ export class User extends Model<User, UserCreationAttrs>{
   @Field()
   password: string;
 
-  @Column({ type: DataType.ENUM({ values: Object.keys(Roles)}), allowNull:false, defaultValue: Roles.USER})
+  @Column
   @Field(() => Roles)
   role: Roles
 
