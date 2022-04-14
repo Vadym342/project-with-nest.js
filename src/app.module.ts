@@ -10,6 +10,8 @@ import { OrganizationsModule } from './models/organizations/organizations.module
 import { OrdersModule } from './models/orders/orders.module';
 import { Order } from './models/orders/entities/order.entity';
 import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './models/auth/auth.module';
+import { auth0Config } from 'config/auth0Config';
 
 @Module({
   imports: [
@@ -30,6 +32,7 @@ import { ConfigModule } from '@nestjs/config';
       models: [User, Organization, Order],
       autoLoadModels: true,
     }),
+    AuthModule,
     UsersModule,
     OrganizationsModule,
     OrdersModule,
