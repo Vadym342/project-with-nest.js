@@ -6,7 +6,7 @@ import { UpdateOrganizationInput } from './dto/update-organization.input';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
-  constructor(private readonly organizationsService: OrganizationsService) { }
+  constructor(private readonly organizationsService: OrganizationsService) {}
 
   @Mutation(() => Organization)
   createOrganization(
@@ -22,7 +22,9 @@ export class OrganizationsResolver {
   }
 
   @Query(() => Organization, { name: 'getOneOrganization' })
-  getOneOrganization(@Args('id', { type: () => Int }) id: number): Promise<Organization> {
+  getOneOrganization(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Organization> {
     return this.organizationsService.getOneOrganization(id);
   }
 
@@ -38,7 +40,9 @@ export class OrganizationsResolver {
   }
 
   @Mutation(() => Organization)
-  removeOrganization(@Args('id', { type: () => Int }) id: number): Promise<Organization> {
+  removeOrganization(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Organization> {
     return this.organizationsService.removeOrganization(id);
   }
 }

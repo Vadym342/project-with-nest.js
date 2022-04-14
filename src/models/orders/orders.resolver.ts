@@ -6,7 +6,7 @@ import { UpdateOrderInput } from './dto/update-order.input';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-  constructor(private readonly ordersService: OrdersService) { }
+  constructor(private readonly ordersService: OrdersService) {}
 
   @Mutation(() => Order)
   createOrder(

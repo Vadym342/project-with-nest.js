@@ -9,7 +9,7 @@ export class OrganizationsService {
   constructor(
     @InjectModel(Organization)
     private organizationRepository: typeof Organization,
-  ) { }
+  ) {}
 
   async createOrganization(
     organizationDto: CreateOrganizationInput,

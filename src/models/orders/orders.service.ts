@@ -10,7 +10,7 @@ export class OrdersService {
   constructor(
     @InjectModel(Order) private orderRepository: typeof Order,
     @InjectModel(User) private userRepository: typeof User,
-  ) { }
+  ) {}
 
   async createOrder(orderDto: CreateOrderInput): Promise<Order> {
     const user = await this.userRepository.findOne({
