@@ -7,7 +7,10 @@ import { join } from 'path';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/entities/user.entity';
 import { OrganizationsModule } from './organizations/organizations.module';
+import { OrdersModule } from './orders/orders.module';
+import { Order } from './orders/entities/order.entity';
 import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -24,11 +27,12 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Organization],
+      models: [User, Organization, Order],
       autoLoadModels: true,
     }),
     UsersModule,
     OrganizationsModule,
+    OrdersModule,
   ],
 })
 export class AppModule {}

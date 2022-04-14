@@ -1,3 +1,4 @@
+import { Order } from './../../orders/entities/order.entity';
 import { Organization } from './../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import {
@@ -5,9 +6,11 @@ import {
   Column,
   DataType,
   ForeignKey,
+  HasMany,
   Model,
   Table,
 } from 'sequelize-typescript';
+
 interface UserCreationAttrs {
   email: string;
   password: string;
@@ -57,4 +60,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsTo(() => Organization)
   organization: Organization;
+
+  @HasMany(() => Order)
+  orders: Order[];
 }
