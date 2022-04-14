@@ -1,12 +1,11 @@
+import { UsersModule } from './users/users.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { User } from './users/entities/user.entity';
 import { ConfigModule } from '@nestjs/config';
-
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -23,11 +22,10 @@ import { ConfigModule } from '@nestjs/config';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [],
+      models: [User],
       autoLoadModels: true,
     }),
+    UsersModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

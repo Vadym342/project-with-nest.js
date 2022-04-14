@@ -2,10 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Test {
-  word: String!
+type User {
+  id: Int!
+  name: String
+  email: String!
+  password: String!
+  role: Roles!
+}
+
+enum Roles {
+  USER
+  ADMIN
 }
 
 type Query {
-  test: [Test!]!
+  getAllUsers: [User!]!
+  getOneUser(id: Int!): User!
+}
+
+type Mutation {
+  createUser(userDto: CreateUserInput!): User!
+  updateUser(updateUserDto: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Roles!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  role: Roles
+  id: Int!
 }
