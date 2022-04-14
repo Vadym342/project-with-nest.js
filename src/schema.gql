@@ -2,10 +2,89 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Test {
-  word: String!
+type Order {
+  id: Int!
+  creatorId: Int!
+  status: Statuses!
+}
+
+enum Statuses {
+  PENDING
+  REJECTED
+  ACCEPTED
+}
+
+type User {
+  id: Int!
+  name: String
+  email: String!
+  password: String!
+  role: Roles!
+  organizationId: Int!
+}
+
+enum Roles {
+  USER
+  ADMIN
+}
+
+type Organization {
+  id: Int!
+  name: String!
 }
 
 type Query {
-  test: [Test!]!
+  getAllUsers: [User!]!
+  getOneUser(id: Int!): User!
+  getAllOrganizations: [Organization!]!
+  getOneOrganization(id: Int!): Organization!
+  getAllOrders: [Order!]!
+  getOneOrder(id: Int!): Order!
+}
+
+type Mutation {
+  createUser(userDto: CreateUserInput!): User!
+  updateUser(updateUserDto: UpdateUserInput!): User!
+  removeUser(id: Int!): User!
+  createOrganization(organizationDto: CreateOrganizationInput!): Organization!
+  updateOrganization(updateOrganizationInput: UpdateOrganizationInput!): Organization!
+  removeOrganization(id: Int!): Organization!
+  createOrder(orderDto: CreateOrderInput!): Order!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  removeOrder(id: Int!): Order!
+}
+
+input CreateUserInput {
+  name: String!
+  email: String!
+  password: String!
+  role: Roles!
+}
+
+input UpdateUserInput {
+  name: String
+  email: String
+  password: String
+  role: Roles
+  id: Int!
+}
+
+input CreateOrganizationInput {
+  name: String!
+}
+
+input UpdateOrganizationInput {
+  name: String
+  id: Int!
+}
+
+input CreateOrderInput {
+  creatorId: Int!
+  status: Statuses!
+}
+
+input UpdateOrderInput {
+  creatorId: Int
+  status: Statuses
+  id: Int!
 }
