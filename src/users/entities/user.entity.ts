@@ -1,6 +1,13 @@
+import { Organization } from './../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
-
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
 interface UserCreationAttrs {
   email: string;
   password: string;
@@ -42,4 +49,12 @@ export class User extends Model<User, UserCreationAttrs> {
   @Column
   @Field(() => Roles)
   role: Roles;
+
+  @ForeignKey(() => Organization)
+  @Column({ type: DataType.INTEGER })
+  @Field((type) => Int)
+  organizationId: number;
+
+  @BelongsTo(() => Organization)
+  organization: Organization;
 }
