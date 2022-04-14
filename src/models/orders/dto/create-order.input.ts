@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { Statuses } from '../entities/order.entity';
+import { Statuses } from '../constants/enums/statuses.enum';
 
 @InputType()
 export class CreateOrderInput {

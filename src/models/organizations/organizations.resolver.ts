@@ -6,23 +6,23 @@ import { UpdateOrganizationInput } from './dto/update-organization.input';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
-  constructor(private readonly organizationsService: OrganizationsService) {}
+  constructor(private readonly organizationsService: OrganizationsService) { }
 
   @Mutation(() => Organization)
   createOrganization(
     @Args('organizationDto', { type: () => CreateOrganizationInput })
     organizationDto: CreateOrganizationInput,
-  ) {
+  ): Promise<Organization> {
     return this.organizationsService.createOrganization(organizationDto);
   }
 
   @Query(() => [Organization], { name: 'getAllOrganizations' })
-  getAllOrganizations() {
+  getAllOrganizations(): Promise<Organization[]> {
     return this.organizationsService.getAllOrganizations();
   }
 
   @Query(() => Organization, { name: 'getOneOrganization' })
-  getOneOrganization(@Args('id', { type: () => Int }) id: number) {
+  getOneOrganization(@Args('id', { type: () => Int }) id: number): Promise<Organization> {
     return this.organizationsService.getOneOrganization(id);
   }
 
@@ -30,7 +30,7 @@ export class OrganizationsResolver {
   updateOrganization(
     @Args('updateOrganizationInput')
     updateOrganizationInput: UpdateOrganizationInput,
-  ) {
+  ): Promise<Organization> {
     return this.organizationsService.updateOrganization(
       updateOrganizationInput.id,
       updateOrganizationInput,
@@ -38,7 +38,7 @@ export class OrganizationsResolver {
   }
 
   @Mutation(() => Organization)
-  removeOrganization(@Args('id', { type: () => Int }) id: number) {
+  removeOrganization(@Args('id', { type: () => Int }) id: number): Promise<Organization> {
     return this.organizationsService.removeOrganization(id);
   }
 }

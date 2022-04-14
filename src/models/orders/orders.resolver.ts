@@ -6,23 +6,23 @@ import { UpdateOrderInput } from './dto/update-order.input';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(private readonly ordersService: OrdersService) { }
 
   @Mutation(() => Order)
   createOrder(
     @Args('orderDto', { type: () => CreateOrderInput })
     orderDto: CreateOrderInput,
-  ) {
+  ): Promise<Order> {
     return this.ordersService.createOrder(orderDto);
   }
 
   @Query(() => [Order], { name: 'getAllOrders' })
-  getAllOrders() {
+  getAllOrders(): Promise<Order[]> {
     return this.ordersService.getAllOrders();
   }
 
   @Query(() => Order, { name: 'getOneOrder' })
-  getOneOrder(@Args('id', { type: () => Int }) id: number) {
+  getOneOrder(@Args('id', { type: () => Int }) id: number): Promise<Order> {
     return this.ordersService.getOneOrder(id);
   }
 
@@ -30,7 +30,7 @@ export class OrdersResolver {
   updateOrder(
     @Args('updateOrderInput', { type: () => UpdateOrderInput })
     updateOrderInput: UpdateOrderInput,
-  ) {
+  ): Promise<Order> {
     return this.ordersService.updateOrder(
       updateOrderInput.id,
       updateOrderInput,
@@ -38,7 +38,7 @@ export class OrdersResolver {
   }
 
   @Mutation(() => Order)
-  removeOrder(@Args('id', { type: () => Int }) id: number) {
+  removeOrder(@Args('id', { type: () => Int }) id: number): Promise<Order> {
     return this.ordersService.removeOrder(id);
   }
 }

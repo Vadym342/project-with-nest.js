@@ -1,4 +1,6 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { User } from 'src/models/users/entities/user.entity';
+import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
   Column,
@@ -7,13 +9,6 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
-import { User } from 'src/users/entities/user.entity';
-
-export enum Statuses {
-  PENDING,
-  REJECTED,
-  ACCEPTED,
-}
 
 registerEnumType(Statuses, {
   name: 'Statuses',
@@ -36,7 +31,6 @@ export class Order extends Model<Order> {
   @Field((type) => Int)
   creatorId: number;
 
-  // @Column({ type: DataType.ENUM({ values: Object.keys(Statuses) }), defaultValue: Statuses.PENDING })
   @Column
   @Field(() => Statuses)
   status: Statuses;

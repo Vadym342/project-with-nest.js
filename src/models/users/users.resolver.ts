@@ -6,22 +6,22 @@ import { UpdateUserInput } from './dto/update-user.input';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) { }
 
   @Mutation(() => User)
   createUser(
     @Args('userDto', { type: () => CreateUserInput }) userDto: CreateUserInput,
-  ) {
+  ): Promise<User> {
     return this.usersService.createUser(userDto);
   }
 
   @Query(() => [User], { name: 'getAllUsers' })
-  getAllUsers() {
+  getAllUsers(): Promise<User[]> {
     return this.usersService.getAllUsers();
   }
 
   @Query(() => User, { name: 'getOneUser' })
-  getOneUser(@Args('id', { type: () => Int }) id: number) {
+  getOneUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
     return this.usersService.getOneUser(id);
   }
 
@@ -29,12 +29,12 @@ export class UsersResolver {
   updateUser(
     @Args('updateUserDto', { type: () => UpdateUserInput })
     updateUserDto: UpdateUserInput,
-  ) {
+  ): Promise<User> {
     return this.usersService.updateUser(updateUserDto.id, updateUserDto);
   }
 
   @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number) {
+  removeUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
     return this.usersService.removeUser(id);
   }
 }

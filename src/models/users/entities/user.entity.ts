@@ -1,6 +1,8 @@
-import { Order } from './../../orders/entities/order.entity';
-import { Organization } from './../../organizations/entities/organization.entity';
+import { Order } from 'src/models/orders/entities/order.entity';
+import { Organization } from 'src/models/organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { IUserCreationAttrs } from '../constants/interfaces/IUserCreationAttrs';
+import { Roles } from '../constants/enums/roles.enum';
 import {
   BelongsTo,
   Column,
@@ -11,23 +13,13 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-interface UserCreationAttrs {
-  email: string;
-  password: string;
-}
-
-export enum Roles {
-  USER,
-  ADMIN,
-}
-
 registerEnumType(Roles, {
   name: 'Roles',
 });
 
 @ObjectType()
 @Table({ tableName: 'users' })
-export class User extends Model<User, UserCreationAttrs> {
+export class User extends Model<User, IUserCreationAttrs> {
   @Column({
     type: DataType.INTEGER,
     unique: true,
