@@ -2,11 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { passportJwtSecret } from 'jwks-rsa';
-import * as dotenv from 'dotenv';
 import { auth0Config } from 'config/auth0Config';
-import { ConfigService } from '@nestjs/config';
-
-dotenv.config();
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -20,8 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
       }),
 
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: process.env.AUTH0_AUDIENCE,
-      issuer: `${process.env.AUTH0_ISSUER_URL}`,
+      ...auth0Config,
       algorithms: ['RS256'],
     });
   }
