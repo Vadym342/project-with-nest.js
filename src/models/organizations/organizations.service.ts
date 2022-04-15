@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { CreateOrganizationDto } from './dto/create-organization.dto';
-import { UpdateOrganizationDto} from './dto/update-organization.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 import { Organization } from './entities/organization.entity';
 
 @Injectable()

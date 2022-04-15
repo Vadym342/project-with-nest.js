@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
-import { UpdateOrderDto} from './dto/update-order.dto';
+import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { User } from 'src/models/users/entities/user.entity';
 
