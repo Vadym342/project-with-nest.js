@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-order.input';
-import { UpdateOrderInput } from './dto/update-order.input';
+import { CreateOrderDto } from './dto/create-order.dto';
+import { UpdateOrderDto} from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { User } from 'src/models/users/entities/user.entity';
 
@@ -12,7 +12,7 @@ export class OrdersService {
     @InjectModel(User) private userRepository: typeof User,
   ) {}
 
-  async createOrder(orderDto: CreateOrderInput): Promise<Order> {
+  async createOrder(orderDto: CreateOrderDto): Promise<Order> {
     const user = await this.userRepository.findOne({
       where: { id: orderDto.creatorId },
     });
@@ -32,7 +32,7 @@ export class OrdersService {
 
   async updateOrder(
     id: number,
-    updateOrderInput: UpdateOrderInput,
+    updateOrderInput: UpdateOrderDto,
   ): Promise<Order> {
     const order = await this.orderRepository.findByPk(id);
     if (order) {

@@ -3,7 +3,7 @@ import { IsAlpha, IsEmail, MinLength } from 'class-validator';
 import { Roles } from '../constants/enums/roles.enum';
 
 @InputType()
-export class CreateUserInput {
+export class CreateUserDto {
   @Field()
   @IsAlpha()
   @MinLength(3)

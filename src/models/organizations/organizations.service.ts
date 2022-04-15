@@ -1,7 +1,7 @@
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
-import { CreateOrganizationInput } from './dto/create-organization.input';
-import { UpdateOrganizationInput } from './dto/update-organization.input';
+import { CreateOrganizationDto } from './dto/create-organization.dto';
+import { UpdateOrganizationDto} from './dto/update-organization.dto';
 import { Organization } from './entities/organization.entity';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class OrganizationsService {
   ) {}
 
   async createOrganization(
-    organizationDto: CreateOrganizationInput,
+    organizationDto: CreateOrganizationDto,
   ): Promise<Organization> {
     return await this.organizationRepository.create(organizationDto);
   }
@@ -27,7 +27,7 @@ export class OrganizationsService {
 
   async updateOrganization(
     id: number,
-    updateOrganizationInput: UpdateOrganizationInput,
+    updateOrganizationInput: UpdateOrganizationDto,
   ): Promise<Organization> {
     const organization = await this.organizationRepository.findByPk(id);
     if (organization) {

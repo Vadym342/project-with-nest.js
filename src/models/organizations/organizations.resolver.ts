@@ -1,8 +1,8 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { OrganizationsService } from './organizations.service';
 import { Organization } from './entities/organization.entity';
-import { CreateOrganizationInput } from './dto/create-organization.input';
-import { UpdateOrganizationInput } from './dto/update-organization.input';
+import { CreateOrganizationDto } from './dto/create-organization.dto';
+import { UpdateOrganizationDto } from './dto/update-organization.dto';
 
 @Resolver(() => Organization)
 export class OrganizationsResolver {
@@ -10,8 +10,8 @@ export class OrganizationsResolver {
 
   @Mutation(() => Organization)
   createOrganization(
-    @Args('organizationDto', { type: () => CreateOrganizationInput })
-    organizationDto: CreateOrganizationInput,
+    @Args('organizationDto', { type: () => CreateOrganizationDto })
+    organizationDto: CreateOrganizationDto,
   ): Promise<Organization> {
     return this.organizationsService.createOrganization(organizationDto);
   }
@@ -31,7 +31,7 @@ export class OrganizationsResolver {
   @Mutation(() => Organization)
   updateOrganization(
     @Args('updateOrganizationInput')
-    updateOrganizationInput: UpdateOrganizationInput,
+    updateOrganizationInput: UpdateOrganizationDto,
   ): Promise<Organization> {
     return this.organizationsService.updateOrganization(
       updateOrganizationInput.id,
