@@ -1,7 +1,7 @@
 import { Order } from 'src/models/orders/entities/order.entity';
 import { Organization } from 'src/models/organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { IUserCreationAttrs } from '../constants/interfaces/IUserCreationAttrs';
+import { IUserCreationAttrs } from '../constants/interfaces/user-creation-attrs.interface';
 import { Roles } from '../constants/enums/roles.enum';
 import {
   BelongsTo,
@@ -26,7 +26,7 @@ export class User extends Model<User, IUserCreationAttrs> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field((type) => Int)
+  @Field(type => Int)
   id: number;
 
   @Column({ type: DataType.STRING })
@@ -47,7 +47,7 @@ export class User extends Model<User, IUserCreationAttrs> {
 
   @ForeignKey(() => Organization)
   @Column({ type: DataType.INTEGER })
-  @Field((type) => Int)
+  @Field(type => Int)
   organizationId: number;
 
   @BelongsTo(() => Organization)

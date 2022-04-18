@@ -23,12 +23,12 @@ export class Order extends Model<Order> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field((type) => Int)
+  @Field(type => Int)
   id: number;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  @Field((type) => Int)
+  @Field(type => Int)
   creatorId: number;
 
   @Column

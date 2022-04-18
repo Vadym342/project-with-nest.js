@@ -9,9 +9,8 @@ import { User } from './models/users/entities/user.entity';
 import { OrganizationsModule } from './models/organizations/organizations.module';
 import { OrdersModule } from './models/orders/orders.module';
 import { Order } from './models/orders/entities/order.entity';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthModule } from './models/auth/auth.module';
-import { auth0Config } from 'config/auth0Config';
 
 @Module({
   imports: [
@@ -20,17 +19,21 @@ import { auth0Config } from 'config/auth0Config';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
     ConfigModule.forRoot({
-      envFilePath: `.${process.env.NODE_ENV}.env`,
+      isGlobal: true,
     }),
-    SequelizeModule.forRoot({
-      dialect: 'postgres',
-      host: process.env.POSTGRES_HOST,
-      port: Number(process.env.POSTGRES_PORT),
-      username: process.env.POSTGRES_USER,
-      password: process.env.POSTGRES_PASSWORD,
-      database: process.env.POSTGRES_DB,
-      models: [User, Organization, Order],
-      autoLoadModels: true,
+    SequelizeModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (configService: ConfigService) => ({
+        dialect: 'postgres',
+        host: configService.get('POSTGRES_HOST'),
+        port: +configService.get('POSTGRES_PORT'),
+        username: configService.get('POSTGRES_USER'),
+        password: configService.get('POSTGRES_PASSWORD'),
+        database: configService.get('POSTGRES_DB'),
+        models: [User, Organization, Order],
+        autoLoadModels: true,
+      }),
+      inject: [ConfigService],
     }),
     AuthModule,
     UsersModule,

@@ -12,7 +12,7 @@ export class Organization extends Model<Organization> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field((type) => Int)
+  @Field(type => Int)
   id: number;
   @Column({ type: DataType.STRING, allowNull: false })
   @Field()
