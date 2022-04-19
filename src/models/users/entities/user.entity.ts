@@ -1,7 +1,6 @@
-import { Order } from 'src/models/orders/entities/order.entity';
-import { Organization } from 'src/models/organizations/entities/organization.entity';
+import { Order } from '@models/orders/entities/order.entity';
+import { Organization } from '@models/organizations/entities/organization.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { IUserCreationAttrs } from '../constants/interfaces/user-creation-attrs.interface';
 import { Roles } from '../constants/enums/roles.enum';
 import {
   BelongsTo,
@@ -19,7 +18,7 @@ registerEnumType(Roles, {
 
 @ObjectType()
 @Table({ tableName: 'users' })
-export class User extends Model<User, IUserCreationAttrs> {
+export class User extends Model<User> {
   @Column({
     type: DataType.INTEGER,
     unique: true,

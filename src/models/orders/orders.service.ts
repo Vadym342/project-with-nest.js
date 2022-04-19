@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
-import { User } from 'src/models/users/entities/user.entity';
+import { User } from '@models/users/entities/user.entity';
 
 @Injectable()
 export class OrdersService {
@@ -17,8 +17,7 @@ export class OrdersService {
       where: { id: orderDto.creatorId },
     });
     if (user) {
-      const order = await this.orderRepository.create(orderDto);
-      return order;
+      return await this.orderRepository.create(orderDto);
     }
   }
 

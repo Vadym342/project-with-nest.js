@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { User } from 'src/models/users/entities/user.entity';
+import { User } from '@models/users/entities/user.entity';
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
