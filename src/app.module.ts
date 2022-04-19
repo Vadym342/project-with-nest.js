@@ -1,16 +1,16 @@
-import { Organization } from './models/organizations/entities/organization.entity';
-import { UsersModule } from './models/users/users.module';
+import { Organization } from '@models/organizations/entities/organization.entity';
+import { UsersModule } from '@models/users/users.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { User } from './models/users/entities/user.entity';
-import { OrganizationsModule } from './models/organizations/organizations.module';
-import { OrdersModule } from './models/orders/orders.module';
-import { Order } from './models/orders/entities/order.entity';
+import { User } from '@models/users/entities/user.entity';
+import { OrganizationsModule } from '@models/organizations/organizations.module';
+import { OrdersModule } from '@models/orders/orders.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from './models/auth/auth.module';
+import { AuthModule } from '@models/auth/auth.module';
+import { Order } from '@models/orders/entities/order.entity';
 
 @Module({
   imports: [
