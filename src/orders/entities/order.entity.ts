@@ -9,7 +9,6 @@ import {
 } from 'sequelize-typescript';
 import { User } from '../../users/entities/user.entity';
 
-
 export enum Statuses {
   PENDING,
   REJECTED,
