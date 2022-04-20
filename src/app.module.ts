@@ -11,9 +11,6 @@ import { OrdersModule } from './orders/orders.module';
 import { Order } from './orders/entities/order.entity';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './auth/auth.module';
-import { BlablaModule } from './blabla/blabla.module';
-import { BlablaModule } from './blabla/blabla.module';
-
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -37,7 +34,6 @@ import { BlablaModule } from './blabla/blabla.module';
     UsersModule,
     OrganizationsModule,
     OrdersModule,
-    BlablaModule,
   ],
 })
 export class AppModule {}
