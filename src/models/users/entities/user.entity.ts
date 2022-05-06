@@ -1,4 +1,3 @@
-
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Roles } from '../constants/enums/roles.enum';
 import { Order } from '../../orders/entities/order.entity';

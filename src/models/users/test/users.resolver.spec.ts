@@ -8,7 +8,7 @@ const mockUserService = {
     return 'some value';
   }),
 
-  createUser: jest.fn((dto) => {
+  createUser: jest.fn(dto => {
     return {
       id: Date.now(),
       ...dto,

@@ -7,8 +7,8 @@ import { User } from '../entities/user.entity';
 import { UsersService } from '../users.service';
 
 const mockUsersRepository = {
-  create: jest.fn().mockImplementation((dto) => dto),
-  save: jest.fn().mockImplementation((user) => Promise.resolve({ ...user })),
+  create: jest.fn().mockImplementation(dto => dto),
+  save: jest.fn().mockImplementation(user => Promise.resolve({ ...user })),
 };
 
 const newUser = {
