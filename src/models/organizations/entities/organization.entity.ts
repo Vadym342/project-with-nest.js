@@ -1,7 +1,7 @@
 import { Int, ObjectType } from '@nestjs/graphql';
 import { Field } from '@nestjs/graphql';
+import { User } from '../../users/entities/user.entity';
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
-import { User } from '@models/users/entities/user.entity';
 
 @ObjectType()
 @Table({ tableName: 'organizations' })

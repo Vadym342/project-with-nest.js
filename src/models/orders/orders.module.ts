@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common';
 import { OrdersService } from './orders.service';
 import { OrdersResolver } from './orders.resolver';
 import { Order } from './entities/order.entity';
-import { User } from '@models/users/entities/user.entity';
-import { Organization } from '@models/organizations/entities/organization.entity';
+import { Organization } from '../organizations/entities/organization.entity';
+import { User } from '../users/entities/user.entity';
+
 
 @Module({
   imports: [SequelizeModule.forFeature([Order, User, Organization])],

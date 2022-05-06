@@ -1,7 +1,8 @@
-import { Order } from '@models/orders/entities/order.entity';
-import { Organization } from '@models/organizations/entities/organization.entity';
+
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Roles } from '../constants/enums/roles.enum';
+import { Order } from '../../orders/entities/order.entity';
+import { Organization } from '../../organizations/entities/organization.entity';
 import {
   BelongsTo,
   Column,
@@ -11,6 +12,9 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+
+
+
 
 registerEnumType(Roles, {
   name: 'Roles',

@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import { User } from '@models/users/entities/user.entity';
+
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
@@ -9,6 +9,7 @@ import {
   Model,
   Table,
 } from 'sequelize-typescript';
+import { User } from '../../users/entities/user.entity';
 
 registerEnumType(Statuses, {
   name: 'Statuses',

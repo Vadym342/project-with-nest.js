@@ -9,10 +9,10 @@
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
-    "paths": {
-      "@models/*": ["models/*"]
-    },
+    //"baseUrl": "./src",
+    // "paths": {
+    //   "@models/*": ["models/*"]
+    // },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
