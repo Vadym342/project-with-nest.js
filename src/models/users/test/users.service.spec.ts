@@ -1,10 +1,10 @@
-import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from '../dto/update-user.dto';
+import { CreateUserDto } from '../dto/create-user.dto';
 import { getModelToken } from '@nestjs/sequelize';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Roles } from './constants/enums/roles.enum';
-import { User } from './entities/user.entity';
-import { UsersService } from './users.service';
+import { Roles } from '../constants/enums/roles.enum';
+import { User } from '../entities/user.entity';
+import { UsersService } from '../users.service';
 
 const mockUsersRepository = {
   create: jest.fn().mockImplementation((dto) => dto),

@@ -32,7 +32,7 @@ export class OrganizationsService {
     const organization = await this.organizationRepository.findByPk(id);
     if (organization) {
       await organization.update(updateOrganizationInput);
-      await organization.save();
+      await organization.save(); // ? method update inside use method save()
       return organization;
     }
   }

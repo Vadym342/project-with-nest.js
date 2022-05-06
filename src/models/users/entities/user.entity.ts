@@ -13,9 +13,6 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-
-
-
 registerEnumType(Roles, {
   name: 'Roles',
 });

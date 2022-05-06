@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { Roles } from './constants/enums/roles.enum';
-import { UsersResolver } from './users.resolver';
-import { UsersService } from './users.service';
+import { Roles } from '../constants/enums/roles.enum';
+import { UsersResolver } from '../users.resolver';
+import { UsersService } from '../users.service';
 
 const mockUserService = {
   getOneUser: jest.fn((id: number) => {

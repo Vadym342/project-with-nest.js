@@ -1,5 +1,4 @@
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
