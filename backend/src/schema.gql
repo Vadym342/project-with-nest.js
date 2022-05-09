@@ -2,16 +2,9 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Order {
+type Organization {
   id: Int!
-  creatorId: Int!
-  status: Statuses!
-}
-
-enum Statuses {
-  PENDING
-  REJECTED
-  ACCEPTED
+  name: String!
 }
 
 type User {
@@ -28,9 +21,16 @@ enum Roles {
   ADMIN
 }
 
-type Organization {
+type Order {
   id: Int!
-  name: String!
+  creatorId: Int!
+  status: Statuses!
+}
+
+enum Statuses {
+  PENDING
+  REJECTED
+  ACCEPTED
 }
 
 type Query {
