@@ -1,12 +1,10 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import Router from '../../routes/route';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      HELLOO BRAZA
-    </div>
+      <Router />
   );
 }
 
