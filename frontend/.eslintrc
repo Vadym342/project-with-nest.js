@@ -5,15 +5,13 @@
         }
     },
     "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended",
-        "plugin:import/errors",
-        "plugin:import/warnings",
-        "plugin:import/typescript",
-        "google",
-        "plugin:prettier/recommended",
-        "prettier",
-        "plugin:react/jsx-runtime"
+        // "plugin:@typescript-eslint/recommended",
+        // "plugin:react/recommended",
+        // "plugin:import/errors",
+        // "plugin:import/warnings",
+        // "plugin:import/typescript",
+        // "google",
+        // "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -25,8 +23,7 @@
     },
     "plugins": [
         "react",
-        "@typescript-eslint",
-        "prettier"
+        "@typescript-eslint"
     ],
     "rules": {
         "require-jsdoc": "off",
