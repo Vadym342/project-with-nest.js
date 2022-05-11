@@ -8,15 +8,21 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { valRequired } from '../../consts/validationPropertiesForFields';
-import validStyle from '../../consts/styles/validation.module.css';
+import validationStyle from './validation';
+
+type FormValues = {
+  name: string;
+};
+
+
 const CreateOrder = () => {
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<FormValues>({
     mode: 'onBlur',
   });
 
@@ -24,9 +30,8 @@ const CreateOrder = () => {
     name: '',
   });
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
+  const onSubmit: SubmitHandler<FormValues> = (data) => {
+    console.log(data);
   };
 
   return (
@@ -63,7 +68,7 @@ const CreateOrder = () => {
               })
             }
           />
-          <div className={validStyle.textBlock}>
+          <div style={validationStyle.textBlock}>
             {errors?.name && <p>{errors?.name?.message || 'Error, try again'}</p>}
           </div>
           <Button

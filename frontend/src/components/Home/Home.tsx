@@ -1,6 +1,5 @@
 
 const Home = () => {
-    console.log("render")
     return (
         <div>
             Home
