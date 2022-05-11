@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,14 +9,13 @@ import Container from '@mui/material/Container';
 import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { valRequired } from '../../consts/validationPropertiesForFields';
-import validationStyle from './validation';
+import validationStyle from '../../consts/styles/validation';
 
 type FormValues = {
   name: string;
 };
 
-
-const CreateOrder = () => {
+const CreateOrder = (): JSX.Element => {
   const {
     register,
     formState: { errors },
@@ -30,7 +28,7 @@ const CreateOrder = () => {
     name: '',
   });
 
-  const onSubmit: SubmitHandler<FormValues> = (data) => {
+  const onSubmit: SubmitHandler<FormValues> = data => {
     console.log(data);
   };
 
@@ -51,7 +49,12 @@ const CreateOrder = () => {
         <Typography component="h1" variant="h5">
           Create Order
         </Typography>
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
@@ -61,15 +64,17 @@ const CreateOrder = () => {
             autoComplete="Name"
             autoFocus
             {...register('name', valRequired)}
-            onChange={(e) =>
+            onChange={e =>
               setOrderForm({
                 ...orderForm,
-                name: e.target.value
+                name: e.target.value,
               })
             }
           />
           <div style={validationStyle.textBlock}>
-            {errors?.name && <p>{errors?.name?.message || 'Error, try again'}</p>}
+            {errors?.name && (
+              <p>{errors?.name?.message || 'Error, try again'}</p>
+            )}
           </div>
           <Button
             type="submit"
@@ -83,6 +88,6 @@ const CreateOrder = () => {
       </Box>
     </Container>
   );
-}
+};
 
 export default CreateOrder;

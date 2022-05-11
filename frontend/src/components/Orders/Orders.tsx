@@ -1,11 +1,5 @@
-
-const Orders = () => {
-    return (
-        <div>
-            Order
-            Order
-        </div>
-    )
-}
+const Orders = (): JSX.Element => {
+  return <div>Order Order</div>;
+};
 
 export default Orders;
