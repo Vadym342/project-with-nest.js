@@ -28,20 +28,20 @@ const Product = () => {
           <Rating name="read-only" size="small" value={value} readOnly />
         </Typography>
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
-          <div style={{ flexGrow: 2, fontSize: '12px' }}>
+          <div style={{ flexGrow: 2, fontSize: '12px', color: '#D23F57' }}>
             2555$
           </div>
-          <div style={{ flexGrow: 2, fontSize: '12px' }}>
+          <div style={{ flexGrow: 2, fontSize: '12px', textDecoration: 'line-through', color: 'gray' }}>
             3443$
           </div>
           <Button style={{ padding: '0px', minWidth: '10px', height: '20px', color: '#D23F57', border: '1px solid #D23F57', borderRadius: '3px' }}>
-            <AddIcon style={{height:'15px'}} />
+            <AddIcon style={{ height: '15px' }} />
           </Button>
-          <div style={{ flexGrow: 5, textAlign: 'center' }}>
+          <div style={{ flexGrow: 5, fontSize: '12px', textAlign: 'center' }}>
             3
           </div>
           <Button style={{ padding: '0px', minWidth: '10px', height: '20px', color: '#D23F57', border: '1px solid #D23F57', borderRadius: '3px' }}>
-            <RemoveIcon style={{height:'15px'}} />
+            <RemoveIcon style={{ height: '15px' }} />
           </Button>
         </div>
       </CardContent>
