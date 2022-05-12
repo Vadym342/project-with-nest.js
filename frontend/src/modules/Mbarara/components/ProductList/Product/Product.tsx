@@ -27,11 +27,11 @@ const Product = () => {
         <Typography gutterBottom variant="h5" component="div">
           <Rating name="read-only" size="small" value={value} readOnly />
         </Typography>
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+        <div style={{ display: 'flex', color:'#D23F57', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
           <div style={{ flexGrow: 2, fontSize: '12px' }}>
             2555$
           </div>
-          <div style={{ flexGrow: 2, fontSize: '12px' }}>
+          <div style={{ flexGrow: 2, fontSize: '12px', textDecoration: 'line-through', color:'gray' }}>
             3443$
           </div>
           <Button style={{ padding: '0px', minWidth: '10px', height: '20px', color: '#D23F57', border: '1px solid #D23F57', borderRadius: '3px' }}>
