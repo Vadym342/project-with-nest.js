@@ -1,5 +1,4 @@
 import { Routes, Navigate, Route } from 'react-router-dom';
-import NavBar from '../modules/Mbarara/components/Navbar';
 import Mbarara from '../pages/Mbarara/Mbarara';
 import MbararaAdmin from '../pages/MbararaAdmin/MbararaAdmin';
 
