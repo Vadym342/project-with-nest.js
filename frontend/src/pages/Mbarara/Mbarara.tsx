@@ -8,11 +8,11 @@ const Mbarara = () => {
     <div style={{ margin: '15px' }}>
       <div>
         <div style={{ marginBottom: '5px' }}>
-          <div style={{display:'flex', flexDirection: 'row', }}>
-            <div style={{color:'#D23F57'}}>
+          <div style={{ display: 'flex', flexDirection: 'row', }}>
+            <div style={{ color: '#D23F57' }}>
               <BoltIcon />
             </div>
-            <div style={{fontWeight: 500, fontSize: '20px'}}>
+            <div style={{ fontWeight: 500, fontSize: '20px' }}>
               Flash Deals
             </div>
           </div>
