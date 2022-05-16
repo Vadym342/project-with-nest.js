@@ -1,25 +1,25 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsAlpha, IsEmail, MinLength } from 'class-validator';
-import { Roles } from '../constants/enums/roles.enum';
 
 @InputType()
-export class CreateUserDto {
+export class CreateProductDto {
   @Field()
   @IsAlpha()
   @MinLength(3)
   name: string;
 
   @Field()
-  @IsEmail()
-  email: string;
+  price: number;
+
+  @Field({ nullable: true })
+  discount: number;
 
   @Field()
-  @MinLength(3)
-  password: string;
-
-  @Field(() => Roles)
-  role: Roles;
+  image: string;
 
   @Field(() => Int)
   organizationId: number;
+  
+  @Field(() => Int)
+  categoryId: number;
 }

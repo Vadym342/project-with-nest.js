@@ -20,9 +20,9 @@ export class UsersResolver {
     return this.usersService.getAllUsers();
   }
 
-  @Query(() => User, { name: 'getOneUser' })
-  getOneUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
-    return this.usersService.getOneUser(id);
+  @Query(() => User, { name: 'getUserById' })
+  getUserById(@Args('id', { type: () => Int }) id: number): Promise<User> {
+    return this.usersService.getUserById(id);
   }
 
   @Mutation(() => User)
@@ -34,7 +34,7 @@ export class UsersResolver {
   }
 
   @Mutation(() => User)
-  removeUser(@Args('id', { type: () => Int }) id: number): Promise<User> {
-    return this.usersService.removeUser(id);
+  removeUserById(@Args('id', { type: () => Int }) id: number): Promise<User> {
+    return this.usersService.removeUserById(id);
   }
 }

@@ -16,20 +16,20 @@ export class UsersService {
     return await this.userRepository.findAll();
   }
 
-  async getOneUser(id: number): Promise<User> {
+  async getUserById(id: number): Promise<User> {
     return await this.userRepository.findByPk(id);
   }
 
-  async updateUser(id: number, updateUserInput: UpdateUserDto): Promise<User> {
+  async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findByPk(id);
     if (user) {
-      await user.update(updateUserInput);
+      await user.update(updateUserDto);
       await user.save();
       return user;
     }
   }
 
-  async removeUser(id: number): Promise<User> {
+  async removeUserById(id: number): Promise<User> {
     const user = await this.userRepository.findByPk(id);
     if (user) {
       await user.destroy();

@@ -25,7 +25,7 @@ export class User extends Model<User> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field(type => Int)
+  @Field(() => Int)
   id: number;
 
   @Column({ type: DataType.STRING })
@@ -46,7 +46,7 @@ export class User extends Model<User> {
 
   @ForeignKey(() => Organization)
   @Column({ type: DataType.INTEGER })
-  @Field(type => Int)
+  @Field(() => Int)
   organizationId: number;
 
   @BelongsTo(() => Organization)

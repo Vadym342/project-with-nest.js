@@ -21,9 +21,9 @@ export class OrdersResolver {
     return this.ordersService.getAllOrders();
   }
 
-  @Query(() => Order, { name: 'getOneOrder' })
-  getOneOrder(@Args('id', { type: () => Int }) id: number): Promise<Order> {
-    return this.ordersService.getOneOrder(id);
+  @Query(() => Order, { name: 'getOrderById' })
+  getOrderById(@Args('id', { type: () => Int }) id: number): Promise<Order> {
+    return this.ordersService.getOrderById(id);
   }
 
   @Mutation(() => Order)
@@ -38,7 +38,7 @@ export class OrdersResolver {
   }
 
   @Mutation(() => Order)
-  removeOrder(@Args('id', { type: () => Int }) id: number): Promise<Order> {
-    return this.ordersService.removeOrder(id);
+  removeOrderById(@Args('id', { type: () => Int }) id: number): Promise<Order> {
+    return this.ordersService.removeOrderById(id);
   }
 }
