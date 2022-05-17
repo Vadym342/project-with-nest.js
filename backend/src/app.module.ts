@@ -36,7 +36,15 @@ import { CategoriesModule } from './models/categories/categories.module';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        models: [User, Organization, Order, Product, Category, ProductOrder, Specification],
+        models: [
+          User,
+          Organization,
+          Order,
+          Product,
+          Category,
+          ProductOrder,
+          Specification
+        ],
         autoLoadModels: true,
       }),
       inject: [ConfigService],
@@ -50,4 +58,4 @@ import { CategoriesModule } from './models/categories/categories.module';
     SpecificationsModule
   ],
 })
-export class AppModule {}
+export class AppModule { }

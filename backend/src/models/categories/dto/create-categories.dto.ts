@@ -1,5 +1,5 @@
-import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsAlpha, IsEmail, MinLength } from 'class-validator';
+import { InputType, Field } from '@nestjs/graphql';
+import { IsAlpha, MinLength } from 'class-validator';
 
 @InputType()
 export class CreateCategoryDto {

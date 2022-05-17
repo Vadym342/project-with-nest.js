@@ -1,13 +1,24 @@
+import { Specification } from './../specifications/entities/specification.entity';
+import { SpecificationsService } from './../specifications/specifications.service';
+import { OrganizationsService } from './../organizations/organizations.service';
+import { Organization } from './../organizations/entities/organization.entity';
+import { CategoriesService } from './../categories/categories.service';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { CreateProductDto } from './dto/create-products.dto';
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
+import { Category } from '../categories/entities/category.entity';
 
 
 @Resolver(() => Product)
 export class ProductsResolver {
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private readonly categoriesService: CategoriesService,
+    private readonly organizationsService: OrganizationsService,
+    private readonly specificationsService: SpecificationsService
+  ) { }
 
   @Mutation(() => Product)
   createProduct(
@@ -15,6 +26,25 @@ export class ProductsResolver {
   ): Promise<Product> {
     return this.productsService.createProduct(productDto);
   }
+
+  @ResolveField(() => Category)
+  async category(@Parent() category) {
+    const { id } = category;
+    return this.categoriesService.getCategoryById(id);
+  }
+
+  @ResolveField(() => Organization)
+  async organization(@Parent() organization) {
+    const { id } = organization;
+    return this.organizationsService.getOrganizationById(id);
+  }
+
+  @ResolveField(() => Specification)
+  async specification(@Parent() specification) {
+    const { id } = specification;
+    return this.specificationsService.getSpecificationById(id);
+  }
+
 
   @Query(() => [Product], { name: 'getAllProducts' })
   getAllProducts(): Promise<Product[]> {

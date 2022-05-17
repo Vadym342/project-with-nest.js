@@ -3,7 +3,7 @@ import { ProductOrder } from './productOrder.entity';
 import { Order } from './../../orders/entities/order.entity';
 import { Category } from './../../categories/entities/category.entity';
 import { Organization } from '../../organizations/entities/organization.entity';
-import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   BelongsTo,
   BelongsToMany,
@@ -34,6 +34,14 @@ export class Product extends Model<Product> {
   @Field({ nullable: false })
   price: number;
 
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Field({ nullable: false })
+  rating: number;
+
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  @Field({ nullable: true })
+  ratingVotes: number;
+
   @Column({ type: DataType.INTEGER, allowNull: true })
   @Field({ nullable: true })
   discount: number;
@@ -46,9 +54,6 @@ export class Product extends Model<Product> {
   @Column({ type: DataType.INTEGER, allowNull: false })
   @Field(() => Int, { nullable: false })
   categoryId: number;
-
-  // @Field(type => [Category], {nullable: true})
-  // org: Category;
 
   @ForeignKey(() => Specification)
   @Column({ type: DataType.INTEGER, allowNull: true })

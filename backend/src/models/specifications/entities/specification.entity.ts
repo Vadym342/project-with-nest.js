@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   DataType,
@@ -9,7 +9,7 @@ import {
 import { Product } from '../../products/entities/product.entity';
 
 @ObjectType()
-@Table({ tableName: 'categories' })
+@Table({ tableName: 'specifications' })
 export class Specification extends Model<Specification> {
   @Column({
     type: DataType.INTEGER,
@@ -20,9 +20,25 @@ export class Specification extends Model<Specification> {
   @Field(() => Int)
   id: number;
 
-  @Column({ type: DataType.STRING })
-  @Field({ nullable: false })
-  name: string;
+  @Column({ type: DataType.STRING, allowNull: true })
+  @Field({ nullable: true })
+  brand: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  @Field({ nullable: true })
+  Model: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  @Field({ nullable: true })
+  description: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  @Field({ nullable: true })
+  feature: string;
+
+  @Column({ type: DataType.STRING, allowNull: true })
+  @Field({ nullable: true })
+  producer:string;
 
   @HasOne(() => Product)
   products: Product;
