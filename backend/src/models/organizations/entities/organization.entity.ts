@@ -1,7 +1,8 @@
 import { Int, ObjectType } from '@nestjs/graphql';
 import { Field } from '@nestjs/graphql';
-import { User } from '../../users/entities/user.entity';
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Product } from '../../products/entities/product.entity';
+import { User } from '../../users/entities/user.entity';
 
 @ObjectType()
 @Table({ tableName: 'organizations' })
@@ -12,11 +13,14 @@ export class Organization extends Model<Organization> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field(type => Int)
+  @Field(() => Int)
   id: number;
   @Column({ type: DataType.STRING, allowNull: false })
   @Field()
   name: string;
+
+  @HasMany(() => Product)
+  products: Product[];
 
   @HasMany(() => User)
   users: User[];

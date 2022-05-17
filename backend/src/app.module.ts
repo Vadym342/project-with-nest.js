@@ -1,3 +1,8 @@
+import { SpecificationsModule } from './models/specifications/specifications.module';
+import { Specification } from './models/specifications/entities/specification.entity';
+import { ProductOrder } from './models/products/entities/productOrder.entity';
+import { Category } from './models/categories/entities/category.entity';
+import { ProductsModule } from './models/products/products.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
@@ -11,6 +16,8 @@ import { Organization } from './models/organizations/entities/organization.entit
 import { OrganizationsModule } from './models/organizations/organizations.module';
 import { User } from './models/users/entities/user.entity';
 import { UsersModule } from './models/users/users.module';
+import { Product } from './models/products/entities/product.entity';
+import { CategoriesModule } from './models/categories/categories.module';
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
@@ -29,7 +36,15 @@ import { UsersModule } from './models/users/users.module';
         username: configService.get('POSTGRES_USER'),
         password: configService.get('POSTGRES_PASSWORD'),
         database: configService.get('POSTGRES_DB'),
-        models: [User, Organization, Order],
+        models: [
+          User,
+          Organization,
+          Order,
+          Product,
+          Category,
+          ProductOrder,
+          Specification
+        ],
         autoLoadModels: true,
       }),
       inject: [ConfigService],
@@ -38,6 +53,9 @@ import { UsersModule } from './models/users/users.module';
     UsersModule,
     OrganizationsModule,
     OrdersModule,
+    ProductsModule,
+    CategoriesModule,
+    SpecificationsModule
   ],
 })
-export class AppModule {}
+export class AppModule { }

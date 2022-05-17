@@ -1,4 +1,4 @@
-import { InputType, Field } from '@nestjs/graphql';
+import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsAlpha, IsEmail, MinLength } from 'class-validator';
 import { Roles } from '../constants/enums/roles.enum';
 
@@ -19,4 +19,7 @@ export class CreateUserDto {
 
   @Field(() => Roles)
   role: Roles;
+
+  @Field(() => Int)
+  organizationId: number;
 }

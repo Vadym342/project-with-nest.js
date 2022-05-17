@@ -21,11 +21,11 @@ export class OrganizationsResolver {
     return this.organizationsService.getAllOrganizations();
   }
 
-  @Query(() => Organization, { name: 'getOneOrganization' })
-  getOneOrganization(
+  @Query(() => Organization, { name: 'getOrganizationById' })
+  getOrganizationById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<Organization> {
-    return this.organizationsService.getOneOrganization(id);
+    return this.organizationsService.getOrganizationById(id);
   }
 
   @Mutation(() => Organization)
@@ -40,9 +40,9 @@ export class OrganizationsResolver {
   }
 
   @Mutation(() => Organization)
-  removeOrganization(
+  removeOrganizationById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<Organization> {
-    return this.organizationsService.removeOrganization(id);
+    return this.organizationsService.removeOrganizationById(id);
   }
 }

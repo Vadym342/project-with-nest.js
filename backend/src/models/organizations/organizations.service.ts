@@ -21,7 +21,7 @@ export class OrganizationsService {
     return await this.organizationRepository.findAll();
   }
 
-  async getOneOrganization(id: number): Promise<Organization> {
+  async getOrganizationById(id: number): Promise<Organization> {
     return await this.organizationRepository.findByPk(id);
   }
 
@@ -37,7 +37,7 @@ export class OrganizationsService {
     }
   }
 
-  async removeOrganization(id: number): Promise<Organization> {
+  async removeOrganizationById(id: number): Promise<Organization> {
     const organization = await this.organizationRepository.findByPk(id);
     if (organization) {
       await organization.destroy();

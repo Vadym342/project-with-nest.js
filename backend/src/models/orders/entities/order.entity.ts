@@ -1,7 +1,10 @@
+import { ProductOrder } from './../../products/entities/productOrder.entity';
+import { Product } from './../../products/entities/product.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
+  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -23,17 +26,20 @@ export class Order extends Model<Order> {
     autoIncrement: true,
     primaryKey: true,
   })
-  @Field(type => Int)
+  @Field(() => Int)
   id: number;
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, allowNull: false })
-  @Field(type => Int)
+  @Field(() => Int)
   creatorId: number;
 
   @Column
   @Field(() => Statuses)
   status: Statuses;
+
+  @BelongsToMany(() => Product, () => ProductOrder)
+  products: Product[];
 
   @BelongsTo(() => User)
   creator: User;

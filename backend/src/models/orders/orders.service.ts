@@ -25,7 +25,7 @@ export class OrdersService {
     return await this.orderRepository.findAll();
   }
 
-  async getOneOrder(id: number): Promise<Order> {
+  async getOrderById(id: number): Promise<Order> {
     return await this.orderRepository.findByPk(id);
   }
 
@@ -41,7 +41,7 @@ export class OrdersService {
     }
   }
 
-  async removeOrder(id: number): Promise<Order> {
+  async removeOrderById(id: number): Promise<Order> {
     const order = await this.orderRepository.findByPk(id);
     if (order) {
       await order.destroy();

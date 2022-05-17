@@ -33,25 +33,70 @@ enum Statuses {
   ACCEPTED
 }
 
+type Category {
+  id: Int!
+  name: String!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Float!
+  rating: Float!
+  ratingVotes: Float
+  discount: Float
+  image: String!
+  categoryId: Int!
+  specificationId: Int
+  organizationId: Int
+  category: Category!
+  organization: Organization!
+  specification: Specification!
+}
+
+type Specification {
+  id: Int!
+  brand: String
+  Model: String
+  description: String
+  feature: String
+  producer: String
+}
+
 type Query {
   getAllUsers: [User!]!
-  getOneUser(id: Int!): User!
+  getUserById(id: Int!): User!
   getAllOrganizations: [Organization!]!
-  getOneOrganization(id: Int!): Organization!
+  getOrganizationById(id: Int!): Organization!
   getAllOrders: [Order!]!
-  getOneOrder(id: Int!): Order!
+  getOrderById(id: Int!): Order!
+  getAllProducts: [Product!]!
+  getProductById(id: Int!): Product!
+  getAllCategories: [Category!]!
+  getCategoryById(id: Int!): Category!
+  getAllSpecifications: [Specification!]!
+  getSpecificationById(id: Int!): Specification!
 }
 
 type Mutation {
   createUser(userDto: CreateUserDto!): User!
   updateUser(updateUserDto: UpdateUserDto!): User!
-  removeUser(id: Int!): User!
+  removeUserById(id: Int!): User!
   createOrganization(organizationDto: CreateOrganizationDto!): Organization!
   updateOrganization(updateOrganizationInput: UpdateOrganizationDto!): Organization!
-  removeOrganization(id: Int!): Organization!
+  removeOrganizationById(id: Int!): Organization!
   createOrder(orderDto: CreateOrderDto!): Order!
   updateOrder(updateOrderInput: UpdateOrderDto!): Order!
-  removeOrder(id: Int!): Order!
+  removeOrderById(id: Int!): Order!
+  createProduct(productDto: CreateProductDto!): Product!
+  updateProduct(updateProductDto: UpdateProductDto!): Product!
+  removeProductById(id: Int!): Product!
+  createCategory(CategoryDto: CreateCategoryDto!): Category!
+  updateCategory(updateCategoryDto: UpdateCategoryDto!): Category!
+  removeCategoryById(id: Int!): Category!
+  createSpecification(SpecificationDto: CreateSpecificationDto!): Specification!
+  updateSpecification(updateSpecificationDto: UpdateSpecificationDto!): Specification!
+  removeSpecificationById(id: Int!): Specification!
 }
 
 input CreateUserDto {
@@ -59,6 +104,7 @@ input CreateUserDto {
   email: String!
   password: String!
   role: Roles!
+  organizationId: Int!
 }
 
 input UpdateUserDto {
@@ -66,6 +112,7 @@ input UpdateUserDto {
   email: String
   password: String
   role: Roles
+  organizationId: Int
   id: Int!
 }
 
@@ -86,5 +133,54 @@ input CreateOrderDto {
 input UpdateOrderDto {
   creatorId: Int
   status: Statuses
+  id: Int!
+}
+
+input CreateProductDto {
+  name: String!
+  price: Float!
+  discount: Float
+  image: String!
+  rating: Float!
+  organizationId: Int!
+  categoryId: Int!
+  specificationId: Int!
+}
+
+input UpdateProductDto {
+  name: String
+  price: Float
+  discount: Float
+  image: String
+  rating: Float
+  organizationId: Int
+  categoryId: Int
+  specificationId: Int
+  id: Int!
+}
+
+input CreateCategoryDto {
+  name: String!
+}
+
+input UpdateCategoryDto {
+  name: String
+  id: Int!
+}
+
+input CreateSpecificationDto {
+  brand: String
+  Model: String
+  description: String
+  feature: String
+  producer: String
+}
+
+input UpdateSpecificationDto {
+  brand: String
+  Model: String
+  description: String
+  feature: String
+  producer: String
   id: Int!
 }
