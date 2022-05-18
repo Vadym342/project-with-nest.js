@@ -1,4 +1,4 @@
-export const style = {
+export const navbarStyle = {
     AdbIcon: { display: { xs: 'none', md: 'flex' }, mr: 1 },
     AdbIconHidden: { display: { xs: 'flex', md: 'none' }, mr: 1 },
     Typography: {
@@ -22,4 +22,14 @@ export const style = {
     },
     BoxHidden: { flexGrow: 1, display: { xs: 'flex', md: 'none' } },
     Box: { flexGrow: 1, display: { xs: 'none', md: 'flex' } },
+
+    SearchIconWrapper: {
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
 }
