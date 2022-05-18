@@ -6,7 +6,7 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(private readonly ordersService: OrdersService) { }
 
   @Mutation(() => Order)
   createOrder(
@@ -20,6 +20,11 @@ export class OrdersResolver {
   getAllOrders(): Promise<Order[]> {
     return this.ordersService.getAllOrders();
   }
+
+  // @Query(() => [Order], { name: 'getAllOrderItems' })
+  // getAllOrderItems(orderId: number, itemsIds: number[]) {
+  //   return this.ordersService.getAllOrderItems(orderId, itemsIds);
+  // }
 
   @Query(() => Order, { name: 'getOrderById' })
   getOrderById(@Args('id', { type: () => Int }) id: number): Promise<Order> {

@@ -2,6 +2,6 @@ import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class CreateOrganizationDto {
-  @Field()
+  @Field({nullable:false})
   name: string;
 }

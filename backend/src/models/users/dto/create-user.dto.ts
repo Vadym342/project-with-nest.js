@@ -1,5 +1,6 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsAlpha, IsEmail, MinLength } from 'class-validator';
+import { Unique } from 'sequelize-typescript';
 import { Roles } from '../constants/enums/roles.enum';
 
 @InputType()

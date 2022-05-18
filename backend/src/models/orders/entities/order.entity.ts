@@ -34,6 +34,13 @@ export class Order extends Model<Order> {
   @Field(() => Int)
   creatorId: number;
 
+  // @Column({ allowNull: false })
+  // @Field()
+  // orderItems: [{
+  //   productId: number;
+  //   quantity: number;
+  // }]
+
   @Column
   @Field(() => Statuses)
   status: Statuses;

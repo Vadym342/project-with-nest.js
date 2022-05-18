@@ -10,6 +10,7 @@ import {
   HasMany,
   Model,
   Table,
+  Unique,
 } from 'sequelize-typescript';
 
 registerEnumType(Roles, {
