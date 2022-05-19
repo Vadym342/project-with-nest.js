@@ -72,6 +72,7 @@ type Query {
   getAllOrders: [Order!]!
   getOrderById(id: Int!): Order!
   getAllProducts: [Product!]!
+  getFlashDealsProducts: [Product!]!
   getProductById(id: Int!): Product!
   getAllCategories: [Category!]!
   getCategoryById(id: Int!): Category!
