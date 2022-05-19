@@ -3,6 +3,7 @@ import { CreateProductDto } from './dto/create-products.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { Product } from './entities/product.entity';
+import { Op } from 'sequelize';
 
 @Injectable()
 export class ProductsService {
@@ -14,6 +15,16 @@ export class ProductsService {
 
   async getAllProducts(): Promise<Product[]> {
     return await this.productRepository.findAll();
+  }
+
+  async getFlashDealsProducts(): Promise<Product[]> {
+    return await this.productRepository.findAll({
+      where: {
+        discount: {
+          [Op.ne]: null
+        }
+      }
+    })
   }
 
   async getProductById(id: number): Promise<Product> {
