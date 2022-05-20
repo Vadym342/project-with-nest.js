@@ -10,7 +10,7 @@ import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { ExpandLess, ExpandMore, ShoppingBag, StarBorder } from '@mui/icons-material';
+import { ShoppingBag } from '@mui/icons-material';
 import { useState } from 'react';
 import CategoryMenu from './CategoryMenu/CategoryMenu';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
