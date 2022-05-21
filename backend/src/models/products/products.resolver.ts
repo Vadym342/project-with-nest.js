@@ -52,8 +52,8 @@ export class ProductsResolver {
   }
 
   @Query(() => [Product], { name: 'getFlashDealsProducts' })
-  getFlashDealsProducts(): Promise<Product[]> {
-    return this.productsService.getFlashDealsProducts();
+  getFlashDealsProducts(@Args('page', { type: () => Int }) page: number, @Args('pageSize', { type: () => Int }) pageSize: number): Promise<Product[]> {
+    return this.productsService.getFlashDealsProducts(page, pageSize);
   }
 
   @Query(() => Product, { name: 'getProductById' })
