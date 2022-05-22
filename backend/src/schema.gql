@@ -128,12 +128,7 @@ input UpdateOrganizationDto {
 input CreateOrderDto {
   creatorId: Int!
   status: Statuses!
-}
-
-input UpdateOrderDto {
-  creatorId: Int
-  status: Statuses
-  id: Int!
+  products: CreateProductDto!
 }
 
 input CreateProductDto {
@@ -145,6 +140,13 @@ input CreateProductDto {
   organizationId: Int!
   categoryId: Int!
   specificationId: Int!
+}
+
+input UpdateOrderDto {
+  creatorId: Int
+  status: Statuses
+  products: CreateProductDto
+  id: Int!
 }
 
 input UpdateProductDto {
