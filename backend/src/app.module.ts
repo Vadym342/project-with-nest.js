@@ -18,6 +18,7 @@ import { User } from './models/users/entities/user.entity';
 import { UsersModule } from './models/users/users.module';
 import { Product } from './models/products/entities/product.entity';
 import { CategoriesModule } from './models/categories/categories.module';
+
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({

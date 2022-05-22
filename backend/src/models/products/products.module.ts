@@ -17,11 +17,13 @@ import { Product } from './entities/product.entity';
     Organization,
     Specification
   ])],
+  
   providers: [
     ProductsResolver,
     ProductsService,
     CategoriesService,
     SpecificationsService,
-    OrganizationsService],
+    OrganizationsService
+  ],
 })
 export class ProductsModule { }

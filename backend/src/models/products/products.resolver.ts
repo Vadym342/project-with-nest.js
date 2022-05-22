@@ -10,7 +10,6 @@ import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 import { Category } from '../categories/entities/category.entity';
 
-
 @Resolver(() => Product)
 export class ProductsResolver {
   constructor(
