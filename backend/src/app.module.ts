@@ -1,6 +1,9 @@
+import { OrderItemsModule } from './models/orderItems/orderItems.module';
+import { OrderItem } from './models/orderItems/entities/orderItem.entity';
+import { ShipmentsModule } from './models/shipments/shipments.module';
+import { Shipment } from './models/shipments/entities/shipment.entity';
 import { SpecificationsModule } from './models/specifications/specifications.module';
 import { Specification } from './models/specifications/entities/specification.entity';
-import { ProductOrder } from './models/products/entities/productOrder.entity';
 import { Category } from './models/categories/entities/category.entity';
 import { ProductsModule } from './models/products/products.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
@@ -42,8 +45,9 @@ import { CategoriesModule } from './models/categories/categories.module';
           Order,
           Product,
           Category,
-          ProductOrder,
-          Specification
+          Specification,
+          Shipment,
+          OrderItem
         ],
         autoLoadModels: true,
       }),
@@ -55,7 +59,9 @@ import { CategoriesModule } from './models/categories/categories.module';
     OrdersModule,
     ProductsModule,
     CategoriesModule,
-    SpecificationsModule
+    SpecificationsModule,
+    ShipmentsModule,
+    OrderItemsModule
   ],
 })
 export class AppModule { }

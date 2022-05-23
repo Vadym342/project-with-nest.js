@@ -1,4 +1,3 @@
-import { ProductOrder } from './../products/entities/productOrder.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -11,12 +10,11 @@ export class OrdersService {
   constructor(
     @InjectModel(Order) private orderRepository: typeof Order,
     @InjectModel(User) private userRepository: typeof User,
-    @InjectModel(ProductOrder) private productOrderRepository: typeof ProductOrder,
   ) { }
 
   async createOrder(orderDto: CreateOrderDto): Promise<Order> {
     const user = await this.userRepository.findOne({
-      where: { id: orderDto.creatorId },
+      where: { id: orderDto.ownerId },
     });
     if (user) {
       return await this.orderRepository.create(orderDto);

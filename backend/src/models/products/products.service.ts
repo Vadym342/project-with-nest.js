@@ -3,6 +3,23 @@ import { CreateProductDto } from './dto/create-products.dto';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { Product } from './entities/product.entity';
+import { Op } from 'sequelize';
+
+interface paginateArgs {
+  page: number;
+  pageSize: number;
+}
+
+const paginate = (query, { page, pageSize }: paginateArgs) => {
+  const offset = page;
+  const limit = pageSize;
+
+  return {
+    ...query,
+    offset,
+    limit,
+  };
+};
 
 @Injectable()
 export class ProductsService {
@@ -14,6 +31,18 @@ export class ProductsService {
 
   async getAllProducts(): Promise<Product[]> {
     return await this.productRepository.findAll();
+  }
+
+  async getFlashDealsProducts(page: number, pageSize: number): Promise<Product[]> {
+    return await this.productRepository.findAll(paginate({
+      where: {
+        discount: {
+          [Op.ne]: null
+        }
+      },
+    },
+      { page, pageSize },
+    ));
   }
 
   async getProductById(id: number): Promise<Product> {

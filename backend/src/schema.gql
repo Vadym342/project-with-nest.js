@@ -2,35 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Organization {
+type Specification {
   id: Int!
-  name: String!
-}
-
-type User {
-  id: Int!
-  name: String
-  email: String!
-  password: String!
-  role: Roles!
-  organizationId: Int!
-}
-
-enum Roles {
-  USER
-  ADMIN
-}
-
-type Order {
-  id: Int!
-  creatorId: Int!
-  status: Statuses!
-}
-
-enum Statuses {
-  PENDING
-  REJECTED
-  ACCEPTED
+  brand: String
+  Model: String
+  description: String
+  feature: String
+  producer: String
 }
 
 type Category {
@@ -54,13 +32,55 @@ type Product {
   specification: Specification!
 }
 
-type Specification {
+type Organization {
   id: Int!
-  brand: String
-  Model: String
-  description: String
-  feature: String
-  producer: String
+  name: String!
+}
+
+type User {
+  id: Int!
+  name: String
+  email: String!
+  password: String!
+  role: Roles!
+  organizationId: Int!
+}
+
+enum Roles {
+  USER
+  ADMIN
+}
+
+type Order {
+  id: Int!
+  ownerId: Int!
+  status: Statuses!
+  archived: Boolean!
+  items: OrderItem!
+}
+
+enum Statuses {
+  PENDING
+  REJECTED
+  ACCEPTED
+}
+
+type OrderItem {
+  id: Int!
+  orderId: Int!
+  productId: Int!
+  orderedPrice: Float!
+  quantity: Int!
+}
+
+type Shipment {
+  id: Int!
+  orderId: Int!
+  fullName: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
 }
 
 type Query {
@@ -76,6 +96,10 @@ type Query {
   getCategoryById(id: Int!): Category!
   getAllSpecifications: [Specification!]!
   getSpecificationById(id: Int!): Specification!
+  getAllShipments: [Shipment!]!
+  getShipmentById(id: Int!): Shipment!
+  getAllOrderItems: [OrderItem!]!
+  getOrderItemById(id: Int!): OrderItem!
 }
 
 type Mutation {
@@ -97,6 +121,12 @@ type Mutation {
   createSpecification(SpecificationDto: CreateSpecificationDto!): Specification!
   updateSpecification(updateSpecificationDto: UpdateSpecificationDto!): Specification!
   removeSpecificationById(id: Int!): Specification!
+  createShipment(ShipmentDto: CreateShipmentDto!): Shipment!
+  updateShipment(updateShipmentInput: UpdateShipmentDto!): Shipment!
+  removeShipmentById(id: Int!): Shipment!
+  createOrderItem(OrderItemDto: CreateOrderItemDto!): OrderItem!
+  updateOrderItem(updateOrderItemInput: UpdateOrderItemDto!): OrderItem!
+  removeOrderItemById(id: Int!): OrderItem!
 }
 
 input CreateUserDto {
@@ -126,9 +156,23 @@ input UpdateOrganizationDto {
 }
 
 input CreateOrderDto {
-  creatorId: Int!
+  ownerId: Int!
   status: Statuses!
-  products: CreateProductDto!
+  items: CreateOrderItemDto!
+}
+
+input CreateOrderItemDto {
+  orderId: Int!
+  productId: Int!
+  orderedPrice: Float!
+  quantity: Int!
+}
+
+input UpdateOrderDto {
+  ownerId: Int
+  status: Statuses
+  items: CreateOrderItemDto
+  id: Int!
 }
 
 input CreateProductDto {
@@ -140,13 +184,6 @@ input CreateProductDto {
   organizationId: Int!
   categoryId: Int!
   specificationId: Int!
-}
-
-input UpdateOrderDto {
-  creatorId: Int
-  status: Statuses
-  products: CreateProductDto
-  id: Int!
 }
 
 input UpdateProductDto {
@@ -184,5 +221,32 @@ input UpdateSpecificationDto {
   description: String
   feature: String
   producer: String
+  id: Int!
+}
+
+input CreateShipmentDto {
+  orderId: Int!
+  fullName: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
+}
+
+input UpdateShipmentDto {
+  orderId: Int
+  fullName: String
+  phone: String
+  country: String
+  city: String
+  address: String
+  id: Int!
+}
+
+input UpdateOrderItemDto {
+  orderId: Int
+  productId: Int
+  orderedPrice: Float
+  quantity: Int
   id: Int!
 }
