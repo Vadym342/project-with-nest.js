@@ -44,6 +44,10 @@ export class Product extends Model<Product> {
   @Field({ nullable: true })
   discount: number;
 
+  @Column({ type: DataType.BOOLEAN, allowNull: true })
+  @Field({ nullable: true })
+  isFavorite: boolean;
+
   @Column({ type: DataType.STRING, allowNull: false })
   @Field({ nullable: false })
   image: string;

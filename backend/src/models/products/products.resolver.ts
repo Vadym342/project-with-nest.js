@@ -51,6 +51,14 @@ export class ProductsResolver {
     return this.productsService.getAllProducts();
   }
 
+  @Query(() => [Product], { name: 'getFlashDealsProducts' })
+  getFlashDealsProducts(
+    @Args('page', { type: () => Int }) page: number,
+    @Args('pageSize', { type: () => Int }) pageSize: number,
+  ): Promise<Product[]> {
+    return this.productsService.getFlashDealsProducts(page, pageSize);
+  }
+
   @Query(() => Product, { name: 'getProductById' })
   getProductById(@Args('id', { type: () => Int }) id: number): Promise<Product> {
     return this.productsService.getProductById(id);

@@ -20,6 +20,9 @@ export class CreateProductDto {
   @Field()
   rating: number;
 
+  @Field({ nullable: true })
+  isFavorite: boolean;
+
   @Field(() => Int)
   organizationId: number;
   

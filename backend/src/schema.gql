@@ -33,6 +33,7 @@ type Product {
   rating: Float!
   ratingVotes: Float
   discount: Float
+  isFavorite: Boolean
   image: String!
   categoryId: Int!
   specificationId: Int
@@ -93,6 +94,7 @@ type Query {
   getAllOrders: [Order!]!
   getOrderById(id: Int!): Order!
   getAllProducts: [Product!]!
+  getFlashDealsProducts: [Product!]!
   getProductById(id: Int!): Product!
   getAllCategories: [Category!]!
   getCategoryById(id: Int!): Category!
@@ -187,6 +189,7 @@ input CreateProductDto {
   discount: Float
   image: String!
   rating: Float!
+  isFavorite: Boolean
   organizationId: Int!
   categoryId: Int!
   specificationId: Int!
@@ -198,6 +201,7 @@ input UpdateProductDto {
   discount: Float
   image: String
   rating: Float
+  isFavorite: Boolean
   organizationId: Int
   categoryId: Int
   specificationId: Int

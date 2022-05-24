@@ -6,15 +6,14 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { ExpandLess, ExpandMore, ShoppingBag, StarBorder } from '@mui/icons-material';
-import { Collapse, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material';
 import { useState } from 'react';
+import CategoryMenu from './CategoryMenu/CategoryMenu';
+import ProfileMenu from './ProfileMenu/ProfileMenu';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,6 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(null);
+  const menuId = 'primary-search-account-menu';
 
   const isMenuOpen = Boolean(anchorEl);
   const isCategoryMenuOpen = Boolean(categoryAnchorEl);
@@ -78,51 +78,6 @@ const NavBar = () => {
     setCategoryAnchorEl(null);
   };
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
-  );
-
-  const categiryMenuId = 'primary-search-account-menu';
-  const renderCategoryMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      style={{ marginLeft: '5%', marginTop: '45px' }}
-      id={categiryMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'left',
-      }}
-      open={isCategoryMenuOpen}
-      onClose={handleCategoryMenuClose}
-    >
-      <MenuItem onClick={handleCategoryMenuClose}>Blab</MenuItem>
-      <MenuItem onClick={handleCategoryMenuClose}>Blabla</MenuItem>
-    </Menu>
-  );
-
   return (
     <Box sx={{ flexGrow: 1, color: 'white' }} >
       <AppBar position="static" style={{ background: "#F6F9FC" }}>
@@ -131,19 +86,21 @@ const NavBar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'block' } }}
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
             style={{ color: '#2B3445' }}
           >
             Mbarara
-            <IconButton
-              onClick={handlerCategoryMenuOpen}
-              size="large"
-              color="default"
-            >
-              <DashboardCustomizeIcon />
-              <KeyboardArrowDownIcon />
-            </IconButton>
           </Typography>
+          <IconButton
+            onClick={handlerCategoryMenuOpen}
+            size="large"
+            color="default"
+            sx={{ display: { xs: 'flex', sm: 'flex' } }}
+          >
+            <DashboardCustomizeIcon />
+            <KeyboardArrowDownIcon />
+          </IconButton>
+
           <Box sx={{ flexGrow: 1 }} />
           <Search style={{ width: '25rem', border: '1px solid #9e9e9e', borderRadius: '50px', color: '#9e9e9e' }}>
             <SearchIconWrapper>
@@ -155,7 +112,7 @@ const NavBar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
             <IconButton
               size="large"
               edge="end"
@@ -178,8 +135,17 @@ const NavBar = () => {
           </Box>
         </Toolbar>
       </AppBar>
-      {renderCategoryMenu}
-      {renderMenu}
+      <CategoryMenu
+        categoryAnchorEl={categoryAnchorEl}
+        isCategoryMenuOpen={isCategoryMenuOpen}
+        handleCategoryMenuClose={handleCategoryMenuClose}
+      />
+      <ProfileMenu
+        menuId={menuId}
+        anchorEl={anchorEl}
+        isMenuOpen={isMenuOpen}
+        handleMenuClose={handleMenuClose}
+      />
     </Box >
   );
 }
