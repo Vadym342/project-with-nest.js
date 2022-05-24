@@ -1,13 +1,13 @@
 import { gql, useQuery } from '@apollo/client';
 import BoltIcon from '@mui/icons-material/Bolt';
-import { width } from '@mui/system';
-import { wrap } from 'module';
+import { Button } from '@mui/material';
+import { useState } from 'react';
 import Product from '../Product/Product';
 
 
 const GET_FLASHDEALSPRODUCT = gql`
-query {
-  getFlashDealsProducts{
+query FlashDeals($page:Int!, $pageSize:Int!){
+  getFlashDealsProducts(page: $page, pageSize: $pageSize){
     id,
     name,
 		price,
@@ -20,14 +20,32 @@ query {
 `
 
 const FlashDealsList = () => {
-  const { data, error, loading } = useQuery(GET_FLASHDEALSPRODUCT);
+  const [page, setPage] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(4);
+  const { data, error, loading } = useQuery(GET_FLASHDEALSPRODUCT, {
+    variables: {
+      page,
+      pageSize
+    }
+  });
 
+  const handleButtonLeft = () => {
+    if (page > 1)
+      setPage(page - 1)
+  }
+
+  const handleButtonRight = () => {
+    if (products && products.length >= 4)
+      setPage(page + 1)
+  }
+
+  //console.log(JSON.stringify(error, null, 2));
   if (error) return <div>Error Page</div>;
 
   if (loading) return <div>Spinner...</div>;
 
   const products = data.getFlashDealsProducts;
-  console.log(products);
+
   return (
     <div style={{ margin: '15px' }}>
       <div>
@@ -41,7 +59,7 @@ const FlashDealsList = () => {
             </div>
           </div>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' }}>
           {
             products.map((product: any) => (
               <Product
@@ -56,7 +74,16 @@ const FlashDealsList = () => {
               />
             ))
           }
-
+        </div>
+        <div>
+          <Button onClick={handleButtonLeft}>
+            Left
+          </Button>
+        </div>
+        <div>
+          <Button onClick={handleButtonRight}>
+            Right
+          </Button>
         </div>
       </div>
     </div>
