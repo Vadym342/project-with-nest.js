@@ -1,4 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Shipment } from './../shipments/entities/shipment.entity';
+import { ShipmentsService } from './../shipments/shipments.service';
+import { OrderItemsService } from './../orderItems/orderItems.service';
+import { OrderItem } from './../orderItems/entities/orderItem.entity';
+import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
 import { OrdersService } from './orders.service';
 import { Order } from './entities/order.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -6,7 +10,11 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 
 @Resolver(() => Order)
 export class OrdersResolver {
-  constructor(private readonly ordersService: OrdersService) {}
+  constructor(
+    private readonly ordersService: OrdersService,
+    private readonly orderItemsSerice: OrderItemsService,
+    private readonly shipmentsService: ShipmentsService,
+  ) { }
 
   @Mutation(() => Order)
   createOrder(
@@ -21,8 +29,20 @@ export class OrdersResolver {
     return this.ordersService.getAllOrders();
   }
 
+  @ResolveField(() => Shipment)
+  async shipment(@Parent() shipment) {
+    const { id } = shipment;
+    return this.shipmentsService.getShipmentByOrderId(id);
+  }
+
+  @ResolveField(() => OrderItem)
+  async items(@Parent() orderItem) {
+    const { id } = orderItem;
+    return this.orderItemsSerice.getOrderItemsForOrderById(id);
+  }
+
   @Query(() => Order, { name: 'getOrderById' })
-  getOrderById(@Args('id', { type: () => Int }) id: number): Promise<Order> {
+  getOrderById(@Args('id', { type: () => Int }) id: number) {
     return this.ordersService.getOrderById(id);
   }
 

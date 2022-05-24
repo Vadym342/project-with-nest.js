@@ -1,6 +1,4 @@
 import { Specification } from './../../specifications/entities/specification.entity';
-import { ProductOrder } from './productOrder.entity';
-import { Order } from './../../orders/entities/order.entity';
 import { Category } from './../../categories/entities/category.entity';
 import { Organization } from '../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
@@ -68,9 +66,6 @@ export class Product extends Model<Product> {
   @Column({ type: DataType.INTEGER, allowNull: true })
   @Field(() => Int, { nullable: true })
   organizationId: number;
-
-  @BelongsToMany(() => Order, () => ProductOrder)
-  orders: Order[]
 
   @BelongsTo(() => Organization)
   organization: Organization;

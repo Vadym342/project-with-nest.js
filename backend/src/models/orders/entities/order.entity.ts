@@ -1,10 +1,9 @@
-import { ProductOrder } from './../../products/entities/productOrder.entity';
-import { Product } from './../../products/entities/product.entity';
+import { Shipment } from './../../shipments/entities/shipment.entity';
+import { OrderItem } from './../../orderItems/entities/orderItem.entity';
 import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -32,15 +31,24 @@ export class Order extends Model<Order> {
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER, allowNull: false })
   @Field(() => Int)
-  creatorId: number;
+  ownerId: number;
+
+  @ForeignKey(() => Shipment)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Field(() => Int)
+  shipmentId : number;
 
   @Column
   @Field(() => Statuses)
   status: Statuses;
 
-  @BelongsToMany(() => Product, () => ProductOrder)
-  products: Product[];
+  @Column
+  @Field(() => Boolean)
+  archived: boolean = false;
 
   @BelongsTo(() => User)
   creator: User;
+
+  @Field(()=> [OrderItem])
+  items: OrderItem[];
 }
