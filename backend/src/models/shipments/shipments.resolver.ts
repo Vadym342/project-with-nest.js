@@ -3,10 +3,9 @@ import { ShipmentsService } from './shipments.service';
 import { Shipment } from './entities/shipment.entity';
 import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
-
 @Resolver(() => Shipment)
 export class ShipmentsResolver {
-  constructor(private readonly ShipmentsService: ShipmentsService) {}
+  constructor(private readonly ShipmentsService: ShipmentsService) { }
 
   @Mutation(() => Shipment)
   createShipment(
@@ -19,6 +18,13 @@ export class ShipmentsResolver {
   @Query(() => [Shipment], { name: 'getAllShipments' })
   getAllShipments(): Promise<Shipment[]> {
     return this.ShipmentsService.getAllShipments();
+  }
+
+  @Query(() => [Shipment], { name: 'getShipmentByOrderId' })
+  getShipmentByOrderId(
+    @Args('id', { type: () => Int }) id: number
+  ): Promise<Shipment> {
+    return this.ShipmentsService.getShipmentByOrderId(id);
   }
 
   @Query(() => Shipment, { name: 'getShipmentById' })

@@ -3,10 +3,9 @@ import { Int, ObjectType, Float } from '@nestjs/graphql';
 import { Field } from '@nestjs/graphql';
 import { Column, DataType, HasMany, Model, Table, ForeignKey } from 'sequelize-typescript';
 import { Product } from '../../products/entities/product.entity';
-import { User } from '../../users/entities/user.entity';
 
 @ObjectType()
-@Table({ tableName: 'OrderItems' })
+@Table({ tableName: 'orderItems' })
 export class OrderItem extends Model<OrderItem> {
   @Column({
     type: DataType.INTEGER,

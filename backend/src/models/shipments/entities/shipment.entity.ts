@@ -40,6 +40,6 @@ export class Shipment extends Model<Shipment> {
   @Field()
   address: string;
 
-  @BelongsTo(() => Order)
+  @HasOne(() => Order)
   order: Order;
 }

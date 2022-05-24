@@ -9,7 +9,7 @@ export class OrderItemsService {
   constructor(
     @InjectModel(OrderItem)
     private OrderItemRepository: typeof OrderItem,
-  ) {}
+  ) { }
 
   async createOrderItem(
     OrderItemDto: CreateOrderItemDto,
@@ -21,6 +21,13 @@ export class OrderItemsService {
     return await this.OrderItemRepository.findAll();
   }
 
+  async getOrderItemsForOrderById(id): Promise<OrderItem[]> {
+    return await this.OrderItemRepository.findAll({
+      where: {
+        orderId: id
+      }
+    });
+  }
   async getOrderItemById(id: number): Promise<OrderItem> {
     return await this.OrderItemRepository.findByPk(id);
   }
@@ -32,7 +39,7 @@ export class OrderItemsService {
     const OrderItem = await this.OrderItemRepository.findByPk(id);
     if (OrderItem) {
       await OrderItem.update(updateOrderItemInput);
-      await OrderItem.save(); 
+      await OrderItem.save();
       return OrderItem;
     }
   }

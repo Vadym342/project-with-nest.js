@@ -2,6 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Shipment {
+  id: Int!
+  orderId: Int!
+  fullName: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
+}
+
 type Specification {
   id: Int!
   brand: String
@@ -54,9 +64,11 @@ enum Roles {
 type Order {
   id: Int!
   ownerId: Int!
+  shipmentId: Int!
   status: Statuses!
   archived: Boolean!
-  items: OrderItem!
+  items: [OrderItem!]!
+  shipment: Shipment!
 }
 
 enum Statuses {
@@ -73,16 +85,6 @@ type OrderItem {
   quantity: Int!
 }
 
-type Shipment {
-  id: Int!
-  orderId: Int!
-  fullName: String!
-  phone: String!
-  country: String!
-  city: String!
-  address: String!
-}
-
 type Query {
   getAllUsers: [User!]!
   getUserById(id: Int!): User!
@@ -97,8 +99,10 @@ type Query {
   getAllSpecifications: [Specification!]!
   getSpecificationById(id: Int!): Specification!
   getAllShipments: [Shipment!]!
+  getShipmentByOrderId(id: Int!): [Shipment!]!
   getShipmentById(id: Int!): Shipment!
   getAllOrderItems: [OrderItem!]!
+  getOrderItemsForOrderById(id: Int!): [OrderItem!]!
   getOrderItemById(id: Int!): OrderItem!
 }
 
@@ -158,7 +162,8 @@ input UpdateOrganizationDto {
 input CreateOrderDto {
   ownerId: Int!
   status: Statuses!
-  items: CreateOrderItemDto!
+  items: [CreateOrderItemDto!]!
+  shipmentId: Int!
 }
 
 input CreateOrderItemDto {
@@ -171,7 +176,8 @@ input CreateOrderItemDto {
 input UpdateOrderDto {
   ownerId: Int
   status: Statuses
-  items: CreateOrderItemDto
+  items: [CreateOrderItemDto!]
+  shipmentId: Int
   id: Int!
 }
 

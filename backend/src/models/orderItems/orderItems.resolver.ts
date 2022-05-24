@@ -21,6 +21,12 @@ export class OrderItemsResolver {
     return this.OrderItemsService.getAllOrderItems();
   }
 
+  @Query(() => [OrderItem], { name: 'getOrderItemsForOrderById' })
+  getOrderItemsForOrderById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<OrderItem[]> {
+    return this.OrderItemsService.getOrderItemsForOrderById(id);
+  }
   @Query(() => OrderItem, { name: 'getOrderItemById' })
   getOrderItemById(
     @Args('id', { type: () => Int }) id: number,

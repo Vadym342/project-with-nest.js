@@ -5,11 +5,14 @@ import { Statuses } from '../constants/enums/statuses.enum';
 
 @InputType()
 export class CreateOrderDto {
-  @Field(() => Int)
+  @Field(() => Int, { nullable: false })
   ownerId: number;
-  @Field(() => Statuses)
+  @Field(() => Statuses, { nullable: false })
   status: Statuses;
-  // In OrderService create OrderItem!!!!!!
-  @Field(()=> CreateOrderItemDto)
+
+  @Field(() => [CreateOrderItemDto], { nullable: false })
   items: OrderItem[]
+
+  @Field(() => Int, { nullable: false })
+  shipmentId: number;
 }

@@ -9,7 +9,7 @@ export class ShipmentsService {
   constructor(
     @InjectModel(Shipment)
     private ShipmentRepository: typeof Shipment,
-  ) {}
+  ) { }
 
   async createShipment(
     ShipmentDto: CreateShipmentDto,
@@ -19,6 +19,14 @@ export class ShipmentsService {
 
   async getAllShipments(): Promise<Shipment[]> {
     return await this.ShipmentRepository.findAll();
+  }
+
+  async getShipmentByOrderId(id): Promise<Shipment> {
+    return await this.ShipmentRepository.findOne({
+      where: {
+        orderId: id
+      }
+    })
   }
 
   async getShipmentById(id: number): Promise<Shipment> {

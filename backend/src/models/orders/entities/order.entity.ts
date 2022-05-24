@@ -1,9 +1,9 @@
+import { Shipment } from './../../shipments/entities/shipment.entity';
 import { OrderItem } from './../../orderItems/entities/orderItem.entity';
-import { Field, Float, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
 import { Statuses } from '../constants/enums/statuses.enum';
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   DataType,
   ForeignKey,
@@ -33,6 +33,11 @@ export class Order extends Model<Order> {
   @Field(() => Int)
   ownerId: number;
 
+  @ForeignKey(() => Shipment)
+  @Column({ type: DataType.INTEGER, allowNull: false })
+  @Field(() => Int)
+  shipmentId : number;
+
   @Column
   @Field(() => Statuses)
   status: Statuses;
@@ -44,6 +49,6 @@ export class Order extends Model<Order> {
   @BelongsTo(() => User)
   creator: User;
 
-  @Field(()=> OrderItem)
+  @Field(()=> [OrderItem])
   items: OrderItem[];
 }
