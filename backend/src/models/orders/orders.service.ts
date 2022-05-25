@@ -1,3 +1,5 @@
+import { Shipment } from './../shipments/entities/shipment.entity';
+import { OrderItem } from './../orderItems/entities/orderItem.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -10,13 +12,18 @@ export class OrdersService {
   constructor(
     @InjectModel(Order) private orderRepository: typeof Order,
     @InjectModel(User) private userRepository: typeof User,
-  ) {}
+    @InjectModel(OrderItem) private orderItemRepository: typeof OrderItem,
+  ) { }
 
   async createOrder(orderDto: CreateOrderDto): Promise<Order> {
+    //new field in model TOTAL PRICE, items.foreach 
     const user = await this.userRepository.findOne({
-      where: { id: orderDto.creatorId },
+      where: { id: orderDto.ownerId },
     });
     if (user) {
+      orderDto.items.forEach(el => {
+        this.orderItemRepository.create(el);
+      })
       return await this.orderRepository.create(orderDto);
     }
   }
@@ -25,10 +32,10 @@ export class OrdersService {
     return await this.orderRepository.findAll();
   }
 
-  async getOrderById(id: number): Promise<Order> {
+  async getOrderById(id: number) {
     return await this.orderRepository.findByPk(id);
   }
-
+  
   async updateOrder(
     id: number,
     updateOrderInput: UpdateOrderDto,

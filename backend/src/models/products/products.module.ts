@@ -24,6 +24,6 @@ import { Product } from './entities/product.entity';
     CategoriesService,
     SpecificationsService,
     OrganizationsService
-  ],
+  ]
 })
 export class ProductsModule { }
