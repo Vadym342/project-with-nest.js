@@ -1,8 +1,10 @@
+import { JwtauthGuard } from './../auth/jwt-auth.guart';
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { UsersService } from './users.service';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -16,6 +18,7 @@ export class UsersResolver {
   }
 
   @Query(() => [User], { name: 'getAllUsers' })
+  @UseGuards(JwtauthGuard)
   getAllUsers(): Promise<User[]> {
     return this.usersService.getAllUsers();
   }
@@ -23,6 +26,11 @@ export class UsersResolver {
   @Query(() => User, { name: 'getUserById' })
   getUserById(@Args('id', { type: () => Int }) id: number): Promise<User> {
     return this.usersService.getUserById(id);
+  }
+
+  @Query(() => User, { name: 'getUserByEmail' })
+  getUserByEmail(@Args('email', { type: () => String }) email: string): Promise<User> {
+    return this.usersService.getUserByEmail(email);
   }
 
   @Mutation(() => User)

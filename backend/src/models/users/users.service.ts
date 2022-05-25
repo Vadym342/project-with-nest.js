@@ -20,6 +20,14 @@ export class UsersService {
     return await this.userRepository.findByPk(id);
   }
 
+  async getUserByEmail(email: string): Promise<User> {
+    return await this.userRepository.findOne({
+      where:{
+        email:email
+      }
+    });
+  }
+
   async updateUser(id: number, updateUserDto: UpdateUserDto): Promise<User> {
     const user = await this.userRepository.findByPk(id);
     if (user) {
