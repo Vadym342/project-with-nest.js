@@ -86,9 +86,15 @@ type OrderItem {
   quantity: Int!
 }
 
+type LoginResponse {
+  accessToken: String!
+  user: User!
+}
+
 type Query {
   getAllUsers: [User!]!
   getUserById(id: Int!): User!
+  getUserByEmail(email: String!): User!
   getAllOrganizations: [Organization!]!
   getOrganizationById(id: Int!): Organization!
   getAllOrders: [Order!]!
@@ -109,6 +115,7 @@ type Query {
 }
 
 type Mutation {
+  login(loginUserDto: LoginUserDto!): LoginResponse!
   createUser(userDto: CreateUserDto!): User!
   updateUser(updateUserDto: UpdateUserDto!): User!
   removeUserById(id: Int!): User!
@@ -133,6 +140,14 @@ type Mutation {
   createOrderItem(OrderItemDto: CreateOrderItemDto!): OrderItem!
   updateOrderItem(updateOrderItemInput: UpdateOrderItemDto!): OrderItem!
   removeOrderItemById(id: Int!): OrderItem!
+  uploadFile_GraphqlUpload(file: Upload!): String!
+  uploadFile: String!
+  uploadMultipleFiles: String!
+}
+
+input LoginUserDto {
+  username: String!
+  password: String!
 }
 
 input CreateUserDto {
@@ -260,3 +275,6 @@ input UpdateOrderItemDto {
   quantity: Int
   id: Int!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload

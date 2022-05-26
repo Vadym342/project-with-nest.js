@@ -1,3 +1,4 @@
+import { UsersService } from './../users/users.service';
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
@@ -6,25 +7,18 @@ import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
-  constructor(configService: ConfigService) {
+  constructor(
+    configService: ConfigService,
+    private usersService: UsersService
+    ) {
     super({
-      secretOrKeyProvider: passportJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: `${configService.get(
-          'AUTH0_ISSUER_URL',
-        )}.well-known/jwks.json`,
-      }),
-
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      audience: configService.get('AUTH0_AUDIENCE'),
-      issuer: `${configService.get('AUTH0_ISSUER_URL')}`,
-      algorithms: ['RS256'],
+      ignoreExpiration: false,
+      secretOrKey: `${configService.get('SECRET_JWT')}`,
     });
   }
 
-  validate(payload: unknown): unknown {
-    return payload;
+  async validate(payload: any) {
+    return await this.usersService.getUserById(payload.sub);
   }
 }
