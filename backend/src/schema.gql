@@ -140,9 +140,7 @@ type Mutation {
   createOrderItem(OrderItemDto: CreateOrderItemDto!): OrderItem!
   updateOrderItem(updateOrderItemInput: UpdateOrderItemDto!): OrderItem!
   removeOrderItemById(id: Int!): OrderItem!
-  uploadFile_GraphqlUpload(file: Upload!): String!
-  uploadFile: String!
-  uploadMultipleFiles: String!
+  uploadFile(file: Upload!): String!
 }
 
 input LoginUserDto {
