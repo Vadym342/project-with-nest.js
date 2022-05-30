@@ -1,9 +1,6 @@
-import { extname } from "path";
-
-export const imageFileFilter = (req: any, file: any, callback: any) => {
-  if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
-    req.fileValidationError = 'Only image files are allowed!';
-    return callback(null, false);
+export const imageFileFilter = (filename: string) => {
+  if (!filename.match(/\.(jpg|jpeg|png|gif)$/)) {
+    return false;
   }
-  callback(null, true);
+  return true;
 };

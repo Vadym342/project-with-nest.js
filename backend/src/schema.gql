@@ -112,6 +112,7 @@ type Query {
   getAllOrderItems: [OrderItem!]!
   getOrderItemsForOrderById(id: Int!): [OrderItem!]!
   getOrderItemById(id: Int!): OrderItem!
+  getImage(key: String!): String!
 }
 
 type Mutation {

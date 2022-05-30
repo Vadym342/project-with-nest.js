@@ -1,12 +1,9 @@
 import { uuid } from 'uuidv4';
-import { Resolver, Args, Mutation } from '@nestjs/graphql';
-import { GraphQLUpload, FileUpload, Upload } from 'graphql-upload';
+import { Resolver, Args, Mutation, Query } from '@nestjs/graphql';
+import { GraphQLUpload, FileUpload } from 'graphql-upload';
 import { createWriteStream } from 'fs';
-import { BadRequestException, Req, UploadedFile, UseInterceptors } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
 import { imageFileFilter } from './file.helper';
 import { FileService } from './files.service';
-
 @Resolver()
 export class FileResolver {
 
@@ -14,51 +11,35 @@ export class FileResolver {
     private readonly filesService: FileService,
   ) { }
 
+  //TEST upload
   @Mutation(() => String)
-  async uploadFile(@Req() req: any, @Args({ name: 'file', type: () => GraphQLUpload })
+  async uploadFile(@Args({ name: 'file', type: () => GraphQLUpload })
   {
     createReadStream,
     filename,
   }: FileUpload) {
-    const path = `${uuid()}-${filename}`
-  
+    if (!imageFileFilter(filename)) {
+      return Promise.reject(new Error('Only image files are allowed!'));
+    }
+    const path = `${uuid()}`;
     const promise = new Promise(async (resolve, reject) =>
       createReadStream()
         .pipe(createWriteStream(`./uploads/${path}`))
         .on('error', error => reject(error))
         .on('finish', () => resolve(`./uploads/${path}`))
     );
-    const resualt = await this.filesService.uploadFileForS3(createReadStream,filename, `uploads/${path}`);
+    const resualt = await this.filesService.uploadFileForS3(createReadStream, path, `uploads/${path}`);
+    const getFile = await this.filesService.getFile(path);
+    console.log(getFile);
     console.log(resualt);
     return promise;
   }
 
-  // @Mutation(() => String)
-  // @UseInterceptors(
-  //   FileInterceptor('file', {
-  //     fileFilter: imageFileFilter,
-  //   })
-  // )
-  // async uploadFile(@Req() req: any, @UploadedFile() file: Express.Multer.File) {
-  //   if (!file || req.fileValidationError) {
-  //     throw new BadRequestException('Invalid file provided, [image files allowed]')
-  //   }
-  //   return file.originalname;
-  // }
-
-  // @Mutation(() => String)
-  // @UseInterceptors(
-  //   FileInterceptor('image')
-  // )
-  // async uploadMultipleFiles(@UploadedFile() files: any) { // Express.multer types !!!
-  //   const response: any = [];
-  //   files.map((file: any) => {
-  //     const fileResponse = {
-  //       originalname: file.originalname,
-  //       filename: file.filename,
-  //     };
-  //     response.push(fileResponse);
-  //   });
-  //   return response;
-  // }
+  //???
+  @Query(()=> String, { name: "getImage" })
+  async getImage(@Args('key', { type: () => String }) key: string) {
+    const res = await this.filesService.getFile(key);
+    console.log(res);
+    return res;
+  }
 }

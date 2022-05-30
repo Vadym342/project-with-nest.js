@@ -8,11 +8,10 @@ const start = async () => {
   try {
     const app = await NestFactory.create(AppModule);
     const configService = app.get(ConfigService);
-
     config.update({
-      accessKeyId: "AKIAWCZEG6XLES2IZYLA" ,
-      secretAccessKey: "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",
-      region: "eu-west-2",
+      accessKeyId: `${configService.get('AWS_ACCESS_KEY')}` ,
+      secretAccessKey: `${configService.get('AWS_SECRET_KEY')}`,
+      region: `${configService.get('AWS_BUCKET_REGION')}`,
     })
   
     const PORT = configService.get<string>('PORT');
