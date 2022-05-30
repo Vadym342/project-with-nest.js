@@ -3,7 +3,8 @@ import BoltIcon from '@mui/icons-material/Bolt';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import Product from '../Product/Product';
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const GET_FLASHDEALSPRODUCT = gql`
 query FlashDeals($page:Int!, $pageSize:Int!){
@@ -75,15 +76,17 @@ const FlashDealsList = () => {
             ))
           }
         </div>
-        <div>
-          <Button onClick={handleButtonLeft}>
-            Left
-          </Button>
-        </div>
-        <div>
-          <Button onClick={handleButtonRight}>
-            Right
-          </Button>
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div style={{ position: 'absolute', top: '200px' }}>
+            <Button onClick={handleButtonLeft} style={{ borderRadius: '50%', minWidth: '25px', color: 'white', background: '#0F3460' }}>
+              <ArrowBackIcon />
+            </Button>
+          </div>
+          <div style={{ position: 'absolute', right:'15px', top: '200px' }}>
+            <Button onClick={handleButtonRight} style={{ borderRadius: '50%', minWidth: '25px', color: 'white', background: '#0F3460' }}>
+              <ArrowForwardIcon />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

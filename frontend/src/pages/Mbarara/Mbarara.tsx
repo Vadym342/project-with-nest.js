@@ -6,7 +6,11 @@ const Mbarara = () => {
   return (
     <div>
       <NavBar />
-      <FlashDealsList />
+      <div>
+        <div>
+          <FlashDealsList />
+        </div>
+      </div>
     </div>
   );
 };
