@@ -6,7 +6,7 @@ import { imageFileFilter } from './file.helper';
 import { FileService } from './files.service';
 @Resolver()
 export class FileResolver {
-
+//util.promisify
   constructor(
     private readonly filesService: FileService,
   ) { }
@@ -39,7 +39,7 @@ export class FileResolver {
   @Query(()=> String, { name: "getImage" })
   async getImage(@Args('key', { type: () => String }) key: string) {
     const res = await this.filesService.getFile(key);
-    console.log(res);
-    return res;
+    console.log(res.Body);
+    return `data:image/*;base64,${res.Body.toString("base64")}`
   }
 }

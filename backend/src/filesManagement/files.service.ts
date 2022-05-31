@@ -31,6 +31,6 @@ export class FileService {
     return await s3.getObject({
       Bucket: `${this.configService.get('AWS_BUCKET_NAME')}`,
       Key: fileKey
-    })
+    }).promise();
   }
 }

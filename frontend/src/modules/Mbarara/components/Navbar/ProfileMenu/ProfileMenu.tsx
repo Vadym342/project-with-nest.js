@@ -1,4 +1,5 @@
 import { Menu, MenuItem } from "@mui/material";
+import ProfileModal from "./ProfileModal/ProfileModal";
 
 interface ProfileMenuArgs {
   menuId: string;
@@ -8,26 +9,41 @@ interface ProfileMenuArgs {
 }
 
 const ProfileMenu = ({ menuId, anchorEl, isMenuOpen, handleMenuClose }: ProfileMenuArgs) => {
+  const user = null;
+
   return (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      style={{ marginTop: '45px' }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-    </Menu>
+    <>
+      {
+        !user
+          ?
+          <ProfileModal
+            isMenuOpen={isMenuOpen}
+            handleMenuClose={handleMenuClose}
+          />
+          :
+          <Menu
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }
+            }
+            style={{ marginTop: '45px' }
+            }
+            id={menuId}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={isMenuOpen}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+          </Menu>
+      }
+    </>
   );
 };
 
