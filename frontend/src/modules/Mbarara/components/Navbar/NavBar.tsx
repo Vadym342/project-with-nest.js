@@ -80,14 +80,14 @@ const NavBar = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, color: 'white' }} >
-      <AppBar position="static" style={navbarStyle.color}>
+    <Box sx={navbarStyle.MainBox} >
+      <AppBar position="static" style={navbarStyle.AppBarColor}>
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'flex' }, color: '#2B3445'  }}
+            sx={navbarStyle.LogoTypography}
           >
             Mbarara
           </Typography>
@@ -95,16 +95,16 @@ const NavBar = () => {
             onClick={handlerCategoryMenuOpen}
             size="large"
             color="default"
-            sx={{ display: { xs: 'flex', sm: 'flex' } }}
+            sx={navbarStyle.CategoryIcon}
           >
             <DashboardCustomizeIcon />
             <KeyboardArrowDownIcon />
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Search style={{ width:'25rem'}}>
+          <Search style={navbarStyle.Search}>
             <SearchIconWrapper>
-              <SearchIcon style={{ color: '#9e9e9e' }} />
+              <SearchIcon style={navbarStyle.SearchIcon} />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -112,7 +112,7 @@ const NavBar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
+          <Box sx={navbarStyle.AccountBox}>
             <IconButton
               size="large"
               edge="end"
