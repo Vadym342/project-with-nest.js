@@ -1,10 +1,10 @@
 import { gql, useQuery } from '@apollo/client';
 import BoltIcon from '@mui/icons-material/Bolt';
-import { Button } from '@mui/material';
-import { useState } from 'react';
+import { Box, Button } from '@mui/material';
+import { memo, useCallback, useState } from 'react';
+import SidePagination from '../../Pagination/SidePagination/SidePagination';
 import Product from '../Product/Product';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import flashDealsStyle from './flashDealsStyle';
 
 const GET_FLASHDEALSPRODUCT = gql`
 query FlashDeals($page:Int!, $pageSize:Int!){
@@ -19,7 +19,6 @@ query FlashDeals($page:Int!, $pageSize:Int!){
   }
 }
 `
-
 const FlashDealsList = () => {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(4);
@@ -30,12 +29,12 @@ const FlashDealsList = () => {
     }
   });
 
-  const handleButtonLeft = () => {
+  const handleButtonPrev = () => {
     if (page > 1)
       setPage(page - 1)
   }
 
-  const handleButtonRight = () => {
+  const handleButtonNext = () => {
     if (products && products.length >= 4)
       setPage(page + 1)
   }
@@ -48,48 +47,40 @@ const FlashDealsList = () => {
   const products = data.getFlashDealsProducts;
 
   return (
-    <div style={{ margin: '15px' }}>
-      <div>
-        <div style={{ marginBottom: '5px' }}>
-          <div style={{ display: 'flex', flexDirection: 'row', }}>
-            <div style={{ color: '#D23F57' }}>
-              <BoltIcon />
-            </div>
-            <div style={{ fontWeight: 500, fontSize: '20px' }}>
-              Flash Deals
-            </div>
-          </div>
+    <Box style={flashDealsStyle.MainBox}>
+      <Box style={flashDealsStyle.TitleBox}>
+        <div>
+          <BoltIcon style={flashDealsStyle.BoltIcon} />
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-around' }}>
-          {
-            products.map((product: any) => (
-              <Product
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                rating={product.rating}
-                discount={product.discount}
-                image={product.image}
-                isFavorite={product.isFavorite}
-              />
-            ))
-          }
+        <div style={flashDealsStyle.TitleText}>
+          Flash Deals
         </div>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
-          <div style={{ position: 'absolute', top: '200px' }}>
-            <Button onClick={handleButtonLeft} style={{ borderRadius: '50%', minWidth: '25px', color: 'white', background: '#0F3460' }}>
-              <ArrowBackIcon />
-            </Button>
-          </div>
-          <div style={{ position: 'absolute', right:'15px', top: '200px' }}>
-            <Button onClick={handleButtonRight} style={{ borderRadius: '50%', minWidth: '25px', color: 'white', background: '#0F3460' }}>
-              <ArrowForwardIcon />
-            </Button>
-          </div>
-        </div>
-      </div>
-    </div>
+      </Box>
+      <Box style={flashDealsStyle.ItemBox}
+        sx={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+        }}>
+        {
+          products.map((product: any) => (
+            <Product
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              rating={product.rating}
+              discount={product.discount}
+              image={product.image}
+              isFavorite={product.isFavorite}
+            />
+          ))
+        }
+      </Box>
+      <SidePagination
+        handleButtonPrev={handleButtonPrev}
+        handleButtonNext={handleButtonNext}
+      />
+    </Box>
   );
 }
 

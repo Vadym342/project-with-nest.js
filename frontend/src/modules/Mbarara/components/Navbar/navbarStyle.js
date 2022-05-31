@@ -1,35 +1,12 @@
-export const navbarStyle = {
-    AdbIcon: { display: { xs: 'none', md: 'flex' }, mr: 1 },
-    AdbIconHidden: { display: { xs: 'flex', md: 'none' }, mr: 1 },
-    Typography: {
-        mr: 2,
-        display: { xs: 'none', md: 'flex' },
-        fontFamily: 'monospace',
-        fontWeight: 700,
-        letterSpacing: '.3rem',
-        color: 'inherit',
-        textDecoration: 'none',
-    },
-    TypographyHidden: {
-        mr: 2,
-        display: { xs: 'flex', md: 'none' },
-        flexGrow: 1,
-        fontFamily: 'monospace',
-        fontWeight: 700,
-        letterSpacing: '.3rem',
-        color: 'inherit',
-        textDecoration: 'none',
-    },
-    BoxHidden: { flexGrow: 1, display: { xs: 'flex', md: 'none' } },
-    Box: { flexGrow: 1, display: { xs: 'none', md: 'flex' } },
-
-    SearchIconWrapper: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
+const navbarStyle = {
+    MainBox: { flexGrow: 1, color: 'white' },
+    AppBarColor: { background: "#F6F9FC" },
+    LogoTypography: { display: { xs: 'none', sm: 'flex' }, color: '#2B3445' },
+    CategoryIcon: { display: { xs: 'flex', sm: 'flex' } },
+    SearchIcon: { color: '#9e9e9e' },
+    Search: { width: '25rem' },
+    AccountBox: { display: { xs: 'flex', md: 'flex' } },
 }
+
+export default navbarStyle;
+

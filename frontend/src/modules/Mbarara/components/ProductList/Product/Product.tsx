@@ -8,6 +8,8 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
+import { Box } from '@mui/material';
+import productStyle from './productStyle';
 
 interface ProductArgs {
   id: number;
@@ -49,8 +51,8 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
 
 
   return (
-    <div style={{ marginLeft: '5px', width: '200px' }}>
-      <Card sx={{ maxWidth: 205, maxHeight: 230 }}>
+    <Box sx={productStyle.MainBox}>
+      <Card sx={productStyle.Card}>
         <CardMedia
           component="img"
           height="110"
@@ -59,11 +61,8 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
         />
         {
           discount ?
-            <div style={{ position: 'absolute', top: '115px' }}>
-              <button disabled style={{
-                background: '#D23F57', marginLeft: '5px', border: 'none', color: 'white', fontSize: '10px',
-                borderRadius: '10px'
-              }}>-{discount}% off</button>
+            <div style={productStyle.DiscoundBlock as React.CSSProperties}>
+              <button disabled style={productStyle.DiscoundBtn}>-{discount}% off</button>
             </div>
             : ''
         }
@@ -72,41 +71,41 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
             {name}
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
+            <div style={productStyle.RatingBlock as React.CSSProperties}>
               <div>
                 <Rating name="read-only" size="small" value={value} readOnly />
               </div>
-              <div style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignSelf: 'center' }}>
+              <div style={productStyle.HeartBlock as React.CSSProperties}>
                 <FavoriteIcon className="heart" onClick={handleSetFavorite} style={heartStyle.heart} />
               </div>
             </div>
           </Typography>
-          <div style={{ display: 'flex', color: '#D23F57', flexDirection: 'row', justifyContent: 'space-around', alignItems: 'flex-start' }}>
+          <div style={productStyle.PriceBlock as React.CSSProperties}>
             {
               discount ?
                 <>
-                  <div style={{ flexGrow: 2, fontSize: '12px' }}>
+                  <div style={productStyle.PriceDiscText}>
                     {price - ((price * discount) / 100)}$
                   </div>
-                  <div style={{ flexGrow: 2, fontSize: '12px', textDecoration: 'line-through', color: 'gray' }}>
+                  <div style={productStyle.PriceText}>
                     {price}$
                   </div>
                 </>
-                : <div style={{ flexGrow: 2, fontSize: '12px' }}>
+                : <div style={productStyle.PriceDiscText}>
                   {price}$
                 </div>
             }
-            <Button onClick={handleIncreaseQuantity} style={{ padding: '0px', minWidth: '10px', height: '20px', color: '#D23F57', border: '1px solid #D23F57', borderRadius: '3px' }}>
-              <AddIcon style={{ height: '15px' }} />
+            <Button onClick={handleIncreaseQuantity} style={productStyle.CardBtn}>
+              <AddIcon style={productStyle.CardIcon} />
             </Button>
             {
               quantity > 0 ?
                 <>
-                  <div style={{ fontSize: '12px', flexGrow: 5, textAlign: 'center' }}>
+                  <div style={productStyle.QuantityText as React.CSSProperties}>
                     {quantity}
                   </div>
-                  <Button onClick={handleDecreaseQuantity} style={{ padding: '0px', minWidth: '10px', height: '20px', color: '#D23F57', border: '1px solid #D23F57', borderRadius: '3px' }}>
-                    <RemoveIcon style={{ height: '15px' }} />
+                  <Button onClick={handleDecreaseQuantity} style={productStyle.CardBtn}>
+                    <RemoveIcon style={productStyle.CardIcon} />
                   </Button>
                 </>
                 : ''
@@ -114,7 +113,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
           </div>
         </CardContent>
       </Card>
-    </div>
+    </Box>
   );
 }
 
