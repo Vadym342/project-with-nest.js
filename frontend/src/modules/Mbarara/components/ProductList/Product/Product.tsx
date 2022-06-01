@@ -64,7 +64,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
         <CardMedia
           component="img"
           height="110"
-          image={data?.getImage}
+          image={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
           alt={name}
         />
         {
