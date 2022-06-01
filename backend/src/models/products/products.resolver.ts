@@ -9,6 +9,7 @@ import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nes
 import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 import { Category } from '../categories/entities/category.entity';
+import { FileService } from '../../filesManagement/files.service';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -16,7 +17,7 @@ export class ProductsResolver {
     private readonly productsService: ProductsService,
     private readonly categoriesService: CategoriesService,
     private readonly organizationsService: OrganizationsService,
-    private readonly specificationsService: SpecificationsService
+    private readonly specificationsService: SpecificationsService,
   ) { }
 
   @Mutation(() => Product)
@@ -43,7 +44,6 @@ export class ProductsResolver {
     const { id } = specification;
     return this.specificationsService.getSpecificationById(id);
   }
-
 
   @Query(() => [Product], { name: 'getAllProducts' })
   getAllProducts(): Promise<Product[]> {

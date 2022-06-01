@@ -9,6 +9,7 @@ import { ProductsResolver } from './products.resolver';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Module } from '@nestjs/common';
 import { Product } from './entities/product.entity';
+import { FileService } from '../../filesManagement/files.service';
 
 @Module({
   imports: [SequelizeModule.forFeature([
@@ -23,7 +24,8 @@ import { Product } from './entities/product.entity';
     ProductsService,
     CategoriesService,
     SpecificationsService,
-    OrganizationsService
+    OrganizationsService,
+    FileService,
   ]
 })
 export class ProductsModule { }

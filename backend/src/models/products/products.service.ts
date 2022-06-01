@@ -1,7 +1,8 @@
+import { FileService } from './../../filesManagement/files.service';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { CreateProductDto } from './dto/create-products.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Product } from './entities/product.entity';
 import { Op } from 'sequelize';
 
@@ -10,7 +11,7 @@ interface paginateArgs {
   pageSize: number;
 }
 
-const paginate = (query, { page, pageSize }: paginateArgs) => {
+const paginate = (query: any, { page, pageSize }: paginateArgs) => {
   const offset = page;
   const limit = pageSize;
 
@@ -23,10 +24,21 @@ const paginate = (query, { page, pageSize }: paginateArgs) => {
 
 @Injectable()
 export class ProductsService {
-  constructor(@InjectModel(Product) private productRepository: typeof Product) { }
+  constructor(
+    @InjectModel(Product) private productRepository: typeof Product,
+    private readonly filesService: FileService,
+  ) { }
 
   async createProduct(productDto: CreateProductDto): Promise<Product> {
-    return await this.productRepository.create(productDto);
+    try {
+      const imageExist = await this.filesService.uploadFileForS3(productDto.image, `uploads/${productDto.image}`)
+      if (imageExist) {
+        return await this.productRepository.create(productDto);
+      }
+    }
+    catch (err) {
+      throw new HttpException("Image or product was not created.", HttpStatus.BAD_REQUEST)
+    }
   }
 
   async getAllProducts(): Promise<Product[]> {

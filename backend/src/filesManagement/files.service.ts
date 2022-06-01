@@ -1,13 +1,14 @@
 import { ConfigService } from '@nestjs/config';
 import { Injectable } from '@nestjs/common';
 import { S3 } from 'aws-sdk';
+import { createReadStream } from 'fs';
 @Injectable()
 export class FileService {
   constructor(
     private readonly configService: ConfigService
   ) { }
 
-  async uploadFileForS3(createReadStream: any, fileName: string, filePath: string) {
+  async uploadFileForS3(fileName: string, filePath: string) {
     const s3 = new S3();
   
     const fileStream = createReadStream(filePath);
