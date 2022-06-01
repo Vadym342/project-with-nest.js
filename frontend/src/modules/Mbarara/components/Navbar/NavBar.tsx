@@ -14,21 +14,22 @@ import { ShoppingBag } from '@mui/icons-material';
 import { useState } from 'react';
 import CategoryMenu from './CategoryMenu/CategoryMenu';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
+import navbarStyle from './navbarStyle';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
-  borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(3),
     width: 'auto',
   },
+  width: '100%',
+  border: '1px solid #9e9e9e',
+  borderRadius: '50px',
+  color: '#9e9e9e'
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -79,15 +80,14 @@ const NavBar = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1, color: 'white' }} >
-      <AppBar position="static" style={{ background: "#F6F9FC" }}>
+    <Box sx={navbarStyle.MainBox} >
+      <AppBar position="static" style={navbarStyle.AppBarColor}>
         <Toolbar>
           <Typography
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: 'none', sm: 'flex' } }}
-            style={{ color: '#2B3445' }}
+            sx={navbarStyle.LogoTypography}
           >
             Mbarara
           </Typography>
@@ -95,16 +95,16 @@ const NavBar = () => {
             onClick={handlerCategoryMenuOpen}
             size="large"
             color="default"
-            sx={{ display: { xs: 'flex', sm: 'flex' } }}
+            sx={navbarStyle.CategoryIcon}
           >
             <DashboardCustomizeIcon />
             <KeyboardArrowDownIcon />
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Search style={{ width: '25rem', border: '1px solid #9e9e9e', borderRadius: '50px', color: '#9e9e9e' }}>
+          <Search style={navbarStyle.Search}>
             <SearchIconWrapper>
-              <SearchIcon style={{ color: '#9e9e9e' }} />
+              <SearchIcon style={navbarStyle.SearchIcon} />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
@@ -112,7 +112,7 @@ const NavBar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'flex', md: 'flex' } }}>
+          <Box sx={navbarStyle.AccountBox}>
             <IconButton
               size="large"
               edge="end"
