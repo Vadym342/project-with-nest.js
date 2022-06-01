@@ -18,8 +18,8 @@ export class CreateUserDto {
   password: string;
 
   @Field(() => Roles)
-  role: Roles;
+  role: Roles = Roles.USER;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   organizationId: number;
 }

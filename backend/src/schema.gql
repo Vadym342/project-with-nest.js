@@ -153,15 +153,15 @@ input CreateUserDto {
   name: String!
   email: String!
   password: String!
-  role: Roles!
-  organizationId: Int!
+  role: Roles = USER
+  organizationId: Int
 }
 
 input UpdateUserDto {
   name: String
   email: String
   password: String
-  role: Roles
+  role: Roles = USER
   organizationId: Int
   id: Int!
 }

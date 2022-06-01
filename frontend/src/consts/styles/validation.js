@@ -2,7 +2,7 @@ const validationStyle = {
     textBlock: {
         fontWeight: 200,
         fontSize: '12px',
-        marginTop: '-15px',
+        marginTop: '-10px',
         color: 'red',
     },
     validBlock: {
