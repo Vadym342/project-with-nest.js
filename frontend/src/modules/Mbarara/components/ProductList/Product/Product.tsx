@@ -8,8 +8,10 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
 import productStyle from './productStyle';
+
 
 interface ProductArgs {
   id: number;
@@ -21,7 +23,14 @@ interface ProductArgs {
   isFavorite: boolean;
 };
 
+const GET_IMG = gql`
+query{
+   getImage(key: "7c6809a0-e973-4676-89af-6fa5cb852d2f")
+}
+`
 const Product = ({ id, name, price, rating, isFavorite, discount, image }: ProductArgs) => {
+
+  const { data, error, loading } = useQuery(GET_IMG);
 
   const [value, setValue] = useState<number | null>(rating);
   const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
@@ -49,14 +58,13 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     setQuantity(quantity - 1);
   }
 
-
   return (
     <Box sx={productStyle.MainBox}>
       <Card sx={productStyle.Card}>
         <CardMedia
           component="img"
           height="110"
-          image="https://static.nike.com/a/images/t_prod_ss/w_960,c_limit,f_auto/60c8aa05-75d0-4f03-a6a9-d651d4460932/sb-dunk-low-%E2%80%9Cwhat-the-paul%E2%80%9D-%E2%80%94-%D0%B4%D0%B0%D1%82%D0%B0-%D1%80%D0%B5%D0%BB%D0%B8%D0%B7%D0%B0.jpg"
+          image={data?.getImage}
           alt={name}
         />
         {

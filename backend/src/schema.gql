@@ -112,6 +112,7 @@ type Query {
   getAllOrderItems: [OrderItem!]!
   getOrderItemsForOrderById(id: Int!): [OrderItem!]!
   getOrderItemById(id: Int!): OrderItem!
+  getImage(key: String!): String!
 }
 
 type Mutation {
@@ -140,6 +141,7 @@ type Mutation {
   createOrderItem(OrderItemDto: CreateOrderItemDto!): OrderItem!
   updateOrderItem(updateOrderItemInput: UpdateOrderItemDto!): OrderItem!
   removeOrderItemById(id: Int!): OrderItem!
+  uploadFile(file: Upload!): String!
 }
 
 input LoginUserDto {
@@ -272,3 +274,6 @@ input UpdateOrderItemDto {
   quantity: Int
   id: Int!
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
