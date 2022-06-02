@@ -9,6 +9,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
 import authFormsStyle from '../../../consts/styles/authFormsStyle';
+import { Link } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../../../redux/requests/userRequest';
 
 type FormValues = {
   email: string;
@@ -17,6 +20,9 @@ type FormValues = {
 };
 
 const LoginForm = () => {
+
+  const [login, { data, loading }] = useMutation(LOGIN)
+
   const {
     register,
     formState: { errors },
@@ -32,7 +38,17 @@ const LoginForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = data => {
-    console.log(data);
+    const res = login({
+      variables: {
+        username: data.email,
+        password: data.password
+      }
+    })
+      .then((response) => JSON.parse(JSON.stringify(response)).data)
+      .then((user) => {
+        console.log(user);
+      })
+
   };
 
   const handleChange =
@@ -138,6 +154,17 @@ const LoginForm = () => {
           >
             Login
           </Button>
+        </Box>
+        <div style={{ textAlign: 'center', fontSize: '14px' }}>
+          Don't have account?
+          <Link to='/registration'> Sign Up</Link>
+        </div>
+        <Box
+          style={authFormsStyle.IntervalBtwnField}
+          sx={{ textAlign: 'center', fontSize: '14px' }
+          }>
+          Forgot your password?
+          <Link to='/login'> Reset It</Link>
         </Box>
       </Box>
     </Box>

@@ -8,6 +8,8 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import { Provider } from 'react-redux';
+import { store } from './redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -19,11 +21,13 @@ const client = new ApolloClient({
 });
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <ApolloProvider client={client}>
-        <App />
-      </ApolloProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
+          <App />
+        </ApolloProvider>
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
 );
