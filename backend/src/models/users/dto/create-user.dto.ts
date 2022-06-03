@@ -4,12 +4,12 @@ import { Roles } from '../constants/enums/roles.enum';
 
 @InputType()
 export class CreateUserDto {
-  @Field()
+  @Field({ nullable: true })
   @IsAlpha()
   @MinLength(3)
   name: string;
 
-  @Field()
+  @Field({ nullable: false })
   @IsEmail()
   email: string;
 

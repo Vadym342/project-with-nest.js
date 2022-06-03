@@ -11,7 +11,7 @@ import { InputAdornment, IconButton } from '@mui/material';
 import authFormsStyle from '../../../consts/styles/authFormsStyle';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER } from '../../../redux/requests/userRequest';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type FormValues = {
   email: string;
@@ -21,8 +21,8 @@ type FormValues = {
 };
 
 const RegistrationForm = () => {
-
-  const [createUser, { data, loading }] = useMutation(CREATE_USER)
+  const history = useNavigate();
+  const [createUser, { data, loading }] = useMutation(CREATE_USER);
   const {
     register,
     formState: { errors },
@@ -39,15 +39,14 @@ const RegistrationForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = data => {
-    console.log(data);
-    const res = createUser({
+    createUser({
       variables: {
         name: data.name,
         email: data.email,
         password: data.password
       }
-    })
-    console.log(res);
+    });
+    history('/login');
   };
 
   const handleChange =

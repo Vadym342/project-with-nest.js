@@ -13,7 +13,10 @@ export class AuthService {
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.getUserByEmail(username);
-    const matchPassword = comparePassword(password, user.password);
+    let matchPassword : boolean;
+    if (user) {
+      matchPassword = comparePassword(password, user.password);
+    }
     if (user && matchPassword) {
       const { password, ...result } = user;
       return result;
@@ -23,9 +26,15 @@ export class AuthService {
 
   async login(loginUserDto: LoginUserDto) {
     const user = await this.usersService.getUserByEmail(loginUserDto.username);
+    const newUser = user;
     return {
       accessToken: this.jwtService.sign({ email: user.email, sub: user.id }),
-      user
+      user: {
+        id: newUser.id,
+        email: newUser.email,
+        name: newUser.name,
+        password: ''
+      }
     }
   }
 }

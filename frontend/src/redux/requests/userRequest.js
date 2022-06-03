@@ -1,13 +1,5 @@
 import { gql } from "@apollo/client";
 
-const GET_CATEGORIES = gql`
-query{
-  getAllCategories{
-  id,
-  name
-}
-}
-`
 const LOGIN = gql`
 mutation Login(
   $username: String!,

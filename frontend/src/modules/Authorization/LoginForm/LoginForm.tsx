@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import validationStyle from '../../../consts/styles/validation';
 import { valRequired } from '../../../consts/validationPropertiesForFields';
@@ -9,9 +9,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
 import authFormsStyle from '../../../consts/styles/authFormsStyle';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../../redux/requests/userRequest';
+import { useAppDispatch } from '../../../hooks/hook';
+import { setUser } from '../../../redux';
 
 type FormValues = {
   email: string;
@@ -20,8 +22,9 @@ type FormValues = {
 };
 
 const LoginForm = () => {
-
-  const [login, { data, loading }] = useMutation(LOGIN)
+  const dispatch = useAppDispatch();
+  const history = useNavigate();
+  const [login, { data, loading, error }] = useMutation(LOGIN);
 
   const {
     register,
@@ -36,21 +39,34 @@ const LoginForm = () => {
     password: '',
     showPassword: false,
   });
+  const [logError, setLogError] = useState('');
 
   const onSubmit: SubmitHandler<FormValues> = data => {
-    const res = login({
+    login({
       variables: {
         username: data.email,
         password: data.password
       }
     })
-      .then((response) => JSON.parse(JSON.stringify(response)).data)
-      .then((user) => {
-        console.log(user);
-      })
-
   };
 
+  useEffect(() => {
+    if (error) {
+      setLogError('Invalid email or password.')
+    } else {
+      if (data) {
+        setLogError('')
+        const user = {
+          token: data.login.accessToken,
+          user: {
+            ...data.login.user
+          }
+        }
+        dispatch(setUser(user));
+        history('/')
+      }
+    }
+  }, [data, error])
   const handleChange =
     (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement>) => {
       setLoginForm({ ...loginForm, [prop]: event.target.value });
@@ -145,6 +161,11 @@ const LoginForm = () => {
             {errors?.password && (
               <p>{errors?.password?.message || 'Error, try again'}</p>
             )}
+          </div>
+          <div>
+            {
+              logError && (<p style={{ fontSize: '13px', color: 'red' }}>{logError}</p>)
+            }
           </div>
           <Button
             type="submit"
