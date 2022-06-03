@@ -15,6 +15,7 @@ import { useState } from 'react';
 import CategoryMenu from './CategoryMenu/CategoryMenu';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
 import navbarStyle from './navbarStyle';
+import Sidebar from '../Order/SideBar/SideBar';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,10 +59,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(null);
+  const [orderAnchorEl, setOrderAnchorEl] = useState<null | HTMLElement>(null);
   const menuId = 'primary-search-account-menu';
 
+  const isOrderMenuOpen = Boolean(orderAnchorEl);
   const isMenuOpen = Boolean(anchorEl);
   const isCategoryMenuOpen = Boolean(categoryAnchorEl);
+
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -69,6 +73,14 @@ const NavBar = () => {
 
   const handleMenuClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleOrderMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setOrderAnchorEl(event.currentTarget);
+  };
+
+  const handleOrderMenuClose = () => {
+    setOrderAnchorEl(null);
   };
 
   const handlerCategoryMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -127,6 +139,7 @@ const NavBar = () => {
             <IconButton
               size="large"
               color="default"
+              onClick={handleOrderMenuOpen}
             >
               <Badge badgeContent={0} color="error" showZero>
                 <ShoppingBag />
@@ -145,6 +158,11 @@ const NavBar = () => {
         anchorEl={anchorEl}
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
+      />
+      <Sidebar
+        orderAnchorEl={orderAnchorEl}
+        isOrderMenuOpen={isOrderMenuOpen}
+        handleOrderMenuClose={handleOrderMenuClose}
       />
     </Box >
   );
