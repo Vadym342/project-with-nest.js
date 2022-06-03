@@ -54,7 +54,7 @@ type User {
   email: String!
   password: String!
   role: Roles!
-  organizationId: Int!
+  organizationId: Int
 }
 
 enum Roles {
@@ -150,7 +150,7 @@ input LoginUserDto {
 }
 
 input CreateUserDto {
-  name: String!
+  name: String
   email: String!
   password: String!
   role: Roles = USER

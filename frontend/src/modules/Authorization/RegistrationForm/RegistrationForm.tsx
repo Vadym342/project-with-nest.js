@@ -9,6 +9,9 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import { VisibilityOff, Visibility } from '@mui/icons-material';
 import { InputAdornment, IconButton } from '@mui/material';
 import authFormsStyle from '../../../consts/styles/authFormsStyle';
+import { useMutation } from '@apollo/client';
+import { CREATE_USER } from '../../../redux/requests/userRequest';
+import { Link, useNavigate } from 'react-router-dom';
 
 type FormValues = {
   email: string;
@@ -18,6 +21,8 @@ type FormValues = {
 };
 
 const RegistrationForm = () => {
+  const history = useNavigate();
+  const [createUser, { data, loading }] = useMutation(CREATE_USER);
   const {
     register,
     formState: { errors },
@@ -34,7 +39,14 @@ const RegistrationForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormValues> = data => {
-    console.log(data);
+    createUser({
+      variables: {
+        name: data.name,
+        email: data.email,
+        password: data.password
+      }
+    });
+    history('/login');
   };
 
   const handleChange =
@@ -162,6 +174,10 @@ const RegistrationForm = () => {
           >
             Create Account
           </Button>
+          <div style={{ textAlign: 'center', fontSize: '14px' }}>
+            Sign in to existing account
+            <Link to='/login'> Sign In</Link>
+          </div>
         </Box>
       </Box>
     </Box>

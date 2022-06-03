@@ -28,12 +28,12 @@ export class User extends Model<User> {
   @Field(() => Int)
   id: number;
 
-  @Column({ type: DataType.STRING })
+  @Column({ type: DataType.STRING, allowNull: true })
   @Field({ nullable: true })
   name: string;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
-  @Field()
+  @Field({ nullable: false })
   email: string;
 
   @Column({ type: DataType.STRING, allowNull: false })
@@ -45,8 +45,8 @@ export class User extends Model<User> {
   role: Roles;
 
   @ForeignKey(() => Organization)
-  @Column({ type: DataType.INTEGER, allowNull:true })
-  @Field(() => Int)
+  @Column({ type: DataType.INTEGER, allowNull: true })
+  @Field(() => Int, { nullable: true })
   organizationId: number;
 
   @BelongsTo(() => Organization)

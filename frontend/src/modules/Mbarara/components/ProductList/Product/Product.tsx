@@ -33,8 +33,8 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
   const { data, error, loading } = useQuery(GET_IMG);
 
   const [value, setValue] = useState<number | null>(rating);
-  const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
   const [quantity, setQuantity] = useState<number>(0);
+  const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
   const heartStyle = {
     heart: {
       color: isFavoriteP ? "red" : "gray",
