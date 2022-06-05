@@ -92,7 +92,7 @@ const NavBar = () => {
   };
 
   return (
-    <Box sx={navbarStyle.MainBox} >
+    <Box sx={navbarStyle.MainBox}>
       <AppBar position="static" style={navbarStyle.AppBarColor}>
         <Toolbar>
           <Typography
@@ -139,7 +139,7 @@ const NavBar = () => {
             <IconButton
               size="large"
               color="default"
-              onClick={handleOrderMenuOpen}
+              onClick={isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen}
             >
               <Badge badgeContent={0} color="error" showZero>
                 <ShoppingBag />
@@ -159,11 +159,16 @@ const NavBar = () => {
         isMenuOpen={isMenuOpen}
         handleMenuClose={handleMenuClose}
       />
-      <Sidebar
-        orderAnchorEl={orderAnchorEl}
-        isOrderMenuOpen={isOrderMenuOpen}
-        handleOrderMenuClose={handleOrderMenuClose}
-      />
+      {
+        orderAnchorEl && (
+          <Sidebar
+            orderAnchorEl={orderAnchorEl}
+            isOrderMenuOpen={isOrderMenuOpen}
+            handleOrderMenuClose={handleOrderMenuClose}
+          />
+        )
+      }
+
     </Box >
   );
 }

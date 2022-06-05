@@ -76,10 +76,13 @@ const FlashDealsList = () => {
           ))
         }
       </Box>
-      <SidePagination
-        handleButtonPrev={handleButtonPrev}
-        handleButtonNext={handleButtonNext}
-      />
+      <div>
+        <SidePagination
+          handleButtonPrev={handleButtonPrev}
+          handleButtonNext={handleButtonNext}
+        />
+      </div>
+
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import { Link } from "react-router-dom";
 
 interface SidePaginationArgs {
   handleButtonPrev: (event: React.MouseEvent<HTMLElement>) => void;
@@ -15,6 +16,7 @@ const SidePagination = ({ handleButtonPrev, handleButtonNext }: SidePaginationAr
     color: 'white',
     background: '#0F3460',
     height: '30px',
+    zIndex: 0
   }
   const iconSt = {
     width: '17px',
@@ -23,16 +25,18 @@ const SidePagination = ({ handleButtonPrev, handleButtonNext }: SidePaginationAr
 
   return (
     <>
-      <Box >
-        <div style={{ position: 'absolute', top: '200px' }}>
+      <Box>
+        <div style={{ position: 'absolute', left:'10px', top: '200px' }}>
           <Button onClick={handleButtonPrev} style={btnSt}>
             <ArrowBackIcon style={iconSt} />
           </Button>
         </div>
-        <div style={{ position: 'absolute', right: '15px', top: '200px' }}>
-          <Button onClick={handleButtonNext} style={btnSt}>
-            <ArrowForwardIcon style={iconSt} />
-          </Button>
+        <div>
+          <div style={{ position: 'absolute', right:'10px', top: '200px' }}>
+            <Button onClick={handleButtonNext} style={btnSt}>
+              <ArrowForwardIcon style={iconSt} />
+            </Button>
+          </div>
         </div>
       </Box>
     </>

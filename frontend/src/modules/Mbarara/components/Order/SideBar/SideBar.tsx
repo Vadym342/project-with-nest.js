@@ -5,8 +5,12 @@ import Menu from '@mui/material/Menu';
 
 const SidebarBox = styled('div')(({ theme }) => ({
   width: '100%',
-  maxWidth: '360px',
-  backgroundColor: theme.palette.background.paper,
+  background: 'white',
+  height: '100vh',
+  right: 0,
+  position: 'absolute',
+  boxShadow: '-5px 0px 5px 0px #aaaaaa',
+  zIndex: 10
 }));
 
 interface OrderMenuArgs {
@@ -16,20 +20,15 @@ interface OrderMenuArgs {
 }
 const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: OrderMenuArgs) => {
   return (
-    <SidebarBox style={{ width: '300px' }}>
-      <Menu
-        anchorEl={orderAnchorEl}
-        open={isOrderMenuOpen}
-        onClose={handleOrderMenuClose}
-      >
-        <List component="nav">
-          <ListItem button onClick={() => { }}>
-            <div>
-              fdfldfF
-            </div>
-          </ListItem>
-        </List>
-      </Menu>
+    <SidebarBox style={{ width: '300px' }} >
+      <List component="nav">
+        <ListItem button onClick={() => { }}>
+          <div>
+            fdfldfF
+          </div>
+        </ListItem>
+      </List>
+
     </SidebarBox>
   );
 }
