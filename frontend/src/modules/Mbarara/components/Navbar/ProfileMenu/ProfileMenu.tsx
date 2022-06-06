@@ -1,4 +1,6 @@
 import { Menu, MenuItem } from "@mui/material";
+import { useAppSelector } from "../../../../../hooks/hook";
+import { userSelector } from "../../../../../redux";
 import ProfileModal from "./ProfileModal/ProfileModal";
 
 interface ProfileMenuArgs {
@@ -9,7 +11,7 @@ interface ProfileMenuArgs {
 }
 
 const ProfileMenu = ({ menuId, anchorEl, isMenuOpen, handleMenuClose }: ProfileMenuArgs) => {
-  const user = null;
+  const user = useAppSelector(userSelector);
 
   return (
     <>
@@ -41,6 +43,7 @@ const ProfileMenu = ({ menuId, anchorEl, isMenuOpen, handleMenuClose }: ProfileM
           >
             <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
             <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>Log out</MenuItem>
           </Menu>
       }
     </>

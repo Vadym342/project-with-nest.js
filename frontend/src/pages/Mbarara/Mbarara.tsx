@@ -8,7 +8,7 @@ const Mbarara = () => {
       <NavBar />
       <div>
         <div>
-          <FlashDealsList />
+          {/* <FlashDealsList /> */}
         </div>
       </div>
     </div>

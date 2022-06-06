@@ -21,7 +21,11 @@ type FormValues = {
   showPassword: boolean;
 };
 
-const LoginForm = () => {
+interface LoginFormArgs {
+  handleMenuClose?: (event: React.MouseEvent<HTMLElement>) => void; 
+}
+
+const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
   const dispatch = useAppDispatch();
   const history = useNavigate();
   const [login, { data, loading, error }] = useMutation(LOGIN);
@@ -63,7 +67,8 @@ const LoginForm = () => {
           }
         }
         dispatch(setUser(user));
-        history('/')
+        localStorage.setItem('user', JSON.stringify(user));
+        history('/');
       }
     }
   }, [data, error])

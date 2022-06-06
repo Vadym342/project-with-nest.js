@@ -13,6 +13,7 @@ mutation Login(
       id,
       name,
       email,
+      role,
       password,
     }
     accessToken
