@@ -1,12 +1,13 @@
 import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Menu from '@mui/material/Menu';
+import { ShoppingBag } from '@mui/icons-material';
+import OrderItem from '../OrderItem/OrderItem';
 
 const SidebarBox = styled('div')(({ theme }) => ({
   width: '100%',
-  background: 'white',
+  background: '#F6F9FC',
   height: '100vh',
+  color: '#0f3460',
   right: 0,
   position: 'absolute',
   boxShadow: '-5px 0px 5px 0px #aaaaaa',
@@ -22,11 +23,18 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
   return (
     <SidebarBox style={{ width: '300px' }} >
       <List component="nav">
-        <ListItem button onClick={() => { }}>
-          <div>
-            fdfldfF
+        <div style={{ display: 'flex', flexDirection: 'row' }}>
+          <div style={{ marginLeft: '15px' }}>
+            <ShoppingBag />
           </div>
-        </ListItem>
+          <div>
+            3 item
+          </div>
+        </div>
+        <div>
+          <OrderItem />
+          <OrderItem />
+        </div>
       </List>
 
     </SidebarBox>

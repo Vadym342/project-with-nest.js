@@ -1,17 +1,13 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useState } from 'react';
-import { gql, useQuery } from '@apollo/client';
 import { Box } from '@mui/material';
 import productStyle from './productStyle';
-
+import Quantity from '../../../../../shared/Buttons/Quantity';
 
 interface ProductArgs {
   id: number;
@@ -23,15 +19,7 @@ interface ProductArgs {
   isFavorite: boolean;
 };
 
-const GET_IMG = gql`
-query{
-   getImage(key: "7c6809a0-e973-4676-89af-6fa5cb852d2f")
-}
-`
 const Product = ({ id, name, price, rating, isFavorite, discount, image }: ProductArgs) => {
-
-  const { data, error, loading } = useQuery(GET_IMG);
-
   const [value, setValue] = useState<number | null>(rating);
   const [quantity, setQuantity] = useState<number>(0);
   const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
@@ -103,21 +91,11 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
                   {price}$
                 </div>
             }
-            <Button onClick={handleIncreaseQuantity} style={productStyle.CardBtn}>
-              <AddIcon style={productStyle.CardIcon} />
-            </Button>
-            {
-              quantity > 0 ?
-                <>
-                  <div style={productStyle.QuantityText as React.CSSProperties}>
-                    {quantity}
-                  </div>
-                  <Button onClick={handleDecreaseQuantity} style={productStyle.CardBtn}>
-                    <RemoveIcon style={productStyle.CardIcon} />
-                  </Button>
-                </>
-                : ''
-            }
+            <Quantity
+              quantity={quantity}
+              handleIncreaseQuantity={handleIncreaseQuantity}
+              handleDecreaseQuantity={handleDecreaseQuantity}
+            />
           </div>
         </CardContent>
       </Card>
