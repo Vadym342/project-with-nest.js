@@ -25,7 +25,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
   const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
   const heartStyle = {
     heart: {
-      color: isFavoriteP ? "red" : "gray",
+      color: isFavoriteP ? 'red' : 'gray',
       height: '17px',
     }
   };
@@ -50,8 +50,8 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     <Box sx={productStyle.MainBox}>
       <Card sx={productStyle.Card}>
         <CardMedia
-          component="img"
-          height="110"
+          component='img'
+          height='110'
           image={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
           alt={name}
         />
@@ -63,16 +63,16 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
             : ''
         }
         <CardContent>
-          <Typography component="div">
+          <Typography component='div'>
             {name}
           </Typography>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant='h5' component='div'>
             <div style={productStyle.RatingBlock as React.CSSProperties}>
               <div>
-                <Rating name="read-only" size="small" value={value} readOnly />
+                <Rating name='read-only' size='small' value={value} readOnly />
               </div>
               <div style={productStyle.HeartBlock as React.CSSProperties}>
-                <FavoriteIcon className="heart" onClick={handleSetFavorite} style={heartStyle.heart} />
+                <FavoriteIcon className='heart' onClick={handleSetFavorite} style={heartStyle.heart} />
               </div>
             </div>
           </Typography>
