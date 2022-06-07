@@ -19,12 +19,7 @@ const orderSlice = createSlice({
   initialState,
   reducers: {
     setOrderItems(state, action: PayloadAction<Order>) {
-      const orderItem = action.payload;
-      state.orderItems.forEach((el: Order) => {
-        if (el.productId !== orderItem.productId) {
-          state.orderItems.push(orderItem);
-        }
-      })
+      state.orderItems.push(action.payload);
     },
     updateOrderItem(state, action: PayloadAction<Order>) {
       const orderItem = action.payload;
@@ -35,7 +30,7 @@ const orderSlice = createSlice({
       })
     },
     deleteOrderItem(state, action: PayloadAction<number>) {
-      state.orderItems = state.orderItems.filter(el => el.productId === action.payload);
+      state.orderItems = state.orderItems.filter(el => el.productId !== action.payload);
     }
   }
 })

@@ -3,6 +3,10 @@ import List from '@mui/material/List';
 import { ShoppingBag } from '@mui/icons-material';
 import OrderItem from '../OrderItem/OrderItem';
 import Button from '@mui/material/Button';
+import { useAppSelector } from '../../../../../hooks/hook';
+import { orderItemsSelector } from '../../../../../redux';
+import { GET_PRODUCTS_BY_IDS } from '../../../../../redux/requests/orderRequest';
+import { useQuery } from '@apollo/client';
 
 const SidebarBox = styled('div')(({ theme }) => ({
   width: '100%',
@@ -21,6 +25,22 @@ interface OrderMenuArgs {
   handleOrderMenuClose: (event: React.MouseEvent<HTMLElement>) => void;
 }
 const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: OrderMenuArgs) => {
+  const orderItems = useAppSelector(orderItemsSelector);
+
+  const handleMapOrderItems = () => {
+    const tmpArr = [];
+    for (let obj of orderItems) {
+      tmpArr.push(obj.productId);
+    }
+    return tmpArr;
+  }
+  const arrayOfIds = handleMapOrderItems();
+  const { data, error, loading } = useQuery(GET_PRODUCTS_BY_IDS, {
+    variables: {
+      arrayIds: arrayOfIds
+    }
+  });
+  console.log(data);
   return (
     <SidebarBox style={{ width: '300px' }} >
       <List component='nav'>
@@ -33,11 +53,6 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
           </div>
         </div>
         <div style={{ height: '250px', overflow: 'scroll' }}>
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
-          <OrderItem />
           <OrderItem />
           <OrderItem />
         </div>

@@ -4,10 +4,12 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Box } from '@mui/material';
 import productStyle from './productStyle';
 import Quantity from '../../../../../shared/Buttons/Quantity';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/hook';
+import { deleteOrderItem, orderItemsSelector, setOrderItems, updateOrderItem } from '../../../../../redux';
 
 interface ProductArgs {
   id: number;
@@ -20,9 +22,22 @@ interface ProductArgs {
 };
 
 const Product = ({ id, name, price, rating, isFavorite, discount, image }: ProductArgs) => {
+  const dispatch = useAppDispatch();
+  const orderItems = useAppSelector(orderItemsSelector);
+
+  const handleCount = (id: number) => {
+    for (let obj of orderItems) {
+      if (obj.productId === id) {
+        return obj.quantity;
+      }
+    }
+  }
+  const count = handleCount(id);
+
   const [value, setValue] = useState<number | null>(rating);
-  const [quantity, setQuantity] = useState<number>(0);
+  const [quantity, setQuantity] = useState<number>(0 | count);
   const [isFavoriteP, setIsFavorite] = useState<boolean | null>(isFavorite || false);
+
   const heartStyle = {
     heart: {
       color: isFavoriteP ? 'red' : 'gray',
@@ -39,11 +54,50 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     }
   }
 
-  const handleIncreaseQuantity = () => {
+  const handleIncreaseQuantity = useCallback(() => {
     setQuantity(quantity + 1);
-  }
+    if (orderItems.length === 0) {
+      dispatch(setOrderItems({
+        productId: id,
+        orderedPrice: price,
+        quantity: quantity + 1
+      }))
+    } else {
+      for (let obj of orderItems) {
+        if (obj.productId === id) {
+          dispatch(updateOrderItem({
+            productId: id,
+            orderedPrice: price,
+            quantity: quantity + 1
+          }))
+        }
+        if (obj.productId !== id) {
+          dispatch(deleteOrderItem(id))
+          dispatch(setOrderItems({
+            productId: id,
+            orderedPrice: price,
+            quantity: quantity + 1
+          }))
+        }
+      }
+    }
+  }, [quantity])
   const handleDecreaseQuantity = () => {
     setQuantity(quantity - 1);
+    for (let obj of orderItems) {
+      if (obj.productId === id) {
+        if (obj.quantity > 1) {
+          dispatch(updateOrderItem({
+            productId: id,
+            orderedPrice: price,
+            quantity: quantity - 1
+          }))
+        } else {
+          dispatch(deleteOrderItem(id))
+        }
+
+      }
+    }
   }
 
   return (

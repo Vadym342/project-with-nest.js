@@ -45,6 +45,14 @@ export class ProductsService {
     return await this.productRepository.findAll();
   }
 
+  async getProductsByArrayIds(arrayIds: number[]): Promise<Product[]> {
+    return await this.productRepository.findAll({
+      where: {
+        id: { [Op.in]: arrayIds}
+      }
+    });
+  }
+
   async getFlashDealsProducts(page: number, pageSize: number): Promise<Product[]> {
     return await this.productRepository.findAll(paginate({
       where: {

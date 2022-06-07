@@ -18,7 +18,7 @@ const Router = () => {
           exact
           path="/admin"
           element={
-            user.role === 'ADMIN' && user.token ? <MbararaAdmin /> : <Navigate to="/" />
+            user?.role === 'ADMIN' && user?.token ? <MbararaAdmin /> : <Navigate to="/" />
           }
         />
         <Route

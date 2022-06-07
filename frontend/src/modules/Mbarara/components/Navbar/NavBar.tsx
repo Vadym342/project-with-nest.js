@@ -16,6 +16,8 @@ import CategoryMenu from './CategoryMenu/CategoryMenu';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
 import navbarStyle from './navbarStyle';
 import Sidebar from '../Order/SideBar/SideBar';
+import { useAppSelector } from '../../../../hooks/hook';
+import { orderItemsSelector } from '../../../../redux';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -66,7 +68,7 @@ const NavBar = () => {
   const isMenuOpen = Boolean(anchorEl);
   const isCategoryMenuOpen = Boolean(categoryAnchorEl);
 
-
+  const orderItems = useAppSelector(orderItemsSelector);
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -141,7 +143,7 @@ const NavBar = () => {
               color="default"
               onClick={isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen}
             >
-              <Badge badgeContent={0} color="error" showZero>
+              <Badge badgeContent={orderItems.length} color="error" showZero>
                 <ShoppingBag />
               </Badge>
             </IconButton>
@@ -157,6 +159,7 @@ const NavBar = () => {
         menuId={menuId}
         anchorEl={anchorEl}
         isMenuOpen={isMenuOpen}
+        setAnchorEl={setAnchorEl}
         handleMenuClose={handleMenuClose}
       />
       {
