@@ -57,6 +57,10 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
     }
   }
 
+  const handleCheckout = () => {
+    
+  }
+
   const sum = handleMapOrderItems('sum');
   const arrayOfIds = handleMapOrderItems('ids');
 
@@ -122,6 +126,7 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
                   backgroundColor: '#b5384d'
                 },
               }}
+              onClick={handleCheckout}
             >
               Checkout Now (${sum})
             </Button>
