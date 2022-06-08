@@ -1,4 +1,3 @@
-import { Shipment } from './../shipments/entities/shipment.entity';
 import { OrderItem } from './../orderItems/entities/orderItem.entity';
 import { InjectModel } from '@nestjs/sequelize';
 import { Injectable } from '@nestjs/common';
@@ -21,9 +20,9 @@ export class OrdersService {
       where: { id: orderDto.ownerId },
     });
     if (user) {
-      orderDto.items.forEach(el => {
-        this.orderItemRepository.create(el);
-      })
+      // orderDto?.items?.forEach(el => {
+      //   this.orderItemRepository.create(el);
+      // })
       return await this.orderRepository.create(orderDto);
     }
   }
@@ -35,7 +34,7 @@ export class OrdersService {
   async getOrderById(id: number) {
     return await this.orderRepository.findByPk(id);
   }
-  
+
   async updateOrder(
     id: number,
     updateOrderInput: UpdateOrderDto,

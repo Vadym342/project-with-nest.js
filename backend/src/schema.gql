@@ -2,16 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Shipment {
-  id: Int!
-  orderId: Int!
-  fullName: String!
-  phone: String!
-  country: String!
-  city: String!
-  address: String!
-}
-
 type Specification {
   id: Int!
   brand: String
@@ -86,6 +76,16 @@ type OrderItem {
   quantity: Int!
 }
 
+type Shipment {
+  id: Int!
+  orderId: Int!
+  fullName: String!
+  phone: String!
+  country: String!
+  city: String!
+  address: String!
+}
+
 type LoginResponse {
   accessToken: String!
   user: User!
@@ -100,6 +100,7 @@ type Query {
   getAllOrders: [Order!]!
   getOrderById(id: Int!): Order!
   getAllProducts: [Product!]!
+  getProductsByArrayIds(arrayIds: [Int!]!): [Product!]!
   getFlashDealsProducts(page: Int!, pageSize: Int!): [Product!]!
   getProductById(id: Int!): Product!
   getAllCategories: [Category!]!
@@ -178,21 +179,12 @@ input UpdateOrganizationDto {
 input CreateOrderDto {
   ownerId: Int!
   status: Statuses!
-  items: [CreateOrderItemDto!]!
-  shipmentId: Int!
-}
-
-input CreateOrderItemDto {
-  orderId: Int!
-  productId: Int!
-  orderedPrice: Float!
-  quantity: Int!
+  shipmentId: Int
 }
 
 input UpdateOrderDto {
   ownerId: Int
   status: Statuses
-  items: [CreateOrderItemDto!]
   shipmentId: Int
   id: Int!
 }
@@ -265,6 +257,13 @@ input UpdateShipmentDto {
   city: String
   address: String
   id: Int!
+}
+
+input CreateOrderItemDto {
+  orderId: Int!
+  productId: Int!
+  orderedPrice: Float!
+  quantity: Int!
 }
 
 input UpdateOrderItemDto {

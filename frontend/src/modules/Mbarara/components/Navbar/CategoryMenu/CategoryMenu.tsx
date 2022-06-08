@@ -1,20 +1,12 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Menu, MenuItem } from "@mui/material";
+import { GET_CATEGORIES } from "../../../../../redux/requests/mainReuqest";
 
 interface CategoryMenuArgs {
   categoryAnchorEl: Element | ((element: Element) => Element) | null | undefined;
   isCategoryMenuOpen: boolean;
   handleCategoryMenuClose: (event: React.MouseEvent<HTMLElement>) => void;
 }
-
-const GET_CATEGORIES = gql`
- query{
-   getAllCategories{
-   id,
-   name
-}
-}
-`
 
 const categiryMenuId = 'primary-search-account-menu';
 const CategoryMenu = ({ categoryAnchorEl, isCategoryMenuOpen, handleCategoryMenuClose }: CategoryMenuArgs) => {

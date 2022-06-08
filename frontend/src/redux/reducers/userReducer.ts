@@ -10,14 +10,14 @@ type User = {
 }
 
 const initialState = {
-  user: {}
+  user: {} || JSON.parse(localStorage.getItem('user') || "")
 }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state, action: PayloadAction<User>) {
+    setUser(state, action: PayloadAction<User | {}>) {
       state.user = action.payload;
     },
   }

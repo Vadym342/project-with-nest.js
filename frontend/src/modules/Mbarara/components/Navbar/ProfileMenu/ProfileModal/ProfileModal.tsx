@@ -34,7 +34,7 @@ const ProfileModal = ({ isMenuOpen, handleMenuClose }: ProfileModalArgs) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <LoginForm />
+          <LoginForm handleMenuClose={handleMenuClose} />
         </Box>
       </Modal>
     </div>
