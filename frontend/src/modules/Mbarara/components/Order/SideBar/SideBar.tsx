@@ -7,6 +7,7 @@ import { useAppSelector } from '../../../../../hooks/hook';
 import { orderItemsSelector } from '../../../../../redux';
 import { GET_PRODUCTS_BY_IDS } from '../../../../../redux/requests/orderRequest';
 import { useQuery } from '@apollo/client';
+import { useEffect, useState } from 'react';
 
 const SidebarBox = styled('div')(({ theme }) => ({
   width: '100%',
@@ -24,23 +25,54 @@ interface OrderMenuArgs {
   isOrderMenuOpen: boolean;
   handleOrderMenuClose: (event: React.MouseEvent<HTMLElement>) => void;
 }
+
+interface orderItemsArgs {
+  productId: number,
+  orderedPrice: number,
+  quantity: number
+}
+interface getProductsByArrayIdsArgs {
+  id: number,
+  name: string,
+  image: string,
+  price: number,
+}
+
 const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: OrderMenuArgs) => {
   const orderItems = useAppSelector(orderItemsSelector);
+  const [orderMappedItems, setOrderMappedItems] = useState<any>();
 
-  const handleMapOrderItems = () => {
-    const tmpArr = [];
+  const handleMapOrderItems = (action: string) => {
+    const tmpArrIds = [];
+    let sum = 0;
     for (let obj of orderItems) {
-      tmpArr.push(obj.productId);
+      tmpArrIds.push(obj.productId);
+      sum += obj.orderedPrice * obj.quantity;
     }
-    return tmpArr;
+    if (action === 'ids') {
+      return tmpArrIds;
+    }
+    if (action === 'sum') {
+      return sum;
+    }
   }
-  const arrayOfIds = handleMapOrderItems();
+
+  const sum = handleMapOrderItems('sum');
+  const arrayOfIds = handleMapOrderItems('ids');
+
   const { data, error, loading } = useQuery(GET_PRODUCTS_BY_IDS, {
     variables: {
       arrayIds: arrayOfIds
     }
   });
-  console.log(data);
+  useEffect(() => {
+    if (data) {
+      const result = data.getProductsByArrayIds.map((t1: getProductsByArrayIdsArgs) =>
+        ({ ...t1, ...orderItems.find((t2: orderItemsArgs) => t2.productId === t1.id) }))
+      setOrderMappedItems(result);
+      console.log(result)
+    }
+  }, [data])
   return (
     <SidebarBox style={{ width: '300px' }} >
       <List component='nav'>
@@ -49,12 +81,23 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
             <ShoppingBag />
           </div>
           <div>
-            3 item
+            {orderItems.length} item
           </div>
         </div>
         <div style={{ height: '250px', overflow: 'scroll' }}>
-          <OrderItem />
-          <OrderItem />
+          {
+            orderMappedItems?.map((orderItem: any) => (
+              <OrderItem
+                key={orderItem.id}
+                id={orderItem.id}
+                name={orderItem.name}
+                image={orderItem.image}
+                orderedPrice={orderItem.orderedPrice}
+                quantityInc={orderItem.quantity}
+              />
+            ))
+          }
+
         </div>
         <div style={{
           display: 'flex',
@@ -80,7 +123,7 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
                 },
               }}
             >
-              Checkout Now ($1234)
+              Checkout Now (${sum})
             </Button>
             <Button
               fullWidth

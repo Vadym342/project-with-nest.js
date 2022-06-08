@@ -1,6 +1,6 @@
 import { Int, ObjectType } from '@nestjs/graphql';
 import { Field } from '@nestjs/graphql';
-import { BelongsTo, Column, DataType, ForeignKey, HasMany, HasOne, Model, Table } from 'sequelize-typescript';
+import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { Order } from '../../orders/entities/order.entity';
 
 @ObjectType()
@@ -39,7 +39,4 @@ export class Shipment extends Model<Shipment> {
   @Column({ type: DataType.STRING, allowNull: false })
   @Field()
   address: string;
-
-  @HasOne(() => Order)
-  order: Order;
 }

@@ -4,7 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 import productStyle from './productStyle';
 import Quantity from '../../../../../shared/Buttons/Quantity';
@@ -59,7 +59,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     if (orderItems.length === 0) {
       dispatch(setOrderItems({
         productId: id,
-        orderedPrice: price,
+        orderedPrice: price - ((price * discount) / 100),
         quantity: quantity + 1
       }))
     } else {
@@ -67,7 +67,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
         if (obj.productId === id) {
           dispatch(updateOrderItem({
             productId: id,
-            orderedPrice: price,
+            orderedPrice: price - ((price * discount) / 100),
             quantity: quantity + 1
           }))
         }
@@ -75,7 +75,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
           dispatch(deleteOrderItem(id))
           dispatch(setOrderItems({
             productId: id,
-            orderedPrice: price,
+            orderedPrice: price - ((price * discount) / 100),
             quantity: quantity + 1
           }))
         }
@@ -89,13 +89,12 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
         if (obj.quantity > 1) {
           dispatch(updateOrderItem({
             productId: id,
-            orderedPrice: price,
+            orderedPrice: price - ((price * discount) / 100),
             quantity: quantity - 1
           }))
         } else {
           dispatch(deleteOrderItem(id))
         }
-
       }
     }
   }
@@ -118,7 +117,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
         }
         <CardContent>
           <Typography component='div'>
-            {name}
+            {name.length > 15 ? `${name.substr(0, 15)}...` : name}
           </Typography>
           <Typography gutterBottom variant='h5' component='div'>
             <div style={productStyle.RatingBlock as React.CSSProperties}>
