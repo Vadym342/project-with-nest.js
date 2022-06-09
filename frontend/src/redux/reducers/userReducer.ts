@@ -10,7 +10,7 @@ type User = {
 }
 
 const initialState = {
-  user: {} || JSON.parse(localStorage.getItem('user') || "")
+  user: localStorage.hasOwnProperty('user') ? JSON.parse(localStorage.getItem('user') || "") : {}
 }
 
 const userSlice = createSlice({

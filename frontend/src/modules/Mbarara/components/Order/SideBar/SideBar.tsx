@@ -8,6 +8,7 @@ import { orderItemsSelector } from '../../../../../redux';
 import { GET_PRODUCTS_BY_IDS } from '../../../../../redux/requests/orderRequest';
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
+import { Box, Drawer } from '@mui/material';
 
 const SidebarBox = styled('div')(({ theme }) => ({
   width: '100%',
@@ -58,7 +59,7 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
   }
 
   const handleCheckout = () => {
-    
+
   }
 
   const sum = handleMapOrderItems('sum');
@@ -78,73 +79,75 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
     }
   }, [data])
   return (
-    <SidebarBox style={{ width: '300px' }} >
-      <List component='nav'>
-        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '15px' }}>
-          <div>
-            <ShoppingBag />
+    <Drawer anchor='right' open={isOrderMenuOpen} onClose={handleOrderMenuClose}>
+      <Box p={2} width='300px' textAlign={'center'} role='presentation'>
+        <List component='nav'>
+          <div style={{ display: 'flex', flexDirection: 'row', marginLeft: '15px' }}>
+            <div>
+              <ShoppingBag />
+            </div>
+            <div>
+              {orderItems.length} item
+            </div>
           </div>
-          <div>
-            {orderItems.length} item
-          </div>
-        </div>
-        <div style={{ height: '250px', overflow: 'scroll' }}>
-          {
-            orderMappedItems?.map((orderItem: any) => (
-              <OrderItem
-                key={orderItem.id}
-                id={orderItem.id}
-                name={orderItem.name}
-                image={orderItem.image}
-                orderedPrice={orderItem.orderedPrice}
-                quantityInc={orderItem.quantity}
-              />
-            ))
-          }
+          <div style={orderItems.length > 4 ?{ height: '250px', overflow: 'scroll' }: {}}>
+            {
+              orderMappedItems?.map((orderItem: any) => (
+                <OrderItem
+                  key={orderItem.id}
+                  id={orderItem.id}
+                  name={orderItem.name}
+                  image={orderItem.image}
+                  orderedPrice={orderItem.orderedPrice}
+                  quantityInc={orderItem.quantity}
+                />
+              ))
+            }
 
-        </div>
-        <div style={{
-          display: 'flex',
-          flexDirection: 'column',
-          height: '10vh',
-          marginLeft: '15px',
-          marginRight: '15px'
-        }}>
-          <div style={{
-            marginTop: 'auto',
-            paddingBottom: '20px',
-            height: '50px'
-          }}>
-            <Button
-              fullWidth
-              sx={{
-                mt: 3, mb: 2, background: '#d23f57',
-                color: 'white',
-                fontSize: '12px',
-                marginRight: '15px',
-                '&:hover': {
-                  backgroundColor: '#b5384d'
-                },
-              }}
-              onClick={handleCheckout}
-            >
-              Checkout Now (${sum})
-            </Button>
-            <Button
-              fullWidth
-              sx={{
-                mt: 3, mb: 2, background: 'white',
-                border: '1px solid #d23f57',
-                fontSize: '12px',
-                color: '#d23f57', marginTop: '-10px'
-              }}
-            >
-              View Cart
-            </Button>
           </div>
-        </div>
-      </List>
-    </SidebarBox >
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            height: '10vh',
+            marginLeft: '15px',
+            marginRight: '15px'
+          }}>
+            <div style={{
+              marginTop: 'auto',
+              paddingBottom: '20px',
+              height: '50px'
+            }}>
+              <Button
+                fullWidth
+                sx={{
+                  mt: 3, mb: 2, background: '#d23f57',
+                  color: 'white',
+                  fontSize: '12px',
+                  marginRight: '15px',
+                  '&:hover': {
+                    backgroundColor: '#b5384d'
+                  },
+                }}
+                onClick={handleCheckout}
+              >
+                Checkout Now (${sum})
+              </Button>
+              <Button
+                fullWidth
+                sx={{
+                  mt: 3, mb: 2, background: 'white',
+                  border: '1px solid #d23f57',
+                  fontSize: '12px',
+                  color: '#d23f57', marginTop: '-10px'
+                }}
+              >
+                View Cart
+              </Button>
+            </div>
+          </div>
+        </List>
+      </Box >
+    </Drawer>
   );
 }
 

@@ -17,7 +17,9 @@ import ProfileMenu from './ProfileMenu/ProfileMenu';
 import navbarStyle from './navbarStyle';
 import Sidebar from '../Order/SideBar/SideBar';
 import { useAppSelector } from '../../../../hooks/hook';
-import { orderItemsSelector } from '../../../../redux';
+import { orderItemsSelector, userSelector } from '../../../../redux';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -62,6 +64,8 @@ const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(null);
   const [orderAnchorEl, setOrderAnchorEl] = useState<null | HTMLElement>(null);
+  const user = useAppSelector(userSelector);
+
   const menuId = 'primary-search-account-menu';
 
   const isOrderMenuOpen = Boolean(orderAnchorEl);
@@ -126,6 +130,17 @@ const NavBar = () => {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
+          {
+            user?.token && user?.user?.role === 'ADMIN' && (
+              <Box style={{ color: 'black' }}>
+                <Link to='/admin' style={{textDecoration:'none'}}>
+                  <Button>
+                    Go to Admin panel
+                  </Button>
+                </Link>
+              </Box>
+            )
+          }
           <Box sx={navbarStyle.AccountBox}>
             <IconButton
               size="large"
@@ -171,7 +186,6 @@ const NavBar = () => {
           />
         )
       }
-
     </Box >
   );
 }
