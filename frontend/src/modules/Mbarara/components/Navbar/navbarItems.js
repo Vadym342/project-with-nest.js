@@ -1,4 +1,4 @@
-import routes from '../../../../consts/routes';
+import routes from '../../../../routes/routesPath';
 
 const fieldsForSideBar = {
     Admin: [

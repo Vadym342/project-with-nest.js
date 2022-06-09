@@ -1,4 +1,3 @@
-
 import { gql } from '@apollo/client';
 
 const GET_PRODUCTS_BY_IDS = gql`
@@ -18,7 +17,8 @@ mutation createShipment(
   $fullName: string,
   $city: string, 
   $country: string,
-  $address: string ){
+  $address: string
+  ){
 createShipment(ShipmentDto:{
     orderId:$orderId,
     phone: $phone,
@@ -58,4 +58,4 @@ mutation CreateOrder($ownerId: Int){
 }
 `
 
-export { GET_PRODUCTS_BY_IDS, CREATE_ORDER,UPDATE_ORDER, CREATE_SHIPMENT }
+export { GET_PRODUCTS_BY_IDS, CREATE_ORDER, UPDATE_ORDER, CREATE_SHIPMENT }
