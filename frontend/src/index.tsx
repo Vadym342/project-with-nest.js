@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import { StepsProvider } from './modules/MbararaAdmin/components/CreateProduct/Context/Context';
 
 
 const root = ReactDOM.createRoot(
@@ -26,7 +27,9 @@ root.render(
     <React.StrictMode>
       <BrowserRouter>
         <ApolloProvider client={client}>
-          <App />
+          <StepsProvider>
+            <App />
+          </StepsProvider>
         </ApolloProvider>
       </BrowserRouter>
     </React.StrictMode>

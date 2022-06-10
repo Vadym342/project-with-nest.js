@@ -1,4 +1,3 @@
-
 import { gql } from '@apollo/client';
 
 const GET_PRODUCTS_BY_IDS = gql`

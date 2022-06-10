@@ -9,4 +9,4 @@ query{
 }
 `
 
-export { GET_CATEGORIES }
+export { GET_CATEGORIES}

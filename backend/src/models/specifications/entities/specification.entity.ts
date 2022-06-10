@@ -26,7 +26,7 @@ export class Specification extends Model<Specification> {
 
   @Column({ type: DataType.STRING, allowNull: true })
   @Field({ nullable: true })
-  Model: string;
+  model: string;
 
   @Column({ type: DataType.STRING, allowNull: true })
   @Field({ nullable: true })

@@ -5,7 +5,7 @@
 type Specification {
   id: Int!
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
@@ -225,7 +225,7 @@ input UpdateCategoryDto {
 
 input CreateSpecificationDto {
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
@@ -233,7 +233,7 @@ input CreateSpecificationDto {
 
 input UpdateSpecificationDto {
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
