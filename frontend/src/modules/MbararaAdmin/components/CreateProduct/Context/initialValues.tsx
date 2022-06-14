@@ -35,16 +35,52 @@ export const initialValues: ValidationSchema = {
     error: '',
     validate: 'select'
   },
-  date: {
-    value: '',
-    error: ''
-  },
-  city: {
+  brand: {
     value: '',
     error: '',
     validate: 'text',
-    minLength: 3,
-    maxLength: 20
+    minLength: 2,
+    maxLength: 20,
+    helperText: 'Custom error message'
+  },
+  imageKey: {
+    value: '',
+    error: '',
+    required: true,
+    validate: 'text',
+    helperText: 'Custom error message'
+  },
+  model: {
+    value: '',
+    error: '',
+    validate: 'text',
+    minLength: 2,
+    maxLength: 20,
+    helperText: 'Custom error message'
+  },
+  description: {
+    value: '',
+    error: '',
+    validate: 'text',
+    minLength: 2,
+    maxLength: 150,
+    helperText: 'Custom error message'
+  },
+  feature: {
+    value: '',
+    error: '',
+    validate: 'text',
+    minLength: 2,
+    maxLength: 20,
+    helperText: 'Custom error message'
+  },
+  producer: {
+    value: '',
+    error: '',
+    validate: 'text',
+    minLength: 2,
+    maxLength: 20,
+    helperText: 'Custom error message'
   },
   agreenemt: {
     value: false,
@@ -53,10 +89,4 @@ export const initialValues: ValidationSchema = {
     validate: 'checkbox',
     helperText: 'Please accept our terms and conditions'
   },
-  phone: {
-    value: '',
-    error: '',
-    validate: 'phone',
-    maxLength: 15
-  }
 }

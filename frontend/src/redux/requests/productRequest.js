@@ -2,11 +2,11 @@ import { gql } from "@apollo/client";
 
 const CREATE_SPECIFICATION = gql`
 mutation CreateSpecification(
-  $brand:string,
-  $model:string,
-  $description:string,
-  $feature:string,
-  $producer:string
+  $brand:String,
+  $model:String,
+  $description:String,
+  $feature:String,
+  $producer:String
   ){
   createSpecification(SpecificationDto:{
     brand: $brand,
@@ -22,9 +22,9 @@ mutation CreateSpecification(
 
 const CREATE_PRODUCT = gql`
 mutation CreateProduct(
-  $name: string,
+  $name: String,
   $price: Float,
-  $image: string,
+  $image: String,
   $discount: Int,
   $organizationId: Int,
   $categoryId: Int,
@@ -51,7 +51,7 @@ mutation CreateProduct(
 `
 
 const UPLOAD_IMAGE = gql`
-mutation UploadFile($file: string){
+mutation UploadFile($file: Upload!){
   uploadFile(file: $file)
 }
 `

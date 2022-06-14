@@ -17,16 +17,16 @@ export default function SecondStep() {
     variant,
     margin
   } = useContext(AppContext)
-  const { city, date, phone, agreenemt } = formValues
+  const { brand, model, description, feature, producer } = formValues
 
   const isError = useCallback(
     () =>
-      Object.keys({ city, date, phone, agreenemt }).some(
+      Object.keys({ brand, model, description, feature, producer }).some(
         (name) =>
           (formValues[name].required && !formValues[name].value) ||
           formValues[name].error
       ),
-    [formValues, city, date, phone, agreenemt]
+    [formValues, brand, model, description, feature, producer]
   )
 
   return (
@@ -37,14 +37,14 @@ export default function SecondStep() {
             variant={variant}
             margin={margin}
             fullWidth
-            label="City"
-            name="city"
-            placeholder="Enter your city"
-            value={city.value}
+            label="Brand"
+            name="brand"
+            placeholder="Brand"
+            value={brand.value}
             onChange={handleChange}
-            error={!!city.error}
-            helperText={city.error}
-            required={city.required}
+            error={!!brand.error}
+            helperText={brand.error}
+            required={brand.required}
           />
         </Grid>
         <Grid item xs={12}>
@@ -52,49 +52,65 @@ export default function SecondStep() {
             variant={variant}
             margin={margin}
             fullWidth
-            InputLabelProps={{
-              shrink: true
-            }}
-            label="Date of birth"
-            name="date"
-            type="date"
-            defaultValue={date.value}
+            label="Model"
+            name="model"
+            placeholder="Model"
+            value={model.value}
             onChange={handleChange}
-            required={date.required}
+            error={!!model.error}
+            helperText={model.error}
+            required={model.required}
           />
         </Grid>
+
         <Grid item xs={12}>
           <TextField
             variant={variant}
             margin={margin}
             fullWidth
-            label="Phone number"
-            name="phone"
-            placeholder="i.e: xxx-xxx-xxxx"
-            value={phone.value}
+            label="Feature"
+            name="feature"
+            placeholder="Feature"
+            value={feature.value}
             onChange={handleChange}
-            error={!!phone.error}
-            helperText={phone.error}
-            required={phone.required}
+            error={!!feature.error}
+            helperText={feature.error}
+            required={feature.required}
           />
         </Grid>
+
         <Grid item xs={12}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={agreenemt.value}
-                onChange={handleChange}
-                name="agreenemt"
-                color="primary"
-                required={agreenemt.required}
-              />
-            }
-            label="Agree to terms and conditions"
+          <TextField
+            variant={variant}
+            margin={margin}
+            fullWidth
+            label="Producer"
+            name="producer"
+            placeholder="Producer"
+            value={producer.value}
+            onChange={handleChange}
+            error={!!producer.error}
+            helperText={producer.error}
+            required={producer.required}
           />
-          <FormHelperText error={!!agreenemt.error}>
-            {agreenemt.error}
-          </FormHelperText>
         </Grid>
+
+        <Grid item xs={12}>
+          <TextField
+            variant={variant}
+            margin={margin}
+            fullWidth
+            label="Description"
+            name="description"
+            placeholder="Description"
+            value={description.value}
+            onChange={handleChange}
+            error={!!description.error}
+            helperText={description.error}
+            required={description.required}
+          />
+        </Grid>
+
       </Grid>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>

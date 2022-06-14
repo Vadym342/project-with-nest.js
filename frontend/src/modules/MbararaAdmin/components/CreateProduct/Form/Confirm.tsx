@@ -6,10 +6,22 @@ import ListItemText from '@mui/material/ListItemText'
 import Divider from '@mui/material/Divider'
 import Button from '@mui/material/Button'
 import { AppContext } from '../Context/Context'
+import { CREATE_PRODUCT, CREATE_SPECIFICATION } from '../../../../../redux/requests/productRequest'
+import { useMutation } from '@apollo/client'
 
 export default function Confirm() {
   const { formValues, handleBack, handleNext } = useContext(AppContext);
-  const { productName, price, discount, category, rating, date, city, phone } = formValues;
+  const { productName, price, discount, category, rating,
+    brand, model, feature, description, producer, imageKey } = formValues;
+
+  const [createSpecification, { data, loading, error }] = useMutation(CREATE_SPECIFICATION);
+  const [createProduct,
+    {
+      data: productData,
+      loading: productLoading,
+      error: productError
+    }] = useMutation(CREATE_PRODUCT);
+
 
   const handleSubmit = () => {
     // Remove unwanted properties from formValue object
@@ -21,6 +33,16 @@ export default function Confirm() {
         [name]: formValues[name].value
       }
       return form
+    })
+
+    createSpecification({
+      variables: {
+        brand,
+        model,
+        feature,
+        producer,
+        description,
+      }
     })
     // Do whatever with the values
     console.log(form)
@@ -78,8 +100,8 @@ export default function Confirm() {
 
         <ListItem>
           <ListItemText
-            primary="Date of birth"
-            secondary={date.value || 'Not Provided'}
+            primary="Image"
+            secondary={imageKey.value || 'Not Provided'}
           />
         </ListItem>
 
@@ -87,8 +109,8 @@ export default function Confirm() {
 
         <ListItem>
           <ListItemText
-            primary="City"
-            secondary={city.value || 'Not Provided'}
+            primary="Producer"
+            secondary={producer.value || 'Not Provided'}
           />
         </ListItem>
 
@@ -96,10 +118,40 @@ export default function Confirm() {
 
         <ListItem>
           <ListItemText
-            primary="phone"
-            secondary={phone.value || 'Not Provided'}
+            primary="Feature"
+            secondary={feature.value || 'Not Provided'}
           />
         </ListItem>
+
+        <Divider />
+
+        <ListItem>
+          <ListItemText
+            primary="Model"
+            secondary={model.value || 'Not Provided'}
+          />
+        </ListItem>
+
+        <Divider />
+
+        <ListItem>
+          <ListItemText
+            primary="Brand"
+            secondary={brand.value || 'Not Provided'}
+          />
+        </ListItem>
+
+        <Divider />
+
+        <ListItem>
+          <ListItemText
+            primary="Description"
+            secondary={description.value || 'Not Provided'}
+          />
+        </ListItem>
+
+        <Divider />
+
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>

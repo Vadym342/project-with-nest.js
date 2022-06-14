@@ -155,23 +155,6 @@ export function StepsProvider({ children }: ProviderProps) {
             error = helperText || 'This field accepts numbers only.'
           break
 
-        case 'email':
-          if (value && !isEmail.test(value))
-            error = helperText || 'Please enter a valid email address.'
-          break
-
-        case 'phone':
-          if (value && !isPhone.test(value))
-            error =
-              helperText ||
-              'Please enter a valid phone number. i.e: xxx-xxx-xxxx'
-          break
-
-        case 'zip':
-          if (value && !isZip.test(value))
-            error = helperText || 'Please enter a valid zip code.'
-          break
-
         case 'checkbox':
           if (!checked) error = helperText || 'Please provide a valid value.'
           break

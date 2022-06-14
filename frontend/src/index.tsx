@@ -11,17 +11,19 @@ import {
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { StepsProvider } from './modules/MbararaAdmin/components/CreateProduct/Context/Context';
-
+import { createUploadLink } from 'apollo-upload-client';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
 const client = new ApolloClient({
-  uri: 'http://localhost:5001/graphql',
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  //@ts-ignore
+  link: createUploadLink({
+    uri: "http://localhost:5001/graphql",
+  }),
 });
-
 root.render(
   <Provider store={store}>
     <React.StrictMode>

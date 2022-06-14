@@ -13,11 +13,11 @@ query GetProductsByArrayIds($arrayIds: [Int!]!){
 const CREATE_SHIPMENT = gql`
 mutation createShipment(
   $orderId: Int,
-  $phone: string,
-  $fullName: string,
-  $city: string, 
-  $country: string,
-  $address: string ){
+  $phone: String,
+  $fullName: String,
+  $city: String, 
+  $country: String,
+  $address: String ){
 createShipment(ShipmentDto:{
     orderId:$orderId,
     phone: $phone,

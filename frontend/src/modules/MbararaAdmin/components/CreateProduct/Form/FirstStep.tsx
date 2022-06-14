@@ -6,19 +6,14 @@ import Button from '@mui/material/Button'
 import { AppContext } from '../Context/Context'
 import { useMutation, useQuery } from '@apollo/client'
 import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest'
-import { PhotoCamera } from '@mui/icons-material'
-import { IconButton, Stack, styled } from '@mui/material'
 import { UPLOAD_IMAGE } from '../../../../../redux/requests/productRequest'
 
-const Input = styled('input')({
-  display: 'none',
-});
-
-export default function FirstStep() {
+const FirstStep = () => {
   const { formValues, handleChange, handleNext, variant, margin } = useContext(
     AppContext
   )
-  const { productName, price, discount, category, rating } = formValues
+  const { productName, price, discount, category, imageKey, rating } = formValues
+  const [imageKeyValue, setImageKeyValue] = useState(imageKey.value);
 
   // Check if all values are not empty and if there are some errors
   const isError = useCallback(
@@ -26,39 +21,38 @@ export default function FirstStep() {
       Object.keys({ productName, price, discount, category, rating }).some(
         (name) =>
           (formValues[name].required && !formValues[name].value) ||
-          formValues[name].error
+          formValues[name].error || !imageKeyValue
       ),
-    [formValues, productName, price, discount, category, rating]
+
+    [formValues, productName, price, discount, category, imageKeyValue, rating]
   )
 
   const { data, error, loading } = useQuery(GET_CATEGORIES);
   const categories = data?.getAllCategories;
 
-  const [file, setFile] = useState()
-  const [description, setDescription] = useState("")
-  const [images, setImages] = useState([])
-  const [publishPost, { data: dataImage, loading: loadingImage }] = useMutation(UPLOAD_IMAGE);
+  const [file, setFile] = useState("");
+  const [images, setImages] = useState([]);
+
+  const [uploadImage, { data: dataImage, loading: loadingImage, error: errorImage }] = useMutation(UPLOAD_IMAGE);
+
   const submit = async (event: any) => {
     event.preventDefault()
-    publishPost({
-      variables: {
-        file
-      }
-    })
-    // const result = await postImage({ image: file, description })
-    //setImages([result.image, ...images])
+    uploadImage({ variables: { file } });
   }
 
   useEffect(() => {
     if (dataImage) {
-      console.log(dataImage);
+      setImageKeyValue(dataImage.uploadFile);
     }
-
-  }, [dataImage])
+    if (errorImage || error) {
+      console.log(JSON.stringify(errorImage, null, 2));
+      console.log(JSON.stringify(error, null, 2));
+    }
+  }, [dataImage, data])
 
   const fileSelected = (event: any) => {
     const file = event.target.files[0]
-    setFile(file)
+    setFile(file);
   }
 
   return (
@@ -98,8 +92,8 @@ export default function FirstStep() {
           >
             <option value=""> </option>
             {
-              categories?.map((category: any, index: number) => (
-                <option key={index} value={category.name}>{category.name}</option>
+              categories?.map((category: any) => (
+                <option key={category.id} value={category.name}>{category.name}</option>
               ))
             }
           </TextField>
@@ -155,38 +149,40 @@ export default function FirstStep() {
             required={rating.required}
           >
             <option value=""> </option>
-            <option value="">0</option>
-            <option value="">1</option>
-            <option value="">2</option>
-            <option value="">3</option>
-            <option value="">4</option>
-            <option value="">5</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
           </TextField>
         </Grid>
 
         <Grid item xs={12} sm={6}>
-          <Stack direction="row" alignItems="center" spacing={2}>
-            {/* <label htmlFor="icon-button-file">
-              <Input accept="image/*" id="icon-button-file" type="file" />
-              <IconButton color="primary" aria-label="upload picture" component="span">
-                Upload <PhotoCamera />
-              </IconButton>
-            </label> */}
-            <form onSubmit={submit}>
-              <input onChange={fileSelected} type="file" accept="image/*"></input>
-              <input value={description} onChange={e => setDescription(e.target.value)} type="text"></input>
-              <button type="submit">Submit</button>
-            </form>
+          <form onSubmit={submit}>
+            <input onChange={fileSelected} required type="file" ></input>
+            <TextField
+              variant={variant}
+              margin={margin}
+              fullWidth
+              disabled
+              name="imageKey"
+              value={imageKey.value = imageKeyValue}
+              onChange={handleChange}
+              inputProps={{ style: { fontSize: '12px' } }}
+            />
+            <Button variant="outlined" type="submit" sx={{
+              fontSize: '13px',
+              marginTop: '5px'
+            }}>Upload image to S3 bucket</Button>
+          </form>
 
-            {images.map(image => (
-              <div key={image}>
-                <img src={image}></img>
-              </div>
-            ))}
-
-          </Stack>
+          {images.map(image => (
+            <div key={image}>
+              <img src={image}></img>
+            </div>
+          ))}
         </Grid>
-
       </Grid>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -203,3 +199,5 @@ export default function FirstStep() {
     </>
   )
 }
+
+export default FirstStep;
