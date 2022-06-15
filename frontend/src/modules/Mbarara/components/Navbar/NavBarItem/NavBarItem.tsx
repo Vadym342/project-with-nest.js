@@ -17,7 +17,7 @@ const NavBarItem = ({
     <>
       <NavLink style={{ textDecoration: 'none', color: 'white' }} to={route}>
         <MenuItem key={title} onClick={handleCloseNavMenu}>
-          <Typography textAlign="center">{title}</Typography>
+          <Typography textAlign='center'>{title}</Typography>
         </MenuItem>
       </NavLink>
     </>

@@ -14,7 +14,7 @@ import MenuDrawer from './Drawer';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-export default function MenuAppBar() {
+const MenuAppBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -37,19 +37,19 @@ export default function MenuAppBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position='static'>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
+            size='large'
+            edge='start'
+            color='inherit'
+            aria-label='menu'
             sx={{ mr: 2 }}
             onClick={handleOpenDrawer}
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
             Mbarara Admin
           </Typography>
           <Box>
@@ -61,17 +61,17 @@ export default function MenuAppBar() {
           </Box>
           <div>
             <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              size='large'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleMenu}
-              color="inherit"
+              color='inherit'
             >
               <AccountCircle />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
@@ -99,3 +99,5 @@ export default function MenuAppBar() {
     </Box>
   );
 }
+
+export default MenuAppBar;

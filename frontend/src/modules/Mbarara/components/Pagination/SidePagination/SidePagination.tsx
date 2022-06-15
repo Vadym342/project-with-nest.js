@@ -1,8 +1,6 @@
 import { Box, Button } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { Link } from "react-router-dom";
-
 interface SidePaginationArgs {
   handleButtonPrev: (event: React.MouseEvent<HTMLElement>) => void;
   handleButtonNext: (event: React.MouseEvent<HTMLElement>) => void;
