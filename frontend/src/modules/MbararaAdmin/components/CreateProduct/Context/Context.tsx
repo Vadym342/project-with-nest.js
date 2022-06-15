@@ -194,7 +194,7 @@ export function StepsProvider({ children }: ProviderProps) {
         margin
       }}
     >
-      <div className="mui-step-form">{children}</div>
+      <div className='mui-step-form'>{children}</div>
     </AppContext.Provider>
   )
 }

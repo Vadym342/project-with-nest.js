@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from '../../../../../hooks/hook';
 import { deleteOrderItem, orderItemsSelector, setOrderItems, updateOrderItem } from '../../../../../redux';
 import Quantity from '../../../../../shared/Buttons/Quantity';
 
-
 interface OrderItemArgs {
   id: number,
   name: string,
@@ -68,7 +67,13 @@ const OrderItem = ({ id, name, image, orderedPrice, quantityInc }: OrderItemArgs
     }
   }
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: '5px' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: '5px'
+    }}>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ flexGrow: 1, marginLeft: '10px' }}>
           <Quantity
@@ -82,7 +87,7 @@ const OrderItem = ({ id, name, image, orderedPrice, quantityInc }: OrderItemArgs
         <img
           style={{ height: '50px', width: '80px', marginLeft: '20px' }}
           src={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
-          alt="photo"
+          alt='photo'
         />
       </div>
       <div style={{ flexGrow: 1, marginLeft: '8px', fontSize: '10px', width: '70px' }}>
@@ -97,7 +102,7 @@ const OrderItem = ({ id, name, image, orderedPrice, quantityInc }: OrderItemArgs
         </div>
       </div>
       <div style={{ marginRight: '10px' }}>
-        <CloseIcon  onClick={handleDeleteItem}/>
+        <CloseIcon onClick={handleDeleteItem} />
       </div>
     </div>
   )

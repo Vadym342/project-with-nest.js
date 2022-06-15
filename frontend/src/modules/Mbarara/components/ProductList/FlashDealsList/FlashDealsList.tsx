@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client';
 import BoltIcon from '@mui/icons-material/Bolt';
-import { Box, Button } from '@mui/material';
-import { memo, useCallback, useState } from 'react';
+import { Box } from '@mui/material';
+import { useState } from 'react';
 import SidePagination from '../../Pagination/SidePagination/SidePagination';
 import Product from '../Product/Product';
 import flashDealsStyle from './flashDealsStyle';
@@ -39,7 +39,6 @@ const FlashDealsList = () => {
       setPage(page + 1)
   }
 
-  //console.log(JSON.stringify(error, null, 2));
   if (error) return <div>Error Page</div>;
 
   if (loading) return <div>Spinner...</div>;
@@ -82,7 +81,6 @@ const FlashDealsList = () => {
           handleButtonNext={handleButtonNext}
         />
       </div>
-
     </Box>
   );
 }

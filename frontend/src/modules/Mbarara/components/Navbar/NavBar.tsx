@@ -99,20 +99,20 @@ const NavBar = () => {
 
   return (
     <Box sx={navbarStyle.MainBox}>
-      <AppBar position="static" style={navbarStyle.AppBarColor}>
+      <AppBar position='static' style={navbarStyle.AppBarColor}>
         <Toolbar>
           <Typography
-            variant="h6"
+            variant='h6'
             noWrap
-            component="div"
+            component='div'
             sx={navbarStyle.LogoTypography}
           >
             Mbarara
           </Typography>
           <IconButton
             onClick={handlerCategoryMenuOpen}
-            size="large"
-            color="default"
+            size='large'
+            color='default'
             sx={navbarStyle.CategoryIcon}
           >
             <DashboardCustomizeIcon />
@@ -125,7 +125,7 @@ const NavBar = () => {
               <SearchIcon style={navbarStyle.SearchIcon} />
             </SearchIconWrapper>
             <StyledInputBase
-              placeholder="Search…"
+              placeholder='Search…'
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
@@ -143,22 +143,22 @@ const NavBar = () => {
           }
           <Box sx={navbarStyle.AccountBox}>
             <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
+              size='large'
+              edge='end'
+              aria-label='account of current user'
               aria-controls={menuId}
-              aria-haspopup="true"
+              aria-haspopup='true'
               onClick={handleProfileMenuOpen}
-              color="default"
+              color='default'
             >
               <AccountCircle />
             </IconButton>
             <IconButton
-              size="large"
-              color="default"
+              size='large'
+              color='default'
               onClick={isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen}
             >
-              <Badge badgeContent={orderItems.length} color="error" showZero>
+              <Badge badgeContent={orderItems.length} color='error' showZero>
                 <ShoppingBag />
               </Badge>
             </IconButton>

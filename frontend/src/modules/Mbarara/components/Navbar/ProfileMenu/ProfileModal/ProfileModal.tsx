@@ -30,8 +30,8 @@ const ProfileModal = ({ isMenuOpen, handleMenuClose }: ProfileModalArgs) => {
       <Modal
         open={isMenuOpen}
         onClose={handleMenuClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
       >
         <Box sx={style}>
           <LoginForm handleMenuClose={handleMenuClose} />

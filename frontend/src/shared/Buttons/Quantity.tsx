@@ -1,5 +1,5 @@
-import { Button } from "@mui/material";
-import productStyle from "../../modules/Mbarara/components/ProductList/Product/productStyle";
+import { Button } from '@mui/material';
+import productStyle from '../../modules/Mbarara/components/ProductList/Product/productStyle';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 

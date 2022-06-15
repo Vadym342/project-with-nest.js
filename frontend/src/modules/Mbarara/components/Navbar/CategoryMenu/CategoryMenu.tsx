@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/client";
-import { Menu, MenuItem } from "@mui/material";
-import { GET_CATEGORIES } from "../../../../../redux/requests/mainReuqest";
+import { useQuery } from '@apollo/client';
+import { Menu, MenuItem } from '@mui/material';
+import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest';
 
 interface CategoryMenuArgs {
   categoryAnchorEl: Element | ((element: Element) => Element) | null | undefined;
