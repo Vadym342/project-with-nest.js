@@ -36,6 +36,14 @@ const MenuDrawer = ({ isDrawerOpen, handleCloseDrawer, handleOpenDrawer }: MenuD
               <ListItemText primary={'Create Product'} />
             </ListItem>
           </NavLink>
+          <NavLink to={routes.AuthRoutes.pathToCreateCategory} style={{ textDecoration: 'none', color: 'black' }}>
+            <ListItem button key={'Create Category'}>
+              <ListItemIcon>
+                <CreateIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Create Category'} />
+            </ListItem>
+          </NavLink>
           <NavLink to={routes.AuthRoutes.pathToCreateProduct} style={{ textDecoration: 'none', color: 'black' }}>
             <ListItem button key={'Users'}>
               <ListItemIcon>

@@ -9,6 +9,18 @@ query{
 }
 `
 
+const CREATE_CATEGORY = gql`
+mutation CreateCategory($name: String!){
+  createCategory(CategoryDto:
+  {
+    name: $name
+  }){
+    id,
+    name
+  }
+}
+`
+
 const GET_CATEGORY_BY_ID = gql`
 query GetCategoryById($id: Int!) {
   getCategoryById(id:$id){
@@ -18,4 +30,4 @@ query GetCategoryById($id: Int!) {
 }
 `
 
-export { GET_CATEGORIES, GET_CATEGORY_BY_ID }
+export { GET_CATEGORIES, GET_CATEGORY_BY_ID, CREATE_CATEGORY };
