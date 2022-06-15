@@ -40,7 +40,7 @@ const Confirm = () => {
       id: +category.value
     }
   });
-  const [categoryName, setCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState('');
   const handleSubmit = () => {
     createProduct({
       variables: {
@@ -69,7 +69,6 @@ const Confirm = () => {
       }
     }
     if (productData) {
-      console.log(productData);
       createSpecification({
         variables: {
           brand: brand.value,
@@ -87,7 +86,7 @@ const Confirm = () => {
       <List disablePadding>
         <ListItem>
           <ListItemText
-            primary="Product Name"
+            primary='Product Name'
             secondary={productName.value || 'Not Provided'}
           />
         </ListItem>
@@ -96,7 +95,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Price"
+            primary='Price'
             secondary={`${price.value} $` || 'Not Provided'}
           />
         </ListItem>
@@ -105,7 +104,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Discount"
+            primary='Discount'
             secondary={`${discount.value} %` || 'Not Provided'}
           />
         </ListItem>
@@ -114,7 +113,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Category"
+            primary='Category'
             secondary={categoryName || 'Not Provided'}
           />
         </ListItem>
@@ -123,7 +122,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Rating"
+            primary='Rating'
             secondary={rating.value || 'Not Provided'}
           />
         </ListItem>
@@ -132,7 +131,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Image"
+            primary='Image'
             secondary={imageKey.value || 'Not Provided'}
           />
         </ListItem>
@@ -141,7 +140,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Producer"
+            primary='Producer'
             secondary={producer.value || 'Not Provided'}
           />
         </ListItem>
@@ -150,7 +149,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Feature"
+            primary='Feature'
             secondary={feature.value || 'Not Provided'}
           />
         </ListItem>
@@ -159,7 +158,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Model"
+            primary='Model'
             secondary={model.value || 'Not Provided'}
           />
         </ListItem>
@@ -168,7 +167,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Brand"
+            primary='Brand'
             secondary={brand.value || 'Not Provided'}
           />
         </ListItem>
@@ -177,7 +176,7 @@ const Confirm = () => {
 
         <ListItem>
           <ListItemText
-            primary="Description"
+            primary='Description'
             secondary={description.value || 'Not Provided'}
           />
         </ListItem>
@@ -190,7 +189,7 @@ const Confirm = () => {
         <Button sx={{ mr: 1 }} onClick={handleBack}>
           Back
         </Button>
-        <Button variant="contained" color="success" onClick={handleSubmit}>
+        <Button variant='contained' color='success' onClick={handleSubmit}>
           Confirm & Continue
         </Button>
       </Box>

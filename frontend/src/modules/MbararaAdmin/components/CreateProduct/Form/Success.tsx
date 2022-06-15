@@ -7,13 +7,12 @@ const Success = () => {
   const { handleClearContext } = useContext(AppContext);
   return (
     <>
-      <Typography variant="h2" align="center" sx={{ py: 4 }}>
-        Thank you!
+      <Typography variant='h2' align='center' sx={{ py: 4 }}>
+        The product was successfully created!
       </Typography>
-      <Typography component="p" align="center">
-        You will get an email with further instructions
+      <Typography component='div' align='center'>
+        <Button variant='outlined' onClick={handleClearContext}>Create One More</Button>
       </Typography>
-      <Button onClick={handleClearContext}>Create One More</Button>
     </>
   )
 }

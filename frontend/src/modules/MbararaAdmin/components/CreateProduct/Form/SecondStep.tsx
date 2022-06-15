@@ -34,9 +34,9 @@ const SecondStep = () => {
             variant={variant}
             margin={margin}
             fullWidth
-            label="Brand"
-            name="brand"
-            placeholder="Brand"
+            label='Brand'
+            name='brand'
+            placeholder='Brand'
             value={brand.value}
             onChange={handleChange}
             error={!!brand.error}
@@ -49,9 +49,9 @@ const SecondStep = () => {
             variant={variant}
             margin={margin}
             fullWidth
-            label="Model"
-            name="model"
-            placeholder="Model"
+            label='Model'
+            name='model'
+            placeholder='Model'
             value={model.value}
             onChange={handleChange}
             error={!!model.error}
@@ -65,9 +65,9 @@ const SecondStep = () => {
             variant={variant}
             margin={margin}
             fullWidth
-            label="Feature"
-            name="feature"
-            placeholder="Feature"
+            label='Feature'
+            name='feature'
+            placeholder='Feature'
             value={feature.value}
             onChange={handleChange}
             error={!!feature.error}
@@ -81,9 +81,9 @@ const SecondStep = () => {
             variant={variant}
             margin={margin}
             fullWidth
-            label="Producer"
-            name="producer"
-            placeholder="Producer"
+            label='Producer'
+            name='producer'
+            placeholder='Producer'
             value={producer.value}
             onChange={handleChange}
             error={!!producer.error}
@@ -97,9 +97,9 @@ const SecondStep = () => {
             variant={variant}
             margin={margin}
             fullWidth
-            label="Description"
-            name="description"
-            placeholder="Description"
+            label='Description'
+            name='description'
+            placeholder='Description'
             value={description.value}
             onChange={handleChange}
             error={!!description.error}
@@ -115,9 +115,9 @@ const SecondStep = () => {
           Back
         </Button>
         <Button
-          variant="contained"
+          variant='contained'
           disabled={isError()}
-          color="primary"
+          color='primary'
           onClick={!isError() ? handleNext : () => null}
         >
           Next

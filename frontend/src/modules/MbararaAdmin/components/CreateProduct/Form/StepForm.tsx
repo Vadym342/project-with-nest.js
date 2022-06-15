@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -36,7 +36,7 @@ const StepForm = () => {
       ) : (
         <>
           <Box sx={{ my: 5 }}>
-            <Typography variant="h4" align="center">
+            <Typography variant='h4' align='center'>
               Create Product
             </Typography>
           </Box>

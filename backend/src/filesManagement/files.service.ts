@@ -12,13 +12,11 @@ export class FileService {
     const s3 = new S3();
     console.log(fileName)
     const fileStream = createReadStream(filePath);
-    const bb = await s3.upload({
+    return await s3.upload({
       Bucket: `${this.configService.get('AWS_BUCKET_NAME')}`,
       Body: fileStream,
       Key: fileName
     }).promise();
-    console.log(bb);
-    return bb;
   }
 
   async deleteFile(fileKey: string) {
