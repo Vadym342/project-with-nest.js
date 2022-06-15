@@ -42,4 +42,4 @@ mutation CreateUser(
 }
 `
 
-export { CREATE_USER, LOGIN }
+export { CREATE_USER, LOGIN };

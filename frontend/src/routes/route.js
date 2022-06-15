@@ -1,5 +1,6 @@
 import { Routes, Navigate, Route } from 'react-router-dom';
 import { useAppSelector } from '../hooks/hook';
+import CreateCategory from '../modules/MbararaAdmin/components/CreateCategory/CreateCategory';
 import CreateProduct from '../modules/MbararaAdmin/components/CreateProduct/CreateProduct';
 import Login from '../pages/Authorization/Login';
 import Registration from '../pages/Authorization/Registration';
@@ -23,6 +24,7 @@ const Router = () => {
         <Route element={<ProtectedRoute user={user} />}>
           <Route exact path={routes.AuthRoutes.pathToAdmin} element={<MbararaAdmin />} />
           <Route exact path={routes.AuthRoutes.pathToCreateProduct} element={<CreateProduct />} />
+          <Route exact path={routes.AuthRoutes.pathToCreateCategory} element={<CreateCategory />} />
         </Route>
 
         <Route

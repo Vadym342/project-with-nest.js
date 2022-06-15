@@ -1,15 +1,15 @@
-import React, { createContext, useReducer } from 'react'
-import { initialValues } from './initialValues'
+import React, { createContext, useReducer } from 'react';
+import { initialValues } from './initialValues';
 
-const isText = RegExp(/^(?![\d+_@.-]+$)[a-zA-Z0-9+_@.-]*$/)
-const isEmail = RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)
-const isPhone = RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4,6})$/) // us
-const isZip = RegExp(/^[0-9]{5}([- /]?[0-9]{4})?$/) // us
-const isNumber = RegExp(/^\d+$/)
+const isText = RegExp(/^(?![\d+_@.-]+$)[a-zA-Z0-9+_@.-]*$/);
+const isEmail = RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i);
+const isPhone = RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4,6})$/); // us
+const isZip = RegExp(/^[0-9]{5}([- /]?[0-9]{4})?$/); // us
+const isNumber = RegExp(/^\d+$/);
 
 // Applied to all fields
-const variant = 'standard'
-const margin = 'normal'
+const variant = 'standard';
+const margin = 'normal';
 
 export declare type ValidationSchema = Record<
   string,
@@ -32,17 +32,17 @@ export declare type ValidationSchema = Record<
 >
 
 type ContextProps = {
-  activeStep: number
-  formValues: ValidationSchema
+  activeStep: number,
+  formValues: ValidationSchema,
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     checked?: boolean
-  ) => void
-  handleNext: () => void
-  handleBack: () => void
-  handleClearContext: () => void
-  variant: 'outlined' | 'standard' | 'filled'
-  margin: 'dense' | 'normal' | 'none'
+  ) => void,
+  handleNext: () => void,
+  handleBack: () => void,
+  handleClearContext: () => void,
+  variant: 'outlined' | 'standard' | 'filled',
+  margin: 'dense' | 'normal' | 'none',
 }
 
 export const AppContext = createContext<ContextProps>({
@@ -61,7 +61,7 @@ interface ProviderProps {
 }
 
 type State = {
-  activeStep: number
+  activeStep: number,
   formValues: ValidationSchema
 }
 
