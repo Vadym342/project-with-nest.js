@@ -1,12 +1,12 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react'
-import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import { AppContext } from '../Context/Context'
-import { useMutation, useQuery } from '@apollo/client'
-import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest'
-import { UPLOAD_IMAGE } from '../../../../../redux/requests/productRequest'
+import { useCallback, useContext, useEffect, useState } from 'react';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { AppContext } from '../Context/Context';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest';
+import { UPLOAD_IMAGE } from '../../../../../redux/requests/productRequest';
 
 const FirstStep = () => {
   const { formValues, handleChange, handleNext, variant, margin } = useContext(
@@ -93,7 +93,7 @@ const FirstStep = () => {
             <option value=""> </option>
             {
               categories?.map((category: any) => (
-                <option key={category.id} value={category.name}>{category.name}</option>
+                <option key={category.id} value={category.id}>{category.name}</option>
               ))
             }
           </TextField>

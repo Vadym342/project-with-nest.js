@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
-import Box from '@mui/material/Box'
-import Stepper from '@mui/material/Stepper'
-import Step from '@mui/material/Step'
-import StepLabel from '@mui/material/StepLabel'
-import Typography from '@mui/material/Typography'
-import FirstStep from './FirstStep'
-import SecondStep from './SecondStep'
-import Confirm from './Confirm'
-import Success from './Success'
-import { AppContext } from '../Context/Context'
+import React, { useContext } from 'react';
+import Box from '@mui/material/Box';
+import Stepper from '@mui/material/Stepper';
+import Step from '@mui/material/Step';
+import StepLabel from '@mui/material/StepLabel';
+import Typography from '@mui/material/Typography';
+import FirstStep from './FirstStep';
+import SecondStep from './SecondStep';
+import Confirm from './Confirm';
+import Success from './Success';
+import { AppContext } from '../Context/Context';
 
 
 // Step titles
@@ -55,4 +55,4 @@ const StepForm = () => {
   )
 }
 
-export default StepForm
+export default StepForm;

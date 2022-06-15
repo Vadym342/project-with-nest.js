@@ -4,8 +4,6 @@ import { IsAlpha, MinLength } from 'class-validator';
 @InputType()
 export class CreateProductDto {
   @Field()
-  @IsAlpha()
-  @MinLength(3)
   name: string;
 
   @Field()
@@ -23,12 +21,12 @@ export class CreateProductDto {
   @Field({ nullable: true })
   isFavorite: boolean;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   organizationId: number;
   
   @Field(() => Int)
   categoryId: number;
 
-  @Field(() => Int)
+  @Field(() => Int, { nullable: true })
   specificationId: number;
 }

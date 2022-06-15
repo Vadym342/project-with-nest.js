@@ -196,9 +196,9 @@ input CreateProductDto {
   image: String!
   rating: Float!
   isFavorite: Boolean
-  organizationId: Int!
+  organizationId: Int
   categoryId: Int!
-  specificationId: Int!
+  specificationId: Int
 }
 
 input UpdateProductDto {

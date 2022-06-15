@@ -1,54 +1,86 @@
-import React, { useContext } from 'react'
-import Box from '@mui/material/Box'
-import List from '@mui/material/List'
-import ListItem from '@mui/material/ListItem'
-import ListItemText from '@mui/material/ListItemText'
-import Divider from '@mui/material/Divider'
-import Button from '@mui/material/Button'
-import { AppContext } from '../Context/Context'
-import { CREATE_PRODUCT, CREATE_SPECIFICATION } from '../../../../../redux/requests/productRequest'
-import { useMutation } from '@apollo/client'
+import { useContext, useEffect, useState } from 'react';
+import Box from '@mui/material/Box';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import Button from '@mui/material/Button';
+import { AppContext } from '../Context/Context';
+import { CREATE_PRODUCT, CREATE_SPECIFICATION, UPDATE_PRODUCT } from '../../../../../redux/requests/productRequest';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_CATEGORY_BY_ID } from '../../../../../redux/requests/mainReuqest';
 
-export default function Confirm() {
+const Confirm = () => {
   const { formValues, handleBack, handleNext } = useContext(AppContext);
   const { productName, price, discount, category, rating,
     brand, model, feature, description, producer, imageKey } = formValues;
 
-  const [createSpecification, { data, loading, error }] = useMutation(CREATE_SPECIFICATION);
+  const [createSpecification,
+    {
+      data: specificationData,
+      loading,
+      error
+    }] = useMutation(CREATE_SPECIFICATION);
+
+  const [updateProduct,
+    {
+      data: updateProductData,
+      loading: updateProductLoading,
+      error: updateProductError
+    }] = useMutation(UPDATE_PRODUCT);
+
   const [createProduct,
     {
       data: productData,
       loading: productLoading,
       error: productError
     }] = useMutation(CREATE_PRODUCT);
-
-
+  const { data: categoryValue, error: categoryError, loading: categoryLoading } = useQuery(GET_CATEGORY_BY_ID, {
+    variables: {
+      id: +category.value
+    }
+  });
+  const [categoryName, setCategoryName] = useState("");
   const handleSubmit = () => {
-    // Remove unwanted properties from formValue object
-    let form = {}
-
-    Object.keys(formValues).map((name) => {
-      form = {
-        ...form,
-        [name]: formValues[name].value
-      }
-      return form
-    })
-
-    createSpecification({
+    createProduct({
       variables: {
-        brand,
-        model,
-        feature,
-        producer,
-        description,
+        name: productName.value,
+        price: +price.value,
+        discount: +discount.value,
+        image: imageKey.value,
+        categoryId: +category.value,
+        rating: +rating.value,
+        isFavorite: false,
+        organizationId: 1
       }
     })
-    // Do whatever with the values
-    console.log(form)
-    // Show last component or success message
-    handleNext()
   }
+
+  useEffect(() => {
+    if (specificationData && productData) {
+      updateProduct({
+        variables: {
+          id: productData.createProduct.id,
+          specificationId: specificationData.createSpecification.id
+        }
+      })
+      if (!updateProductError) {
+        handleNext()
+      }
+    }
+    if (productData) {
+      console.log(productData);
+      createSpecification({
+        variables: {
+          brand: brand.value,
+          model: model.value,
+          feature: feature.value,
+          producer: producer.value,
+          description: description.value,
+        }
+      })
+    }
+  }, [productData, specificationData, categoryValue, updateProductData])
 
   return (
     <>
@@ -83,7 +115,7 @@ export default function Confirm() {
         <ListItem>
           <ListItemText
             primary="Category"
-            secondary={category.value || 'Not Provided'}
+            secondary={categoryName || 'Not Provided'}
           />
         </ListItem>
 
@@ -165,3 +197,5 @@ export default function Confirm() {
     </>
   )
 }
+
+export default Confirm;

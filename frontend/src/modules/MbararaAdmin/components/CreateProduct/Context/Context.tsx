@@ -1,7 +1,7 @@
 import React, { createContext, useReducer } from 'react'
 import { initialValues } from './initialValues'
 
-const isText = RegExp(/^[A-Z ]+$/i)
+const isText = RegExp(/^(?![\d+_@.-]+$)[a-zA-Z0-9+_@.-]*$/)
 const isEmail = RegExp(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i)
 const isPhone = RegExp(/^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4,6})$/) // us
 const isZip = RegExp(/^[0-9]{5}([- /]?[0-9]{4})?$/) // us
@@ -18,13 +18,13 @@ export declare type ValidationSchema = Record<
     error?: string
     required?: boolean
     validate?:
-      | 'text'
-      | 'number'
-      | 'email'
-      | 'phone'
-      | 'zip'
-      | 'checkbox'
-      | 'select'
+    | 'text'
+    | 'number'
+    | 'email'
+    | 'phone'
+    | 'zip'
+    | 'checkbox'
+    | 'select'
     minLength?: number
     maxLength?: number
     helperText?: string
@@ -40,6 +40,7 @@ type ContextProps = {
   ) => void
   handleNext: () => void
   handleBack: () => void
+  handleClearContext: () => void
   variant: 'outlined' | 'standard' | 'filled'
   margin: 'dense' | 'normal' | 'none'
 }
@@ -47,9 +48,10 @@ type ContextProps = {
 export const AppContext = createContext<ContextProps>({
   activeStep: 0,
   formValues: initialValues,
-  handleChange() {},
-  handleNext() {},
-  handleBack() {},
+  handleChange() { },
+  handleNext() { },
+  handleBack() { },
+  handleClearContext() { },
   variant,
   margin
 })
@@ -68,6 +70,7 @@ type Action =
   | { type: 'decrease' }
   | { type: 'form-value'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string }
+  | { type: 'clearContext' }
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
@@ -103,6 +106,11 @@ function reducer(state: State, action: Action): State {
           }
         }
       }
+    case 'clearContext':
+      return {
+        activeStep: 0,
+        formValues: initialValues,
+      }
 
     default:
       return state
@@ -116,9 +124,11 @@ export function StepsProvider({ children }: ProviderProps) {
   })
 
   // Proceed to next step
-  const handleNext = () => dispatch({ type: 'increase' })
+  const handleNext = () => dispatch({ type: 'increase' });
   // Go back to prev step
-  const handleBack = () => dispatch({ type: 'decrease' })
+  const handleBack = () => dispatch({ type: 'decrease' });
+  // Clear Context
+  const handleClearContext = () => dispatch({ type: 'clearContext' });
 
   // Handle form change
   const handleChange = (
@@ -179,6 +189,7 @@ export function StepsProvider({ children }: ProviderProps) {
         handleChange,
         handleNext,
         handleBack,
+        handleClearContext,
         variant,
         margin
       }}

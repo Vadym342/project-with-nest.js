@@ -1,7 +1,10 @@
-import Typography from '@mui/material/Typography'
-import { Button } from '@mui/material'
+import Typography from '@mui/material/Typography';
+import { Button } from '@mui/material';
+import { AppContext } from '../Context/Context';
+import { useContext } from 'react';
 
-export default function Success() {
+const Success = () => {
+  const { handleClearContext } = useContext(AppContext);
   return (
     <>
       <Typography variant="h2" align="center" sx={{ py: 4 }}>
@@ -10,7 +13,9 @@ export default function Success() {
       <Typography component="p" align="center">
         You will get an email with further instructions
       </Typography>
-      <Button onClick={() => window.location.reload()}>Create One More</Button>
+      <Button onClick={handleClearContext}>Create One More</Button>
     </>
   )
 }
+
+export default Success;

@@ -22,15 +22,15 @@ mutation CreateSpecification(
 
 const CREATE_PRODUCT = gql`
 mutation CreateProduct(
-  $name: String,
-  $price: Float,
-  $image: String,
-  $discount: Int,
+  $name: String!,
+  $price: Float!,
+  $image: String!,
+  $discount: Float!,
   $organizationId: Int,
-  $categoryId: Int,
+  $categoryId: Int!,
   $specificationId: Int,
-  $isFavorite: boolean,
-  $rating: Int
+  $isFavorite: Boolean,
+  $rating: Float!
   ){
   createProduct(productDto:{
     name:$name,
@@ -50,10 +50,43 @@ mutation CreateProduct(
 }
 `
 
+const UPDATE_PRODUCT = gql`
+mutation UpdateProduct(
+  $id:Int!,
+  $name: String,
+  $price: Float,
+  $image: String,
+  $discount: Float,
+  $organizationId: Int,
+  $categoryId: Int,
+  $specificationId: Int,
+  $isFavorite: Boolean,
+  $rating: Float
+){
+  updateProduct(updateProductDto:{
+    id:$id,
+    name:$name,
+    price:$price,
+    image:$image,
+    discount:$discount,
+    organizationId:$organizationId,
+    categoryId:$categoryId,
+    specificationId:$specificationId,
+    isFavorite:$isFavorite,
+    rating:$rating,
+  }){
+    id,
+    organizationId,
+    categoryId,
+    specificationId
+  }
+}
+`
+
 const UPLOAD_IMAGE = gql`
 mutation UploadFile($file: Upload!){
   uploadFile(file: $file)
 }
 `
 
-export { CREATE_PRODUCT, CREATE_SPECIFICATION, UPLOAD_IMAGE }
+export { CREATE_PRODUCT, CREATE_SPECIFICATION, UPLOAD_IMAGE, UPDATE_PRODUCT }
