@@ -7,7 +7,7 @@ export class CreateSpecificationDto {
   brand: string;
 
   @Field({ nullable: true })
-  Model: string;
+  model: string;
 
   @Field({ nullable: true })
   description: string;

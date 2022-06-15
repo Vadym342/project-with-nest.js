@@ -10,7 +10,7 @@ export class FileService {
 
   async uploadFileForS3(fileName: string, filePath: string) {
     const s3 = new S3();
-  
+    console.log(fileName)
     const fileStream = createReadStream(filePath);
     return await s3.upload({
       Bucket: `${this.configService.get('AWS_BUCKET_NAME')}`,

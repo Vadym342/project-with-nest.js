@@ -5,7 +5,7 @@
 type Specification {
   id: Int!
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
@@ -196,9 +196,9 @@ input CreateProductDto {
   image: String!
   rating: Float!
   isFavorite: Boolean
-  organizationId: Int!
+  organizationId: Int
   categoryId: Int!
-  specificationId: Int!
+  specificationId: Int
 }
 
 input UpdateProductDto {
@@ -225,7 +225,7 @@ input UpdateCategoryDto {
 
 input CreateSpecificationDto {
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
@@ -233,7 +233,7 @@ input CreateSpecificationDto {
 
 input UpdateSpecificationDto {
   brand: String
-  Model: String
+  model: String
   description: String
   feature: String
   producer: String
