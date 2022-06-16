@@ -4,7 +4,7 @@ import {
 } from 'react-router-dom';
 import routes from './routesPath';
 import MenuAppBar from '../modules/MbararaAdmin/components/SideBar/AppBar';
-const ProtectedRoute = ({
+const PrivateRoute = ({
   user,
   redirectPath = `${routes.NonAuthRoutes.pathToHome}`,
 }) => {
@@ -18,4 +18,4 @@ const ProtectedRoute = ({
     <Navigate to={redirectPath} replace />;
 };
 
-export default ProtectedRoute;
+export default PrivateRoute;

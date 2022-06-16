@@ -103,6 +103,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     <Box sx={productStyle.MainBox}>
       <Card sx={productStyle.Card}>
         <CardMedia
+          style={{ backgroundSize: 'cover' }}
           component='img'
           height='110'
           image={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
