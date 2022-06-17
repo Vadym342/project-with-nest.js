@@ -99,7 +99,7 @@ type Query {
   getOrganizationById(id: Int!): Organization!
   getAllOrders: [Order!]!
   getOrderById(id: Int!): Order!
-  getAllProducts: [Product!]!
+  getAllProducts(categoryId: Int): [Product!]!
   getProductsByArrayIds(arrayIds: [Int!]!): [Product!]!
   getFlashDealsProducts(page: Int!, pageSize: Int!): [Product!]!
   getProductById(id: Int!): Product!

@@ -14,8 +14,8 @@ query FlashDeals($page:Int!, $pageSize:Int!){
 }
 `
 const GET_ALLPRODUCTS = gql`
-query{
-  getAllProducts{
+query GetAllProducts($categoryId: Int){
+  getAllProducts(categoryId:$categoryId){
     id,
     name,
 		price,
@@ -27,6 +27,19 @@ query{
 }
 `
 
+const GET_ALLPRODUCTS1 = gql`
+query{ 
+  getAllProducts{
+    id,
+    name,
+		price,
+    rating,
+    discount,
+    image,
+    isFavorite
+  }
+}
+`
 
 const GET_CATEGORIES = gql`
 query{
@@ -60,5 +73,6 @@ query GetCategoryById($id: Int!) {
 
 export {
   GET_CATEGORIES, GET_CATEGORY_BY_ID,
-  CREATE_CATEGORY, GET_FLASHDEALSPRODUCT, GET_ALLPRODUCTS
+  CREATE_CATEGORY, GET_FLASHDEALSPRODUCT, GET_ALLPRODUCTS,
+  GET_ALLPRODUCTS1
 };

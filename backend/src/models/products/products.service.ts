@@ -11,7 +11,7 @@ interface paginateArgs {
   pageSize: number;
 }
 
-const paginate = (query: any, { page, pageSize }: paginateArgs) => {
+const paginateFlashDeals = (query: any, { page, pageSize }: paginateArgs) => {
   const offset = page;
   const limit = pageSize;
 
@@ -21,6 +21,17 @@ const paginate = (query: any, { page, pageSize }: paginateArgs) => {
     limit,
   };
 };
+
+const paginateProducts = (query: any, { page, pageSize }: paginateArgs) => {
+  const offset = page;
+  const limit = pageSize;
+
+  return {
+    ...query,
+    offset,
+    limit,
+  };
+}
 
 @Injectable()
 export class ProductsService {
@@ -41,20 +52,29 @@ export class ProductsService {
     }
   }
 
-  async getAllProducts(): Promise<Product[]> {
+  async getAllProducts(categoryId?: number): Promise<Product[]> {
+    if (categoryId) {
+      return await this.productRepository.findAll({
+        where: {
+          categoryId: categoryId
+        }
+      });
+    }
     return await this.productRepository.findAll();
   }
 
-  async getProductsByArrayIds(arrayIds: number[]): Promise<Product[]> {
-    return await this.productRepository.findAll({
+  async getProductsByArrayIds(page: number, pageSize: number, arrayIds: number[]): Promise<Product[]> {
+    return await this.productRepository.findAll(paginateProducts({
       where: {
-        id: { [Op.in]: arrayIds}
+        id: { [Op.in]: arrayIds }
       }
-    });
+    },
+      { page, pageSize }
+    ));
   }
 
   async getFlashDealsProducts(page: number, pageSize: number): Promise<Product[]> {
-    return await this.productRepository.findAll(paginate({
+    return await this.productRepository.findAll(paginateFlashDeals({
       where: {
         discount: {
           [Op.ne]: null

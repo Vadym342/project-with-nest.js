@@ -39,11 +39,11 @@ const CategoryMenu = ({ categoryAnchorEl, isCategoryMenuOpen, handleCategoryMenu
     >
       {
         categories.map((category: any) => (
-          <MenuItem key={category.id} onClick={handleCategoryMenuClose}>
-            <Link style={{ textDecoration: 'none', color:'#2B3445' }} to={`${routes.NonAuthRoutes.pathToProductList}${category.id}`}>
+          <Link key={category.id} style={{ textDecoration: 'none', color: '#2B3445' }} to={`${routes.NonAuthRoutes.pathToProductList}${category.id}`}>
+            <MenuItem onClick={handleCategoryMenuClose}>
               {category.name}
-            </Link>
-          </MenuItem>
+            </MenuItem>
+          </Link>
         ))
       }
     </Menu >

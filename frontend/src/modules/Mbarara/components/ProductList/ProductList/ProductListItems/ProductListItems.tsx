@@ -1,16 +1,38 @@
 import { useQuery } from '@apollo/client';
-import { Box } from '@mui/material';
-import { GET_ALLPRODUCTS } from '../../../../../../redux/requests/mainReuqest';
+import { Box, Pagination } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { GET_ALLPRODUCTS, GET_ALLPRODUCTS1 } from '../../../../../../redux/requests/mainReuqest';
+import ProductListPagination from '../../../Pagination/ProductListPagination/ProductListPagination';
 import Product from '../../Product/Product';
 
 const ProductListItems = () => {
-  const { data, error, loading } = useQuery(GET_ALLPRODUCTS);
+  const { id: categoryId } = useParams();
+  const [products, setProducts] = useState([]);
 
-  if (error) return <div>Error Page</div>;
+  const [page, setPage] = useState(1);
+  const totalPages = 15;
+  const handlePages = (updatePage: number) => {
+    console.log(updatePage)
+    setPage(updatePage);
+  }
 
-  if (loading) return <div>Spinner...</div>;
+  const { data, error, loading } = Number(categoryId) > 1
+    ?
+    useQuery(GET_ALLPRODUCTS, {
+      variables:
+      {
+        categoryId: Number(categoryId)
+      }
+    })
+    :
+    useQuery(GET_ALLPRODUCTS1);
 
-  const products = data.getAllProducts;
+  useEffect(() => {
+    if (data) {
+      setProducts(data.getAllProducts);
+    }
+  }, [data])
 
   return (
     <div style={{ marginLeft: '20px', marginRight: '20px' }}>
@@ -23,7 +45,7 @@ const ProductListItems = () => {
           flexWrap: 'wrap',
         }}>
         {
-          products.map((product: any) => (
+          products?.map((product: any) => (
             <Product
               key={product.id}
               id={product.id}
@@ -36,6 +58,13 @@ const ProductListItems = () => {
             />
           ))
         }
+        <Box style={{ marginTop: '15px' }}>
+          <ProductListPagination
+            page={page}
+            totalPages={totalPages}
+            handlePagination={handlePages}
+          />
+        </Box>
       </Box>
     </div>
   )

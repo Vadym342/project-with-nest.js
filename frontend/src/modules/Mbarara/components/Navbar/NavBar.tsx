@@ -20,6 +20,7 @@ import { useAppSelector } from '../../../../hooks/hook';
 import { orderItemsSelector, userSelector } from '../../../../redux';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import routes from '../../../../routes/routesPath';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -107,7 +108,9 @@ const NavBar = () => {
             component='div'
             sx={navbarStyle.LogoTypography}
           >
-            Mbarara
+            <Link style={{ textDecoration: 'none', color: '#2B3445' }} to={routes.NonAuthRoutes.pathToHome}>
+              Mbarara
+            </Link>
           </Typography>
           <IconButton
             onClick={handlerCategoryMenuOpen}
@@ -133,7 +136,7 @@ const NavBar = () => {
           {
             user?.token && user?.user?.role === 'ADMIN' && (
               <Box style={{ color: 'black' }}>
-                <Link to='/admin' style={{textDecoration:'none'}}>
+                <Link to='/admin' style={{ textDecoration: 'none' }}>
                   <Button>
                     Go to Admin panel
                   </Button>
