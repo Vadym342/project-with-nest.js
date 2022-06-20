@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const CREATE_SPECIFICATION = gql`
 mutation CreateSpecification(

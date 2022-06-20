@@ -1,5 +1,4 @@
 import { InputType, Field, Int } from '@nestjs/graphql';
-import { IsAlpha, MinLength } from 'class-validator';
 
 @InputType()
 export class CreateProductDto {
@@ -23,7 +22,7 @@ export class CreateProductDto {
 
   @Field(() => Int, { nullable: true })
   organizationId: number;
-  
+
   @Field(() => Int)
   categoryId: number;
 

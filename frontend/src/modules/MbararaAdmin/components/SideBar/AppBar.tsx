@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -20,11 +19,11 @@ const MenuAppBar = () => {
 
   const handleCloseDrawer = () => {
     setIsDrawerOpen(false);
-  }
+  };
 
   const handleOpenDrawer = () => {
     setIsDrawerOpen(true);
-  }
+  };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,7 +32,6 @@ const MenuAppBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -54,9 +52,7 @@ const MenuAppBar = () => {
           </Typography>
           <Box>
             <Link to='/' style={{ textDecoration: 'none' }}>
-              <Button style={{ color: 'white' }}>
-                Go to Mbarara Shop
-              </Button>
+              <Button style={{ color: 'white' }}>Go to Mbarara Shop</Button>
             </Link>
           </Box>
           <div>
@@ -98,6 +94,6 @@ const MenuAppBar = () => {
       />
     </Box>
   );
-}
+};
 
 export default MenuAppBar;

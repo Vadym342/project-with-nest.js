@@ -3,25 +3,21 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './components/App/App';
 import './index.css';
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { StepsProvider } from './modules/MbararaAdmin/components/CreateProduct/Context/Context';
 import { createUploadLink } from 'apollo-upload-client';
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
+  document.getElementById('root') as HTMLElement
 );
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   //@ts-ignore
   link: createUploadLink({
-    uri: "http://localhost:5001/graphql",
+    uri: 'http://localhost:5001/graphql',
   }),
 });
 root.render(
@@ -35,5 +31,5 @@ root.render(
         </ApolloProvider>
       </BrowserRouter>
     </React.StrictMode>
-  </Provider>,
+  </Provider>
 );

@@ -1,11 +1,13 @@
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Badge,
+  Button } from '@mui/material';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -18,7 +20,6 @@ import navbarStyle from './navbarStyle';
 import Sidebar from '../Order/SideBar/SideBar';
 import { useAppSelector } from '../../../../hooks/hook';
 import { orderItemsSelector, userSelector } from '../../../../redux';
-import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import routes from '../../../../routes/routesPath';
 
@@ -35,7 +36,7 @@ const Search = styled('div')(({ theme }) => ({
   width: '100%',
   border: '1px solid #9e9e9e',
   borderRadius: '50px',
-  color: '#9e9e9e'
+  color: '#9e9e9e',
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -63,7 +64,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(null);
+  const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(
+    null
+  );
   const [orderAnchorEl, setOrderAnchorEl] = useState<null | HTMLElement>(null);
   const user = useAppSelector(userSelector);
 
@@ -108,10 +111,14 @@ const NavBar = () => {
             component='div'
             sx={navbarStyle.LogoTypography}
           >
-            <Link style={{ textDecoration: 'none', color: '#2B3445' }} to={routes.NonAuthRoutes.pathToHome}>
+            <Link
+              style={{ textDecoration: 'none', color: '#2B3445' }}
+              to={routes.NonAuthRoutes.pathToHome}
+            >
               Mbarara
             </Link>
           </Typography>
+
           <IconButton
             onClick={handlerCategoryMenuOpen}
             size='large'
@@ -123,6 +130,7 @@ const NavBar = () => {
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
+
           <Search style={navbarStyle.Search}>
             <SearchIconWrapper>
               <SearchIcon style={navbarStyle.SearchIcon} />
@@ -132,18 +140,16 @@ const NavBar = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
           <Box sx={{ flexGrow: 1 }} />
-          {
-            user?.token && user?.user?.role === 'ADMIN' && (
-              <Box style={{ color: 'black' }}>
-                <Link to='/admin' style={{ textDecoration: 'none' }}>
-                  <Button>
-                    Go to Admin panel
-                  </Button>
-                </Link>
-              </Box>
-            )
-          }
+          {user?.token && user?.user?.role === 'ADMIN' && (
+            <Box style={{ color: 'black' }}>
+              <Link to='/admin' style={{ textDecoration: 'none' }}>
+                <Button>Go to Admin panel</Button>
+              </Link>
+            </Box>
+          )}
+
           <Box sx={navbarStyle.AccountBox}>
             <IconButton
               size='large'
@@ -159,7 +165,9 @@ const NavBar = () => {
             <IconButton
               size='large'
               color='default'
-              onClick={isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen}
+              onClick={
+                isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen
+              }
             >
               <Badge badgeContent={orderItems.length} color='error' showZero>
                 <ShoppingBag />
@@ -168,11 +176,13 @@ const NavBar = () => {
           </Box>
         </Toolbar>
       </AppBar>
+
       <CategoryMenu
         categoryAnchorEl={categoryAnchorEl}
         isCategoryMenuOpen={isCategoryMenuOpen}
         handleCategoryMenuClose={handleCategoryMenuClose}
       />
+
       <ProfileMenu
         menuId={menuId}
         anchorEl={anchorEl}
@@ -180,17 +190,16 @@ const NavBar = () => {
         setAnchorEl={setAnchorEl}
         handleMenuClose={handleMenuClose}
       />
-      {
-        orderAnchorEl && (
-          <Sidebar
-            orderAnchorEl={orderAnchorEl}
-            isOrderMenuOpen={isOrderMenuOpen}
-            handleOrderMenuClose={handleOrderMenuClose}
-          />
-        )
-      }
-    </Box >
+
+      {orderAnchorEl && (
+        <Sidebar
+          orderAnchorEl={orderAnchorEl}
+          isOrderMenuOpen={isOrderMenuOpen}
+          handleOrderMenuClose={handleOrderMenuClose}
+        />
+      )}
+    </Box>
   );
-}
+};
 
 export default NavBar;

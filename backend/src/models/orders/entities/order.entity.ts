@@ -40,9 +40,9 @@ export class Order extends Model<Order> {
   @Field(() => Statuses)
   status: Statuses;
 
-  @Column
+  @Column({ type: DataType.BOOLEAN })
   @Field(() => Boolean)
-  archived: boolean = false;
+  archived = false;
 
   @BelongsTo(() => User)
   creator: User;

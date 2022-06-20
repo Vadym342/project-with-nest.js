@@ -1,5 +1,13 @@
 import { useMutation } from '@apollo/client';
-import { Button, Container, Grid, Box, Paper, TextField, Typography } from '@mui/material';
+import {
+  Button,
+  Container,
+  Grid,
+  Box,
+  Paper,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import validationStyle from '../../../../consts/styles/validation';
@@ -7,11 +15,12 @@ import { valRequired } from '../../../../consts/validationPropertiesForFields';
 import { CREATE_CATEGORY } from '../../../../redux/requests/mainReuqest';
 
 type FormValues = {
-  name: string
+  name: string;
 };
 
 const CreateCategory = () => {
-  const [createCategory, { data, loading, error }] = useMutation(CREATE_CATEGORY);
+  const [createCategory, { data, loading, error }] =
+    useMutation(CREATE_CATEGORY);
 
   const {
     register,
@@ -28,22 +37,21 @@ const CreateCategory = () => {
   const onSubmit: SubmitHandler<FormValues> = data => {
     createCategory({
       variables: {
-        name: categoryForm.name
-      }
-    })
+        name: categoryForm.name,
+      },
+    });
   };
 
   useEffect(() => {
-    if(error){
+    if (error) {
       console.log(JSON.stringify(error, null, 2));
     }
-
-  }, [data])
+  }, [data]);
 
   return (
     <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
       <Box
-        component="form"
+        component='form'
         onSubmit={handleSubmit(onSubmit)}
         noValidate
         sx={{ mt: 1 }}
@@ -80,7 +88,7 @@ const CreateCategory = () => {
           </Grid>
           <Grid item xs={12} sm={12}>
             <Button
-              type="submit"
+              type='submit'
               variant='contained'
               color='primary'
               sx={{ mt: 3, ml: 1 }}
@@ -91,7 +99,7 @@ const CreateCategory = () => {
         </Paper>
       </Box>
     </Container>
-  )
-}
+  );
+};
 
 export default CreateCategory;

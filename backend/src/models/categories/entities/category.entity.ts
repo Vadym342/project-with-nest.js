@@ -1,11 +1,5 @@
-import { Field, Int, ObjectType, registerEnumType } from '@nestjs/graphql';
-import {
-  Column,
-  DataType,
-  HasMany,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
 import { Product } from '../../products/entities/product.entity';
 
 @ObjectType()

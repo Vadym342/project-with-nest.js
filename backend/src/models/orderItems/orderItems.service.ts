@@ -9,11 +9,9 @@ export class OrderItemsService {
   constructor(
     @InjectModel(OrderItem)
     private OrderItemRepository: typeof OrderItem,
-  ) { }
+  ) {}
 
-  async createOrderItem(
-    OrderItemDto: CreateOrderItemDto,
-  ): Promise<OrderItem> {
+  async createOrderItem(OrderItemDto: CreateOrderItemDto): Promise<OrderItem> {
     return await this.OrderItemRepository.create(OrderItemDto);
   }
 
@@ -24,8 +22,8 @@ export class OrderItemsService {
   async getOrderItemsForOrderById(id): Promise<OrderItem[]> {
     return await this.OrderItemRepository.findAll({
       where: {
-        orderId: id
-      }
+        orderId: id,
+      },
     });
   }
   async getOrderItemById(id: number): Promise<OrderItem> {

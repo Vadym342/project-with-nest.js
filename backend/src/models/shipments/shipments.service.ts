@@ -9,11 +9,9 @@ export class ShipmentsService {
   constructor(
     @InjectModel(Shipment)
     private ShipmentRepository: typeof Shipment,
-  ) { }
+  ) {}
 
-  async createShipment(
-    ShipmentDto: CreateShipmentDto,
-  ): Promise<Shipment> {
+  async createShipment(ShipmentDto: CreateShipmentDto): Promise<Shipment> {
     return await this.ShipmentRepository.create(ShipmentDto);
   }
 
@@ -24,9 +22,9 @@ export class ShipmentsService {
   async getShipmentByOrderId(id): Promise<Shipment> {
     return await this.ShipmentRepository.findOne({
       where: {
-        orderId: id
-      }
-    })
+        orderId: id,
+      },
+    });
   }
 
   async getShipmentById(id: number): Promise<Shipment> {

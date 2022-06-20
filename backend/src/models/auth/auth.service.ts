@@ -2,18 +2,17 @@ import { LoginUserDto } from './dto/login-user';
 import { Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import bcrypt from 'bcrypt';
 import { comparePassword } from '../../utils/bcrypt';
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
-    private jwtService: JwtService
-  ) { }
+    private jwtService: JwtService,
+  ) {}
 
   async validateUser(username: string, password: string): Promise<any> {
     const user = await this.usersService.getUserByEmail(username);
-    let matchPassword : boolean;
+    let matchPassword: boolean;
     if (user) {
       matchPassword = comparePassword(password, user.password);
     }
@@ -34,8 +33,8 @@ export class AuthService {
         email: newUser.email,
         name: newUser.name,
         role: newUser.role,
-        password: ''
-      }
-    }
+        password: '',
+      },
+    };
   }
 }

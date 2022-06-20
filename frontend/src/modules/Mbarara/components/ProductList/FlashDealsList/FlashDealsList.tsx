@@ -13,19 +13,17 @@ const FlashDealsList = () => {
   const { data, error, loading } = useQuery(GET_FLASHDEALSPRODUCT, {
     variables: {
       page,
-      pageSize
-    }
+      pageSize,
+    },
   });
 
   const handleButtonPrev = () => {
-    if (page > 1)
-      setPage(page - 1)
-  }
+    if (page > 1) setPage(page - 1);
+  };
 
   const handleButtonNext = () => {
-    if (products && products.length >= 4)
-      setPage(page + 1)
-  }
+    if (products && products.length >= 4) setPage(page + 1);
+  };
 
   if (error) return <div>Error Page</div>;
 
@@ -39,29 +37,27 @@ const FlashDealsList = () => {
         <div>
           <BoltIcon style={flashDealsStyle.BoltIcon} />
         </div>
-        <div style={flashDealsStyle.TitleText}>
-          Flash Deals
-        </div>
+        <div style={flashDealsStyle.TitleText}>Flash Deals</div>
       </Box>
-      <Box style={flashDealsStyle.ItemBox}
+      <Box
+        style={flashDealsStyle.ItemBox}
         sx={{
           flexDirection: 'row',
           flexWrap: 'wrap',
-        }}>
-        {
-          products.map((product: any) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              rating={product.rating}
-              discount={product.discount}
-              image={product.image}
-              isFavorite={product.isFavorite}
-            />
-          ))
-        }
+        }}
+      >
+        {products.map((product: any) => (
+          <Product
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            rating={product.rating}
+            discount={product.discount}
+            image={product.image}
+            isFavorite={product.isFavorite}
+          />
+        ))}
       </Box>
       <div>
         <SidePagination
@@ -71,6 +67,6 @@ const FlashDealsList = () => {
       </div>
     </Box>
   );
-}
+};
 
 export default FlashDealsList;

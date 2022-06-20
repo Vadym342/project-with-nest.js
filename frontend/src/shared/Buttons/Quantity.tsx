@@ -9,25 +9,29 @@ interface QuantityArgs {
   handleIncreaseQuantity: () => void;
 }
 
-const Quantity = ({ quantity, handleDecreaseQuantity, handleIncreaseQuantity }: QuantityArgs) => {
+const Quantity = ({
+  quantity,
+  handleDecreaseQuantity,
+  handleIncreaseQuantity,
+}: QuantityArgs) => {
   return (
     <>
-      {
-        quantity > 0 ?
-          <>
-            <Button onClick={handleDecreaseQuantity} style={productStyle.CardBtn}>
-              <RemoveIcon style={productStyle.CardIcon} />
-            </Button>
-            <div style={productStyle.QuantityText as React.CSSProperties}>
-              {quantity}
-            </div>
-          </>
-          : ''
-      }
+      {quantity > 0 ? (
+        <>
+          <Button onClick={handleDecreaseQuantity} style={productStyle.CardBtn}>
+            <RemoveIcon style={productStyle.CardIcon} />
+          </Button>
+          <div style={productStyle.QuantityText as React.CSSProperties}>
+            {quantity}
+          </div>
+        </>
+      ) : (
+        ''
+      )}
       <Button onClick={handleIncreaseQuantity} style={productStyle.CardBtn}>
         <AddIcon style={productStyle.CardIcon} />
       </Button>
     </>
-  )
-}
+  );
+};
 export default Quantity;

@@ -28,7 +28,9 @@ export class UsersResolver {
   }
 
   @Query(() => User, { name: 'getUserByEmail' })
-  getUserByEmail(@Args('email', { type: () => String }) email: string): Promise<User> {
+  getUserByEmail(
+    @Args('email', { type: () => String }) email: string,
+  ): Promise<User> {
     return this.usersService.getUserByEmail(email);
   }
 

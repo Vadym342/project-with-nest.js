@@ -4,15 +4,22 @@ import { Link } from 'react-router-dom';
 import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest';
 import routes from '../../../../../routes/routesPath';
 
-
 interface CategoryMenuArgs {
-  categoryAnchorEl: Element | ((element: Element) => Element) | null | undefined;
+  categoryAnchorEl:
+    | Element
+    | ((element: Element) => Element)
+    | null
+    | undefined;
   isCategoryMenuOpen: boolean;
   handleCategoryMenuClose: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const categiryMenuId = 'primary-search-account-menu';
-const CategoryMenu = ({ categoryAnchorEl, isCategoryMenuOpen, handleCategoryMenuClose }: CategoryMenuArgs) => {
+const CategoryMenu = ({
+  categoryAnchorEl,
+  isCategoryMenuOpen,
+  handleCategoryMenuClose,
+}: CategoryMenuArgs) => {
   const { data, error, loading } = useQuery(GET_CATEGORIES);
 
   if (error) return <div>Error Page</div>;
@@ -37,16 +44,16 @@ const CategoryMenu = ({ categoryAnchorEl, isCategoryMenuOpen, handleCategoryMenu
       open={isCategoryMenuOpen}
       onClose={handleCategoryMenuClose}
     >
-      {
-        categories.map((category: any) => (
-          <Link key={category.id} style={{ textDecoration: 'none', color: '#2B3445' }} to={`${routes.NonAuthRoutes.pathToProductList}${category.id}`}>
-            <MenuItem onClick={handleCategoryMenuClose}>
-              {category.name}
-            </MenuItem>
-          </Link>
-        ))
-      }
-    </Menu >
+      {categories.map((category: any) => (
+        <Link
+          key={category.id}
+          style={{ textDecoration: 'none', color: '#2B3445' }}
+          to={`${routes.NonAuthRoutes.pathToProductList}${category.id}`}
+        >
+          <MenuItem onClick={handleCategoryMenuClose}>{category.name}</MenuItem>
+        </Link>
+      ))}
+    </Menu>
   );
 };
 

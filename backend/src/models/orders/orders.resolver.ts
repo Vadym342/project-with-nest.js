@@ -2,7 +2,15 @@ import { Shipment } from './../shipments/entities/shipment.entity';
 import { ShipmentsService } from './../shipments/shipments.service';
 import { OrderItemsService } from './../orderItems/orderItems.service';
 import { OrderItem } from './../orderItems/entities/orderItem.entity';
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { OrdersService } from './orders.service';
 import { Order } from './entities/order.entity';
 import { CreateOrderDto } from './dto/create-order.dto';
@@ -14,7 +22,7 @@ export class OrdersResolver {
     private readonly ordersService: OrdersService,
     private readonly orderItemsSerice: OrderItemsService,
     private readonly shipmentsService: ShipmentsService,
-  ) { }
+  ) {}
 
   @Mutation(() => Order)
   createOrder(

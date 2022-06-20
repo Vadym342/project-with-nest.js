@@ -5,33 +5,33 @@ import { CreateShipmentDto } from './dto/create-shipment.dto';
 import { UpdateShipmentDto } from './dto/update-shipment.dto';
 @Resolver(() => Shipment)
 export class ShipmentsResolver {
-  constructor(private readonly ShipmentsService: ShipmentsService) { }
+  constructor(private readonly shipmentsService: ShipmentsService) {}
 
   @Mutation(() => Shipment)
   createShipment(
     @Args('ShipmentDto', { type: () => CreateShipmentDto })
     ShipmentDto: CreateShipmentDto,
   ): Promise<Shipment> {
-    return this.ShipmentsService.createShipment(ShipmentDto);
+    return this.shipmentsService.createShipment(ShipmentDto);
   }
 
   @Query(() => [Shipment], { name: 'getAllShipments' })
   getAllShipments(): Promise<Shipment[]> {
-    return this.ShipmentsService.getAllShipments();
+    return this.shipmentsService.getAllShipments();
   }
 
   @Query(() => [Shipment], { name: 'getShipmentByOrderId' })
   getShipmentByOrderId(
-    @Args('id', { type: () => Int }) id: number
+    @Args('id', { type: () => Int }) id: number,
   ): Promise<Shipment> {
-    return this.ShipmentsService.getShipmentByOrderId(id);
+    return this.shipmentsService.getShipmentByOrderId(id);
   }
 
   @Query(() => Shipment, { name: 'getShipmentById' })
   getShipmentById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<Shipment> {
-    return this.ShipmentsService.getShipmentById(id);
+    return this.shipmentsService.getShipmentById(id);
   }
 
   @Mutation(() => Shipment)
@@ -39,7 +39,7 @@ export class ShipmentsResolver {
     @Args('updateShipmentInput')
     updateShipmentInput: UpdateShipmentDto,
   ): Promise<Shipment> {
-    return this.ShipmentsService.updateShipment(
+    return this.shipmentsService.updateShipment(
       updateShipmentInput.id,
       updateShipmentInput,
     );
@@ -49,6 +49,6 @@ export class ShipmentsResolver {
   removeShipmentById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<Shipment> {
-    return this.ShipmentsService.removeShipmentById(id);
+    return this.shipmentsService.removeShipmentById(id);
   }
 }

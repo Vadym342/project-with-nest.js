@@ -1,4 +1,4 @@
-import FlashDealsList from "../../modules/Mbarara/components/ProductList/FlashDealsList/FlashDealsList";
+import FlashDealsList from '../../modules/Mbarara/components/ProductList/FlashDealsList/FlashDealsList';
 
 const Mbarara = () => {
   return (

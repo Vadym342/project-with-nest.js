@@ -12,13 +12,15 @@ import { Product } from './entities/product.entity';
 import { FileService } from '../../filesManagement/files.service';
 
 @Module({
-  imports: [SequelizeModule.forFeature([
-    Product,
-    Category,
-    Organization,
-    Specification
-  ])],
-  
+  imports: [
+    SequelizeModule.forFeature([
+      Product,
+      Category,
+      Organization,
+      Specification,
+    ]),
+  ],
+
   providers: [
     ProductsResolver,
     ProductsService,
@@ -26,6 +28,6 @@ import { FileService } from '../../filesManagement/files.service';
     SpecificationsService,
     OrganizationsService,
     FileService,
-  ]
+  ],
 })
-export class ProductsModule { }
+export class ProductsModule {}

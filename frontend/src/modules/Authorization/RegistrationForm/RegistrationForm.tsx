@@ -43,14 +43,15 @@ const RegistrationForm = () => {
       variables: {
         name: data.name,
         email: data.email,
-        password: data.password
-      }
+        password: data.password,
+      },
     });
     history('/login');
   };
 
   const handleChange =
-    (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (prop: keyof FormValues) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setRegisterForm({ ...registerForm, [prop]: event.target.value });
     };
 
@@ -61,23 +62,19 @@ const RegistrationForm = () => {
     });
   };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
   };
   return (
     <Box>
       <CssBaseline />
-      <Box
-        sx={authFormsStyle.FormBox}
-      >
-        <div style={{ fontWeight: 600, }}>
-          Create Your Account
-        </div>
-        <div>
-          Please fill all fields to continue
-        </div>
+      <Box sx={authFormsStyle.FormBox}>
+        <div style={{ fontWeight: 600 }}>Create Your Account</div>
+        <div>Please fill all fields to continue</div>
         <Box
-          component="form"
+          component='form'
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
@@ -86,10 +83,12 @@ const RegistrationForm = () => {
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Name:</label>
             </div>
-            <OutlinedInput placeholder="Vasyan"
+
+            <OutlinedInput
+              placeholder='Vasyan'
               style={authFormsStyle.Field}
               sx={{
-                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
+                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride,
               }}
               {...register('name', valRequired)}
               onChange={e =>
@@ -97,21 +96,25 @@ const RegistrationForm = () => {
                   ...registerForm,
                   name: e.target.value,
                 })
-              } />
+              }
+            />
           </div>
+
           <div style={validationStyle.textBlock}>
             {errors?.name && (
               <p>{errors?.name?.message || 'Error, try again'}</p>
             )}
           </div>
+
           <div style={authFormsStyle.IntervalBtwnField}>
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Email:</label>
             </div>
-            <OutlinedInput placeholder="example@gmail.com"
+            <OutlinedInput
+              placeholder='example@gmail.com'
               style={authFormsStyle.Field}
               sx={{
-                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
+                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride,
               }}
               {...register('email', valRequired)}
               onChange={e =>
@@ -119,57 +122,64 @@ const RegistrationForm = () => {
                   ...registerForm,
                   email: e.target.value,
                 })
-              } />
+              }
+            />
           </div>
+
           <div style={validationStyle.textBlock}>
             {errors?.email && (
               <p>{errors?.email?.message || 'Error, try again'}</p>
             )}
           </div>
+
           <div style={authFormsStyle.IntervalBtwnField}>
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Password:</label>
             </div>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id='outlined-adornment-password'
               type={registerForm.showPassword ? 'text' : 'password'}
               style={authFormsStyle.Field}
               sx={{
-                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
+                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride,
               }}
               value={registerForm.password}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position='end'>
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label='toggle password visibility'
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
+                    edge='end'
                   >
-                    {registerForm.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {registerForm.showPassword ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
                   </IconButton>
                 </InputAdornment>
               }
               {...register('password', valRequired)}
               onChange={e => {
-                handleChange('password')
+                handleChange('password');
                 setRegisterForm({
                   ...registerForm,
                   password: e.target.value,
-                })
-              }
-              }
+                });
+              }}
             />
           </div>
+
           <div style={validationStyle.textBlock}>
             {errors?.password && (
               <p>{errors?.password?.message || 'Error, try again'}</p>
             )}
           </div>
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2, background: '#d23f57' }}
           >
             Create Account

@@ -6,32 +6,32 @@ import { UpdateOrderItemDto } from './dto/update-orderItem.dto';
 
 @Resolver(() => OrderItem)
 export class OrderItemsResolver {
-  constructor(private readonly OrderItemsService: OrderItemsService) {}
+  constructor(private readonly orderItemsService: OrderItemsService) {}
 
   @Mutation(() => OrderItem)
   createOrderItem(
     @Args('OrderItemDto', { type: () => CreateOrderItemDto })
     OrderItemDto: CreateOrderItemDto,
   ): Promise<OrderItem> {
-    return this.OrderItemsService.createOrderItem(OrderItemDto);
+    return this.orderItemsService.createOrderItem(OrderItemDto);
   }
 
   @Query(() => [OrderItem], { name: 'getAllOrderItems' })
   getAllOrderItems(): Promise<OrderItem[]> {
-    return this.OrderItemsService.getAllOrderItems();
+    return this.orderItemsService.getAllOrderItems();
   }
 
   @Query(() => [OrderItem], { name: 'getOrderItemsForOrderById' })
   getOrderItemsForOrderById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<OrderItem[]> {
-    return this.OrderItemsService.getOrderItemsForOrderById(id);
+    return this.orderItemsService.getOrderItemsForOrderById(id);
   }
   @Query(() => OrderItem, { name: 'getOrderItemById' })
   getOrderItemById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<OrderItem> {
-    return this.OrderItemsService.getOrderItemById(id);
+    return this.orderItemsService.getOrderItemById(id);
   }
 
   @Mutation(() => OrderItem)
@@ -39,7 +39,7 @@ export class OrderItemsResolver {
     @Args('updateOrderItemInput')
     updateOrderItemInput: UpdateOrderItemDto,
   ): Promise<OrderItem> {
-    return this.OrderItemsService.updateOrderItem(
+    return this.orderItemsService.updateOrderItem(
       updateOrderItemInput.id,
       updateOrderItemInput,
     );
@@ -49,6 +49,6 @@ export class OrderItemsResolver {
   removeOrderItemById(
     @Args('id', { type: () => Int }) id: number,
   ): Promise<OrderItem> {
-    return this.OrderItemsService.removeOrderItemById(id);
+    return this.orderItemsService.removeOrderItemById(id);
   }
 }

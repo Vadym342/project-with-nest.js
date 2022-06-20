@@ -4,7 +4,7 @@ import StepForm from './Form/StepForm';
 
 const theme = createTheme();
 
-const CreateProduct = () => {
+const CreateProduct = (): JSX.Element => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -17,7 +17,7 @@ const CreateProduct = () => {
         </Paper>
       </Container>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 export default CreateProduct;

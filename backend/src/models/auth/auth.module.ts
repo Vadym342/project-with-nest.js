@@ -21,4 +21,4 @@ const configService = new ConfigService();
   providers: [AuthService, JwtStrategy, AuthResolver, LocalStrategy],
   exports: [PassportModule],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import routes from './routesPath';
 import MenuAppBar from '../modules/MbararaAdmin/components/SideBar/AppBar';
+
 const PrivateRoute = ({
   user,
   redirectPath = `${routes.NonAuthRoutes.pathToHome}`,

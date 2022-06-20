@@ -1,7 +1,13 @@
 import { Order } from './../../orders/entities/order.entity';
 import { Int, ObjectType, Float } from '@nestjs/graphql';
 import { Field } from '@nestjs/graphql';
-import { Column, DataType, HasMany, Model, Table, ForeignKey } from 'sequelize-typescript';
+import {
+  Column,
+  DataType,
+  Model,
+  Table,
+  ForeignKey,
+} from 'sequelize-typescript';
 import { Product } from '../../products/entities/product.entity';
 
 @ObjectType()

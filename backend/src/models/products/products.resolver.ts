@@ -5,7 +5,15 @@ import { Organization } from './../organizations/entities/organization.entity';
 import { CategoriesService } from './../categories/categories.service';
 import { UpdateProductDto } from './dto/update-products.dto';
 import { CreateProductDto } from './dto/create-products.dto';
-import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nestjs/graphql';
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql';
 import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 import { Category } from '../categories/entities/category.entity';
@@ -17,11 +25,12 @@ export class ProductsResolver {
     private readonly categoriesService: CategoriesService,
     private readonly organizationsService: OrganizationsService,
     private readonly specificationsService: SpecificationsService,
-  ) { }
+  ) {}
 
   @Mutation(() => Product)
   createProduct(
-    @Args('productDto', { type: () => CreateProductDto }) productDto: CreateProductDto,
+    @Args('productDto', { type: () => CreateProductDto })
+    productDto: CreateProductDto,
   ): Promise<Product> {
     return this.productsService.createProduct(productDto);
   }
@@ -44,19 +53,19 @@ export class ProductsResolver {
     return this.specificationsService.getSpecificationById(id);
   }
 
-
   @Query(() => [Product], { name: 'getAllProducts' })
   getAllProducts(
     @Args('page', { type: () => Int, nullable: true }) page?: number,
     @Args('pageSize', { type: () => Int, nullable: true }) pageSize?: number,
-    @Args('categoryId', { type: () => Int, nullable: true }) categoryId?: number,
+    @Args('categoryId', { type: () => Int, nullable: true })
+    categoryId?: number,
   ) {
     return this.productsService.getAllProducts(page, pageSize, categoryId);
   }
 
   @Query(() => [Product], { name: 'getProductsByArrayIds' })
   getProductsByArrayIds(
-    @Args('arrayIds', { type: () => [Int] }) arrayIds: number[]
+    @Args('arrayIds', { type: () => [Int] }) arrayIds: number[],
   ): Promise<Product[]> {
     return this.productsService.getProductsByArrayIds(arrayIds);
   }
@@ -70,7 +79,9 @@ export class ProductsResolver {
   }
 
   @Query(() => Product, { name: 'getProductById' })
-  getProductById(@Args('id', { type: () => Int }) id: number): Promise<Product> {
+  getProductById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Product> {
     return this.productsService.getProductById(id);
   }
 
@@ -79,11 +90,16 @@ export class ProductsResolver {
     @Args('updateProductDto', { type: () => UpdateProductDto })
     updateProductDto: UpdateProductDto,
   ): Promise<Product> {
-    return this.productsService.updateProduct(updateProductDto.id, updateProductDto);
+    return this.productsService.updateProduct(
+      updateProductDto.id,
+      updateProductDto,
+    );
   }
 
   @Mutation(() => Product)
-  removeProductById(@Args('id', { type: () => Int }) id: number): Promise<Product> {
+  removeProductById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Product> {
     return this.productsService.removeProductById(id);
   }
 }
