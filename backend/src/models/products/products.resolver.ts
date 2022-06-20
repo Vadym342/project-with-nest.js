@@ -46,17 +46,19 @@ export class ProductsResolver {
 
 
   @Query(() => [Product], { name: 'getAllProducts' })
-  getAllProducts(@Args('categoryId', { type: () => Int, nullable: true }) categoryId?: number): Promise<Product[]> {
-    return this.productsService.getAllProducts(categoryId);
+  getAllProducts(
+    @Args('page', { type: () => Int, nullable: true }) page?: number,
+    @Args('pageSize', { type: () => Int, nullable: true }) pageSize?: number,
+    @Args('categoryId', { type: () => Int, nullable: true }) categoryId?: number,
+  ) {
+    return this.productsService.getAllProducts(page, pageSize, categoryId);
   }
 
   @Query(() => [Product], { name: 'getProductsByArrayIds' })
   getProductsByArrayIds(
-    @Args('arrayIds', { type: () => [Int] }) arrayIds: number[],
-    @Args('page', { type: () => Int }) page: number,
-    @Args('pageSize', { type: () => Int }) pageSize: number,
+    @Args('arrayIds', { type: () => [Int] }) arrayIds: number[]
   ): Promise<Product[]> {
-    return this.productsService.getProductsByArrayIds(arrayIds, page, pageSize);
+    return this.productsService.getProductsByArrayIds(arrayIds);
   }
 
   @Query(() => [Product], { name: 'getFlashDealsProducts' })

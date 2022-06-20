@@ -14,7 +14,6 @@ interface paginateArgs {
 const paginateFlashDeals = (query: any, { page, pageSize }: paginateArgs) => {
   const offset = page;
   const limit = pageSize;
-
   return {
     ...query,
     offset,
@@ -23,7 +22,7 @@ const paginateFlashDeals = (query: any, { page, pageSize }: paginateArgs) => {
 };
 
 const paginateProducts = (query: any, { page, pageSize }: paginateArgs) => {
-  const offset = page;
+  const offset = (page - 1) * pageSize;
   const limit = pageSize;
 
   return {
@@ -48,29 +47,29 @@ export class ProductsService {
       }
     }
     catch (err) {
-      throw new HttpException("Image or product was not created.", HttpStatus.BAD_REQUEST)
+      throw new HttpException('Image or product was not created.', HttpStatus.BAD_REQUEST)
     }
   }
 
-  async getAllProducts(categoryId?: number): Promise<Product[]> {
-    if (categoryId) {
-      return await this.productRepository.findAll({
+  async getAllProducts(page: number, pageSize: number, ctgId?: number) {
+    if (ctgId) {
+      return await this.productRepository.findAll(paginateProducts({
         where: {
-          categoryId: categoryId
-        }
-      });
+          categoryId: ctgId
+        },
+      },
+        { page, pageSize },
+      ));
     }
-    return await this.productRepository.findAll();
+    return await this.productRepository.findAll(paginateProducts({}, { page, pageSize }));
   }
 
-  async getProductsByArrayIds(page: number, pageSize: number, arrayIds: number[]): Promise<Product[]> {
-    return await this.productRepository.findAll(paginateProducts({
+  async getProductsByArrayIds(arrayIds: number[]): Promise<Product[]> {
+    return await this.productRepository.findAll({
       where: {
         id: { [Op.in]: arrayIds }
       }
-    },
-      { page, pageSize }
-    ));
+    });
   }
 
   async getFlashDealsProducts(page: number, pageSize: number): Promise<Product[]> {

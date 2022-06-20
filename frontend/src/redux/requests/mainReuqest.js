@@ -14,8 +14,8 @@ query FlashDeals($page:Int!, $pageSize:Int!){
 }
 `
 const GET_ALLPRODUCTS = gql`
-query GetAllProducts($categoryId: Int){
-  getAllProducts(categoryId:$categoryId){
+query GetAllProducts($page: Int, $pageSize:Int, $categoryId: Int){
+  getAllProducts(page:$page, pageSize:$pageSize, categoryId:$categoryId){
     id,
     name,
 		price,
@@ -28,8 +28,8 @@ query GetAllProducts($categoryId: Int){
 `
 
 const GET_ALLPRODUCTS1 = gql`
-query{ 
-  getAllProducts{
+query GetAllProducts($page: Int, $pageSize:Int){ 
+  getAllProducts(page:$page, pageSize:$pageSize){
     id,
     name,
 		price,

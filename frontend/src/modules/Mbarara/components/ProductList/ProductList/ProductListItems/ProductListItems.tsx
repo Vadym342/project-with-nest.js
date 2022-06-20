@@ -11,9 +11,10 @@ const ProductListItems = () => {
   const [products, setProducts] = useState([]);
 
   const [page, setPage] = useState(1);
-  const totalPages = 15;
+  const [totalPages, setTotalPages] = useState(10);
+  const pageSize = 6;
+  
   const handlePages = (updatePage: number) => {
-    console.log(updatePage)
     setPage(updatePage);
   }
 
@@ -22,11 +23,18 @@ const ProductListItems = () => {
     useQuery(GET_ALLPRODUCTS, {
       variables:
       {
-        categoryId: Number(categoryId)
+        categoryId: Number(categoryId),
+        page,
+        pageSize,
       }
     })
     :
-    useQuery(GET_ALLPRODUCTS1);
+    useQuery(GET_ALLPRODUCTS1, {
+      variables: {
+        page,
+        pageSize,
+      }
+    });
 
   useEffect(() => {
     if (data) {
@@ -58,13 +66,13 @@ const ProductListItems = () => {
             />
           ))
         }
-        <Box style={{ marginTop: '15px' }}>
-          <ProductListPagination
-            page={page}
-            totalPages={totalPages}
-            handlePagination={handlePages}
-          />
-        </Box>
+      </Box>
+      <Box style={{ marginTop: '15px', display: 'flex', justifyContent: 'center' }}>
+        <ProductListPagination
+          page={page}
+          totalPages={totalPages}
+          handlePagination={handlePages}
+        />
       </Box>
     </div>
   )
