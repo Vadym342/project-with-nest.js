@@ -6,44 +6,55 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import Button from '@mui/material/Button';
 import { AppContext } from '../Context/Context';
-import { CREATE_PRODUCT, CREATE_SPECIFICATION, UPDATE_PRODUCT } from '../../../../../redux/requests/productRequest';
+import {
+  CREATE_PRODUCT,
+  CREATE_SPECIFICATION,
+  UPDATE_PRODUCT,
+} from '../../../../../redux/requests/productRequest';
 import { useMutation, useQuery } from '@apollo/client';
 import { GET_CATEGORY_BY_ID } from '../../../../../redux/requests/mainReuqest';
 
 const Confirm = () => {
   const { formValues, handleBack, handleNext } = useContext(AppContext);
-  const { productName, price, discount, category, rating,
-    brand, model, feature, description, producer, imageKey } = formValues;
+  const {
+    productName,
+    price,
+    discount,
+    category,
+    rating,
+    brand,
+    model,
+    feature,
+    description,
+    producer,
+    imageKey,
+  } = formValues;
 
-  const [createSpecification,
-    {
-      data: specificationData,
-      loading,
-      error
-    }] = useMutation(CREATE_SPECIFICATION);
+  const [createSpecification, { data: specificationData, loading, error }] =
+    useMutation(CREATE_SPECIFICATION);
 
-  const [updateProduct,
+  const [
+    updateProduct,
     {
       data: updateProductData,
       loading: updateProductLoading,
-      error: updateProductError
-    }] = useMutation(UPDATE_PRODUCT);
+      error: updateProductError,
+    },
+  ] = useMutation(UPDATE_PRODUCT);
 
-  const [createProduct,
-    {
-      data: productData,
-      loading: productLoading,
-      error: productError
-    }] = useMutation(CREATE_PRODUCT);
+  const [
+    createProduct,
+    { data: productData, loading: productLoading, error: productError },
+  ] = useMutation(CREATE_PRODUCT);
 
   const {
     data: categoryValue,
     error: categoryError,
-    loading: categoryLoading
+    loading: categoryLoading,
   } = useQuery(GET_CATEGORY_BY_ID, {
     variables: {
-      id: +category.value
-    }
+      id: +category.value,
+    },
   });
 
   const [categoryName, setCategoryName] = useState('');
@@ -58,21 +69,21 @@ const Confirm = () => {
         categoryId: +category.value,
         rating: +rating.value,
         isFavorite: false,
-        organizationId: 1
-      }
-    })
-  }
+        organizationId: 1,
+      },
+    });
+  };
 
   useEffect(() => {
     if (specificationData && productData) {
       updateProduct({
         variables: {
           id: productData.createProduct.id,
-          specificationId: specificationData.createSpecification.id
-        }
-      })
+          specificationId: specificationData.createSpecification.id,
+        },
+      });
       if (!updateProductError) {
-        handleNext()
+        handleNext();
       }
     }
     if (productData) {
@@ -83,8 +94,8 @@ const Confirm = () => {
           feature: feature.value,
           producer: producer.value,
           description: description.value,
-        }
-      })
+        },
+      });
     }
   }, [productData, specificationData, categoryValue, updateProductData]);
 
@@ -189,7 +200,6 @@ const Confirm = () => {
         </ListItem>
 
         <Divider />
-
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
@@ -201,7 +211,7 @@ const Confirm = () => {
         </Button>
       </Box>
     </>
-  )
-}
+  );
+};
 
 export default Confirm;

@@ -37,6 +37,6 @@ const ProfileModal = ({ isMenuOpen, handleMenuClose }: ProfileModalArgs) => {
       </Modal>
     </div>
   );
-}
+};
 
 export default ProfileModal;

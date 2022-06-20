@@ -6,7 +6,10 @@ interface SidePaginationArgs {
   handleButtonNext: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
-const SidePagination = ({ handleButtonPrev, handleButtonNext }: SidePaginationArgs) => {
+const SidePagination = ({
+  handleButtonPrev,
+  handleButtonNext,
+}: SidePaginationArgs) => {
   const btnSt = {
     borderRadius: '50%',
     minWidth: '15px',
@@ -14,23 +17,23 @@ const SidePagination = ({ handleButtonPrev, handleButtonNext }: SidePaginationAr
     color: 'white',
     background: '#0F3460',
     height: '30px',
-    zIndex: 0
-  }
+    zIndex: 0,
+  };
   const iconSt = {
     width: '17px',
-    fontSize: '15px'
-  }
+    fontSize: '15px',
+  };
 
   return (
     <>
       <Box>
-        <div style={{ position: 'absolute', left:'10px', top: '200px' }}>
+        <div style={{ position: 'absolute', left: '10px', top: '200px' }}>
           <Button onClick={handleButtonPrev} style={btnSt}>
             <ArrowBackIcon style={iconSt} />
           </Button>
         </div>
         <div>
-          <div style={{ position: 'absolute', right:'10px', top: '200px' }}>
+          <div style={{ position: 'absolute', right: '10px', top: '200px' }}>
             <Button onClick={handleButtonNext} style={btnSt}>
               <ArrowForwardIcon style={iconSt} />
             </Button>

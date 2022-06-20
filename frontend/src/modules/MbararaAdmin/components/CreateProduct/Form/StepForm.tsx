@@ -14,18 +14,18 @@ import { consts } from '../../../../../consts/consts';
 const handleSteps = (step: number) => {
   switch (step) {
     case 0:
-      return <FirstStep />
+      return <FirstStep />;
     case 1:
-      return <SecondStep />
+      return <SecondStep />;
     case 2:
-      return <Confirm />
+      return <Confirm />;
     default:
-      throw new Error('Unknown step')
+      throw new Error('Unknown step');
   }
-}
+};
 
 const StepForm = () => {
-  const { activeStep } = useContext(AppContext)
+  const { activeStep } = useContext(AppContext);
 
   return (
     <>
@@ -39,7 +39,7 @@ const StepForm = () => {
             </Typography>
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>
-            {consts.stepLabels.map((label) => (
+            {consts.stepLabels.map(label => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>
@@ -50,7 +50,7 @@ const StepForm = () => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
 export default StepForm;

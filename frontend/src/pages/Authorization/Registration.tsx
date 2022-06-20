@@ -2,10 +2,10 @@ import RegistrationForm from '../../modules/Authorization/RegistrationForm/Regis
 
 const Registration = () => {
   return (
-    <div  style={{ marginTop:'70px'}}>
+    <div style={{ marginTop: '70px' }}>
       <RegistrationForm />
     </div>
-  )
+  );
 };
 
 export default Registration;

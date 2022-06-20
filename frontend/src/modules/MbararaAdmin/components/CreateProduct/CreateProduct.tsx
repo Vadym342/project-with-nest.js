@@ -17,7 +17,7 @@ const CreateProduct = () => {
         </Paper>
       </Container>
     </ThemeProvider>
-  )
-}
+  );
+};
 
 export default CreateProduct;

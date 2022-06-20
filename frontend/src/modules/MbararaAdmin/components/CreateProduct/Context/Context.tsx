@@ -14,76 +14,76 @@ const margin = 'normal';
 export declare type ValidationSchema = Record<
   string,
   {
-    value?: any
-    error?: string
-    required?: boolean
+    value?: any;
+    error?: string;
+    required?: boolean;
     validate?:
-    | 'text'
-    | 'number'
-    | 'email'
-    | 'phone'
-    | 'zip'
-    | 'checkbox'
-    | 'select'
-    minLength?: number
-    maxLength?: number
-    helperText?: string
+      | 'text'
+      | 'number'
+      | 'email'
+      | 'phone'
+      | 'zip'
+      | 'checkbox'
+      | 'select';
+    minLength?: number;
+    maxLength?: number;
+    helperText?: string;
   }
->
+>;
 
 type ContextProps = {
-  activeStep: number,
-  formValues: ValidationSchema,
+  activeStep: number;
+  formValues: ValidationSchema;
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     checked?: boolean
-  ) => void,
-  handleNext: () => void,
-  handleBack: () => void,
-  handleClearContext: () => void,
-  variant: 'outlined' | 'standard' | 'filled',
-  margin: 'dense' | 'normal' | 'none',
-}
+  ) => void;
+  handleNext: () => void;
+  handleBack: () => void;
+  handleClearContext: () => void;
+  variant: 'outlined' | 'standard' | 'filled';
+  margin: 'dense' | 'normal' | 'none';
+};
 
 export const AppContext = createContext<ContextProps>({
   activeStep: 0,
   formValues: initialValues,
-  handleChange() { },
-  handleNext() { },
-  handleBack() { },
-  handleClearContext() { },
+  handleChange() {},
+  handleNext() {},
+  handleBack() {},
+  handleClearContext() {},
   variant,
-  margin
-})
+  margin,
+});
 
 interface ProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 type State = {
-  activeStep: number,
-  formValues: ValidationSchema
-}
+  activeStep: number;
+  formValues: ValidationSchema;
+};
 
 type Action =
   | { type: 'increase' }
   | { type: 'decrease' }
   | { type: 'form-value'; name: string; fieldValue: any }
   | { type: 'form-error'; name: string; error: string }
-  | { type: 'clearContext' }
+  | { type: 'clearContext' };
 
 function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'increase':
       return {
         ...state,
-        activeStep: state.activeStep + 1
-      }
+        activeStep: state.activeStep + 1,
+      };
     case 'decrease':
       return {
         ...state,
-        activeStep: state.activeStep - 1
-      }
+        activeStep: state.activeStep - 1,
+      };
     case 'form-value':
       return {
         ...state,
@@ -91,10 +91,10 @@ function reducer(state: State, action: Action): State {
           ...state.formValues,
           [action.name]: {
             ...state.formValues[action.name],
-            value: action.fieldValue
-          }
-        }
-      }
+            value: action.fieldValue,
+          },
+        },
+      };
     case 'form-error':
       return {
         ...state,
@@ -102,26 +102,26 @@ function reducer(state: State, action: Action): State {
           ...state.formValues,
           [action.name]: {
             ...state.formValues[action.name],
-            error: action.error
-          }
-        }
-      }
+            error: action.error,
+          },
+        },
+      };
     case 'clearContext':
       return {
         activeStep: 0,
         formValues: initialValues,
-      }
+      };
 
     default:
-      return state
+      return state;
   }
 }
 
 export function StepsProvider({ children }: ProviderProps) {
   const [{ activeStep, formValues }, dispatch] = useReducer(reducer, {
     activeStep: 0,
-    formValues: initialValues
-  })
+    formValues: initialValues,
+  });
 
   // Proceed to next step
   const handleNext = () => dispatch({ type: 'increase' });
@@ -135,51 +135,51 @@ export function StepsProvider({ children }: ProviderProps) {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     checked?: boolean
   ) => {
-    const { type, name, value } = event.target
+    const { type, name, value } = event.target;
 
-    const fieldValue = type === 'checkbox' ? checked : value
+    const fieldValue = type === 'checkbox' ? checked : value;
 
-    dispatch({ type: 'form-value', name, fieldValue })
+    dispatch({ type: 'form-value', name, fieldValue });
 
-    const fieldName = initialValues[name]
-    if (!fieldName) return
+    const fieldName = initialValues[name];
+    if (!fieldName) return;
 
-    const { required, validate, minLength, maxLength, helperText } = fieldName
+    const { required, validate, minLength, maxLength, helperText } = fieldName;
 
-    let error = ''
+    let error = '';
 
-    if (required && !fieldValue) error = 'This field is required'
+    if (required && !fieldValue) error = 'This field is required';
     if (minLength && value && value.length < minLength)
-      error = `Minimum ${minLength} characters is required.`
+      error = `Minimum ${minLength} characters is required.`;
     if (maxLength && value && value.length > maxLength)
-      error = 'Maximum length exceeded!'
+      error = 'Maximum length exceeded!';
     if (validate) {
       switch (validate) {
         case 'text':
           if (value && !isText.test(value))
-            error = helperText || 'This field accepts text only.'
-          break
+            error = helperText || 'This field accepts text only.';
+          break;
 
         case 'number':
           if (value && !isNumber.test(value))
-            error = helperText || 'This field accepts numbers only.'
-          break
+            error = helperText || 'This field accepts numbers only.';
+          break;
 
         case 'checkbox':
-          if (!checked) error = helperText || 'Please provide a valid value.'
-          break
+          if (!checked) error = helperText || 'Please provide a valid value.';
+          break;
 
         case 'select':
-          if (!value) error = helperText || 'Please select a value.'
-          break
+          if (!value) error = helperText || 'Please select a value.';
+          break;
 
         default:
-          break
+          break;
       }
     }
 
-    dispatch({ type: 'form-error', name, error })
-  }
+    dispatch({ type: 'form-error', name, error });
+  };
 
   return (
     <AppContext.Provider
@@ -191,10 +191,10 @@ export function StepsProvider({ children }: ProviderProps) {
         handleBack,
         handleClearContext,
         variant,
-        margin
+        margin,
       }}
     >
       <div className='mui-step-form'>{children}</div>
     </AppContext.Provider>
-  )
+  );
 }

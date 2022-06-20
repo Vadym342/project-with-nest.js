@@ -1,4 +1,11 @@
-import { Checkbox, FormControlLabel, FormGroup, Rating, TextField, Typography } from '@mui/material';
+import {
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Rating,
+  TextField,
+  Typography,
+} from '@mui/material';
 import React, { useState } from 'react';
 import NumberFormat, { InputAttributes } from 'react-number-format';
 
@@ -9,28 +16,28 @@ interface CustomProps {
 
 const NumberFormatCustom = React.forwardRef<
   NumberFormat<InputAttributes>,
-  CustomProps>
-  (function NumberFormatCustom(props, ref) {
-    const { onChange, ...other } = props;
+  CustomProps
+>(function NumberFormatCustom(props, ref) {
+  const { onChange, ...other } = props;
 
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={ref}
-        onValueChange={(values) => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value,
-            },
-          });
-        }}
-        thousandSeparator
-        isNumericString
-        prefix='$'
-      />
-    );
-  });
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={ref}
+      onValueChange={values => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      isNumericString
+      prefix='$'
+    />
+  );
+});
 
 interface State {
   startPrice: string;
@@ -38,7 +45,6 @@ interface State {
 }
 
 const ProductListOptions = () => {
-
   const [priceRange, setPriceRange] = useState<State>({
     startPrice: '0',
     endPrice: '1000',
@@ -51,18 +57,29 @@ const ProductListOptions = () => {
   };
 
   return (
-    <div style={{
-      height: '1000px', display: 'flex', borderRadius: '8px', width: '250px', background: 'white',
-      flexDirection: 'column', marginLeft: '20px'
-    }}>
-      <div style={{ marginLeft: '15px', marginTop: '10px', marginRight: '15px' }}>
+    <div
+      style={{
+        height: '1000px',
+        display: 'flex',
+        borderRadius: '8px',
+        width: '250px',
+        background: 'white',
+        flexDirection: 'column',
+        marginLeft: '20px',
+      }}
+    >
+      <div
+        style={{ marginLeft: '15px', marginTop: '10px', marginRight: '15px' }}
+      >
+        <div style={{ margin: '5px', fontWeight: 500 }}>Price Range</div>
 
-        <div style={{ margin: '5px', fontWeight: 500 }}>
-          Price Range
-        </div>
-
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'center',
+          }}
+        >
           <div>
             <TextField
               value={priceRange.startPrice}
@@ -75,9 +92,7 @@ const ProductListOptions = () => {
               variant='standard'
             />
           </div>
-          <div style={{ margin: '5px' }}>
-            -
-          </div>
+          <div style={{ margin: '5px' }}>-</div>
           <div>
             <TextField
               value={priceRange.endPrice}
@@ -93,9 +108,7 @@ const ProductListOptions = () => {
         </div>
 
         <div>
-          <div style={{ margin: '5px', fontWeight: 500 }}>
-            Brand
-          </div>
+          <div style={{ margin: '5px', fontWeight: 500 }}>Brand</div>
           <FormGroup>
             <FormControlLabel control={<Checkbox />} label='Adidas' />
             <FormControlLabel control={<Checkbox />} label='Nike' />
@@ -105,9 +118,7 @@ const ProductListOptions = () => {
         </div>
 
         <div>
-          <div style={{ margin: '5px', fontWeight: 500 }}>
-            Rating
-          </div>
+          <div style={{ margin: '5px', fontWeight: 500 }}>Rating</div>
           <Typography component='legend'>Read only</Typography>
           <Rating name='read-only' value={5} readOnly />
           <Typography component='legend'>Disabled</Typography>
@@ -117,7 +128,7 @@ const ProductListOptions = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default ProductListOptions;

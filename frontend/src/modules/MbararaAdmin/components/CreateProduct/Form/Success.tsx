@@ -11,10 +11,12 @@ const Success = () => {
         The product was successfully created!
       </Typography>
       <Typography component='div' align='center'>
-        <Button variant='outlined' onClick={handleClearContext}>Create One More</Button>
+        <Button variant='outlined' onClick={handleClearContext}>
+          Create One More
+        </Button>
       </Typography>
     </>
-  )
-}
+  );
+};
 
 export default Success;

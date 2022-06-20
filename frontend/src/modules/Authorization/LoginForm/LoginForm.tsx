@@ -22,7 +22,7 @@ type FormValues = {
 };
 
 interface LoginFormArgs {
-  handleMenuClose?: (event: React.MouseEvent<HTMLElement>) => void; 
+  handleMenuClose?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
@@ -49,31 +49,32 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
     login({
       variables: {
         username: data.email,
-        password: data.password
-      }
-    })
+        password: data.password,
+      },
+    });
   };
 
   useEffect(() => {
     if (error) {
-      setLogError('Invalid email or password.')
+      setLogError('Invalid email or password.');
     } else {
       if (data) {
-        setLogError('')
+        setLogError('');
         const user = {
           token: data.login.accessToken,
           user: {
-            ...data.login.user
-          }
-        }
+            ...data.login.user,
+          },
+        };
         dispatch(setUser(user));
         localStorage.setItem('user', JSON.stringify(user));
         history('/');
       }
     }
-  }, [data, error])
+  }, [data, error]);
   const handleChange =
-    (prop: keyof FormValues) => (event: React.ChangeEvent<HTMLInputElement>) => {
+    (prop: keyof FormValues) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setLoginForm({ ...loginForm, [prop]: event.target.value });
     };
 
@@ -84,21 +85,17 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
     });
   };
 
-  const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
     event.preventDefault();
   };
   return (
     <Box>
       <CssBaseline />
-      <Box
-        sx={authFormsStyle.FormBox}
-      >
-        <div style={{ fontWeight: 600, }}>
-          Welcome To Mbarara
-        </div>
-        <div>
-          Login
-        </div>
+      <Box sx={authFormsStyle.FormBox}>
+        <div style={{ fontWeight: 600 }}>Welcome To Mbarara</div>
+        <div>Login</div>
         <Box
           component='form'
           onSubmit={handleSubmit(onSubmit)}
@@ -109,10 +106,11 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Email:</label>
             </div>
-            <OutlinedInput placeholder='example@gmail.com'
+            <OutlinedInput
+              placeholder='example@gmail.com'
               style={authFormsStyle.Field}
               sx={{
-                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
+                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride,
               }}
               {...register('email', valRequired)}
               onChange={e =>
@@ -120,7 +118,8 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
                   ...loginForm,
                   email: e.target.value,
                 })
-              } />
+              }
+            />
           </div>
           <div style={validationStyle.textBlock}>
             {errors?.email && (
@@ -136,7 +135,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
               type={loginForm.showPassword ? 'text' : 'password'}
               style={authFormsStyle.Field}
               sx={{
-                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
+                '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride,
               }}
               value={loginForm.password}
               endAdornment={
@@ -147,19 +146,22 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
                     onMouseDown={handleMouseDownPassword}
                     edge='end'
                   >
-                    {loginForm.showPassword ? <VisibilityOff /> : <Visibility />}
+                    {loginForm.showPassword ? (
+                      <VisibilityOff />
+                    ) : (
+                      <Visibility />
+                    )}
                   </IconButton>
                 </InputAdornment>
               }
               {...register('password', valRequired)}
               onChange={e => {
-                handleChange('password')
+                handleChange('password');
                 setLoginForm({
                   ...loginForm,
                   password: e.target.value,
-                })
-              }
-              }
+                });
+              }}
             />
           </div>
           <div style={validationStyle.textBlock}>
@@ -168,9 +170,9 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
             )}
           </div>
           <div>
-            {
-              logError && (<p style={{ fontSize: '13px', color: 'red' }}>{logError}</p>)
-            }
+            {logError && (
+              <p style={{ fontSize: '13px', color: 'red' }}>{logError}</p>
+            )}
           </div>
           <Button
             type='submit'
@@ -187,8 +189,8 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
         </div>
         <Box
           style={authFormsStyle.IntervalBtwnField}
-          sx={{ textAlign: 'center', fontSize: '14px' }
-          }>
+          sx={{ textAlign: 'center', fontSize: '14px' }}
+        >
           Forgot your password?
           <Link to='/login'> Reset It</Link>
         </Box>

@@ -1,5 +1,13 @@
 import { styled, alpha } from '@mui/material/styles';
-import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Badge } from '@mui/material';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  InputBase,
+  Badge,
+} from '@mui/material';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -29,7 +37,7 @@ const Search = styled('div')(({ theme }) => ({
   width: '100%',
   border: '1px solid #9e9e9e',
   borderRadius: '50px',
-  color: '#9e9e9e'
+  color: '#9e9e9e',
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
@@ -57,7 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const NavBar = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(null);
+  const [categoryAnchorEl, setCategoryAnchorEl] = useState<null | HTMLElement>(
+    null
+  );
   const [orderAnchorEl, setOrderAnchorEl] = useState<null | HTMLElement>(null);
   const user = useAppSelector(userSelector);
 
@@ -102,7 +112,10 @@ const NavBar = () => {
             component='div'
             sx={navbarStyle.LogoTypography}
           >
-            <Link style={{ textDecoration: 'none', color: '#2B3445' }} to={routes.NonAuthRoutes.pathToHome}>
+            <Link
+              style={{ textDecoration: 'none', color: '#2B3445' }}
+              to={routes.NonAuthRoutes.pathToHome}
+            >
               Mbarara
             </Link>
           </Typography>
@@ -130,17 +143,13 @@ const NavBar = () => {
           </Search>
 
           <Box sx={{ flexGrow: 1 }} />
-          {
-            user?.token && user?.user?.role === 'ADMIN' && (
-              <Box style={{ color: 'black' }}>
-                <Link to='/admin' style={{ textDecoration: 'none' }}>
-                  <Button>
-                    Go to Admin panel
-                  </Button>
-                </Link>
-              </Box>
-            )
-          }
+          {user?.token && user?.user?.role === 'ADMIN' && (
+            <Box style={{ color: 'black' }}>
+              <Link to='/admin' style={{ textDecoration: 'none' }}>
+                <Button>Go to Admin panel</Button>
+              </Link>
+            </Box>
+          )}
 
           <Box sx={navbarStyle.AccountBox}>
             <IconButton
@@ -157,7 +166,9 @@ const NavBar = () => {
             <IconButton
               size='large'
               color='default'
-              onClick={isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen}
+              onClick={
+                isOrderMenuOpen ? handleOrderMenuClose : handleOrderMenuOpen
+              }
             >
               <Badge badgeContent={orderItems.length} color='error' showZero>
                 <ShoppingBag />
@@ -181,17 +192,15 @@ const NavBar = () => {
         handleMenuClose={handleMenuClose}
       />
 
-      {
-        orderAnchorEl && (
-          <Sidebar
-            orderAnchorEl={orderAnchorEl}
-            isOrderMenuOpen={isOrderMenuOpen}
-            handleOrderMenuClose={handleOrderMenuClose}
-          />
-        )
-      }
-    </Box >
+      {orderAnchorEl && (
+        <Sidebar
+          orderAnchorEl={orderAnchorEl}
+          isOrderMenuOpen={isOrderMenuOpen}
+          handleOrderMenuClose={handleOrderMenuClose}
+        />
+      )}
+    </Box>
   );
-}
+};
 
 export default NavBar;

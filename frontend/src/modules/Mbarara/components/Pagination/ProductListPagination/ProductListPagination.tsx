@@ -6,13 +6,17 @@ export interface Props {
   handlePagination: (page: number) => void;
 }
 
-const ProductListPagination = ({ page, totalPages, handlePagination }: Props) => {
+const ProductListPagination = ({
+  page,
+  totalPages,
+  handlePagination,
+}: Props) => {
   return (
     <div>
       <Pagination
         style={{
           display: 'flex',
-          justifyContent: 'center'
+          justifyContent: 'center',
         }}
         variant='outlined'
         color='secondary'
@@ -20,7 +24,7 @@ const ProductListPagination = ({ page, totalPages, handlePagination }: Props) =>
         onChange={(_, num) => handlePagination(num)}
         count={totalPages}
       />
-    </div >
+    </div>
   );
 };
 

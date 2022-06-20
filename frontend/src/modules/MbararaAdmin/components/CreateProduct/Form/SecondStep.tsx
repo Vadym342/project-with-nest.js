@@ -6,20 +6,14 @@ import Button from '@mui/material/Button';
 import { AppContext } from '../Context/Context';
 
 const SecondStep = () => {
-  const {
-    formValues,
-    handleChange,
-    handleBack,
-    handleNext,
-    variant,
-    margin
-  } = useContext(AppContext)
+  const { formValues, handleChange, handleBack, handleNext, variant, margin } =
+    useContext(AppContext);
   const { brand, model, description, feature, producer } = formValues;
 
   const isError = useCallback(
     () =>
       Object.keys({ brand, model, description, feature, producer }).some(
-        (name) =>
+        name =>
           (formValues[name].required && !formValues[name].value) ||
           formValues[name].error
       ),
@@ -107,7 +101,6 @@ const SecondStep = () => {
             required={description.required}
           />
         </Grid>
-
       </Grid>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
@@ -124,7 +117,7 @@ const SecondStep = () => {
         </Button>
       </Box>
     </>
-  )
-}
+  );
+};
 
 export default SecondStep;
