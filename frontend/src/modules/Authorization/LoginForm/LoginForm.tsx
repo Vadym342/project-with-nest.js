@@ -72,6 +72,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
       }
     }
   }, [data, error]);
+
   const handleChange =
     (prop: keyof FormValues) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +91,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
   ) => {
     event.preventDefault();
   };
+  
   return (
     <Box>
       <CssBaseline />

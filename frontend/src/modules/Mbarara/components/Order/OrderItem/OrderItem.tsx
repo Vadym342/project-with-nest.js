@@ -43,7 +43,7 @@ const OrderItem = ({
         })
       );
     } else {
-      for (let obj of orderItems) {
+      for (const obj of orderItems) {
         if (obj.productId === id) {
           dispatch(
             updateOrderItem({
@@ -69,7 +69,7 @@ const OrderItem = ({
   const handleDecreaseQuantity = () => {
     if (quantity > 1) {
       setQuantity(quantity - 1);
-      for (let obj of orderItems) {
+      for (const obj of orderItems) {
         if (obj.productId === id) {
           if (obj.quantity > 1) {
             dispatch(

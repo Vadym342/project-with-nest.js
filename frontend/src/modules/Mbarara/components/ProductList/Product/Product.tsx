@@ -40,7 +40,7 @@ const Product = ({
   const orderItems = useAppSelector(orderItemsSelector);
 
   const handleCount = (id: number) => {
-    for (let obj of orderItems) {
+    for (const obj of orderItems) {
       if (obj.productId === id) {
         return obj.quantity;
       }
@@ -86,7 +86,7 @@ const Product = ({
     if (orderItems.length === 0) {
       dispatch(setOrderItems(addOrderItemsObj));
     } else {
-      for (let obj of orderItems) {
+      for (const obj of orderItems) {
         if (obj.productId === id) {
           dispatch(updateOrderItem(addOrderItemsObj));
         }
@@ -100,7 +100,7 @@ const Product = ({
 
   const handleDecreaseQuantity = () => {
     setQuantity(quantity - 1);
-    for (let obj of orderItems) {
+    for (const obj of orderItems) {
       if (obj.productId === id && obj.quantity > 1) {
         dispatch(updateOrderItem(deleteOrderItemsObj));
       } else {

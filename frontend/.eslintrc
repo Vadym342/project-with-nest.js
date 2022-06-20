@@ -5,18 +5,17 @@
         }
     },
     "extends": [
-        // "plugin:@typescript-eslint/recommended",
-        // "plugin:react/recommended",
-        // "plugin:import/errors",
-        // "plugin:import/warnings",
-        // "plugin:import/typescript",
-        // "google",
-        // "plugin:react/jsx-runtime"
+        "plugin:@typescript-eslint/recommended",
+        "plugin:react/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true,
+            "tsx": true
         },
         "ecmaVersion": 12,
         "sourceType": "module"
@@ -27,8 +26,11 @@
     ],
     "rules": {
         "require-jsdoc": "off",
+        "react/react-in-jsx-scope": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/ban-types": "off",
+        "react/no-unescaped-entities": 0,
+        "eslint no-empty-function":"off",
         "max-len": ["warn", { "code": 120 }]
     }
 }

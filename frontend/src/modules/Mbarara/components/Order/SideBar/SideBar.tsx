@@ -38,7 +38,7 @@ const Sidebar = ({
   const handleMapOrderItems = (action: string) => {
     const tmpArrIds = [];
     let sum = 0;
-    for (let obj of orderItems) {
+    for (const obj of orderItems) {
       tmpArrIds.push(obj.productId);
       sum += obj.orderedPrice * obj.quantity;
     }
