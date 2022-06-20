@@ -6,14 +6,18 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoriesService {
-  constructor(@InjectModel(Category) private CategoryRepository: typeof Category) {}
+  constructor(@InjectModel(Category) private CategoryRepository: typeof Category) { }
 
   async createCategory(CategoryDto: CreateCategoryDto): Promise<Category> {
     return await this.CategoryRepository.create(CategoryDto);
   }
 
   async getAllCategories(): Promise<Category[]> {
-    return await this.CategoryRepository.findAll();
+    return await this.CategoryRepository.findAll({
+      order: [
+        ['name', 'ASC']
+      ]
+    });
   }
 
   async getCategoryById(id: number): Promise<Category> {

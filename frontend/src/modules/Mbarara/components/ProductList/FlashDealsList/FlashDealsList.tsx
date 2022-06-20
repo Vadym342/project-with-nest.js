@@ -2,23 +2,11 @@ import { gql, useQuery } from '@apollo/client';
 import BoltIcon from '@mui/icons-material/Bolt';
 import { Box } from '@mui/material';
 import { useState } from 'react';
+import { GET_FLASHDEALSPRODUCT } from '../../../../../redux/requests/mainReuqest';
 import SidePagination from '../../Pagination/SidePagination/SidePagination';
 import Product from '../Product/Product';
 import flashDealsStyle from './flashDealsStyle';
 
-const GET_FLASHDEALSPRODUCT = gql`
-query FlashDeals($page:Int!, $pageSize:Int!){
-  getFlashDealsProducts(page: $page, pageSize: $pageSize){
-    id,
-    name,
-		price,
-    rating,
-    discount,
-    image,
-    isFavorite
-  }
-}
-`
 const FlashDealsList = () => {
   const [page, setPage] = useState<number>(1);
   const [pageSize, setPageSize] = useState<number>(4);

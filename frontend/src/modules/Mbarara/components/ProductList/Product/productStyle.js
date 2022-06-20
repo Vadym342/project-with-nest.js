@@ -1,7 +1,7 @@
 const productStyle = {
   MainBox: { marginLeft: '5px', marginTop: '7px', width: '200px' },
   Card: { maxWidth: 205, maxHeight: 230 },
-  DiscoundBlock: { position: 'absolute', top: '115px' },
+  DiscoundBlock: { marginTop: '-125px', marginBottom: '80px', fontSize: '29px' },
   DiscoundBtn: {
     background: '#D23F57',
     marginLeft: '5px',
@@ -41,6 +41,6 @@ const productStyle = {
     borderRadius: '3px'
   },
   QuantityText: { fontSize: '12px', flexGrow: 5, textAlign: 'center' },
-  CardIcon : { height: '15px' }
+  CardIcon: { height: '15px' }
 }
 export default productStyle; 

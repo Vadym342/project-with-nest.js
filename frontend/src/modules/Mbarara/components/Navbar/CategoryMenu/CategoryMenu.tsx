@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/client';
 import { Menu, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { GET_CATEGORIES } from '../../../../../redux/requests/mainReuqest';
+import routes from '../../../../../routes/routesPath';
+
 
 interface CategoryMenuArgs {
   categoryAnchorEl: Element | ((element: Element) => Element) | null | undefined;
@@ -36,10 +39,14 @@ const CategoryMenu = ({ categoryAnchorEl, isCategoryMenuOpen, handleCategoryMenu
     >
       {
         categories.map((category: any) => (
-          <MenuItem key={category.id} onClick={handleCategoryMenuClose}>{category.name}</MenuItem>
+          <Link key={category.id} style={{ textDecoration: 'none', color: '#2B3445' }} to={`${routes.NonAuthRoutes.pathToProductList}${category.id}`}>
+            <MenuItem onClick={handleCategoryMenuClose}>
+              {category.name}
+            </MenuItem>
+          </Link>
         ))
       }
-    </Menu>
+    </Menu >
   );
 };
 

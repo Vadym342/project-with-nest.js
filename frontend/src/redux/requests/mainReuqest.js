@@ -1,5 +1,46 @@
 import { gql } from "@apollo/client";
 
+const GET_FLASHDEALSPRODUCT = gql`
+query FlashDeals($page:Int!, $pageSize:Int!){
+  getFlashDealsProducts(page: $page, pageSize: $pageSize){
+    id,
+    name,
+		price,
+    rating,
+    discount,
+    image,
+    isFavorite
+  }
+}
+`
+const GET_ALLPRODUCTS = gql`
+query GetAllProducts($page: Int, $pageSize:Int, $categoryId: Int){
+  getAllProducts(page:$page, pageSize:$pageSize, categoryId:$categoryId){
+    id,
+    name,
+		price,
+    rating,
+    discount,
+    image,
+    isFavorite
+  }
+}
+`
+
+const GET_ALLPRODUCTS1 = gql`
+query GetAllProducts($page: Int, $pageSize:Int){ 
+  getAllProducts(page:$page, pageSize:$pageSize){
+    id,
+    name,
+		price,
+    rating,
+    discount,
+    image,
+    isFavorite
+  }
+}
+`
+
 const GET_CATEGORIES = gql`
 query{
   getAllCategories{
@@ -30,4 +71,8 @@ query GetCategoryById($id: Int!) {
 }
 `
 
-export { GET_CATEGORIES, GET_CATEGORY_BY_ID, CREATE_CATEGORY };
+export {
+  GET_CATEGORIES, GET_CATEGORY_BY_ID,
+  CREATE_CATEGORY, GET_FLASHDEALSPRODUCT, GET_ALLPRODUCTS,
+  GET_ALLPRODUCTS1
+};

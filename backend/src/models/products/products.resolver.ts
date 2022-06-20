@@ -9,7 +9,6 @@ import { Resolver, Query, Mutation, Args, Int, ResolveField, Parent } from '@nes
 import { Product } from './entities/product.entity';
 import { ProductsService } from './products.service';
 import { Category } from '../categories/entities/category.entity';
-import { FileService } from '../../filesManagement/files.service';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -45,13 +44,20 @@ export class ProductsResolver {
     return this.specificationsService.getSpecificationById(id);
   }
 
+
   @Query(() => [Product], { name: 'getAllProducts' })
-  getAllProducts(): Promise<Product[]> {
-    return this.productsService.getAllProducts();
+  getAllProducts(
+    @Args('page', { type: () => Int, nullable: true }) page?: number,
+    @Args('pageSize', { type: () => Int, nullable: true }) pageSize?: number,
+    @Args('categoryId', { type: () => Int, nullable: true }) categoryId?: number,
+  ) {
+    return this.productsService.getAllProducts(page, pageSize, categoryId);
   }
 
   @Query(() => [Product], { name: 'getProductsByArrayIds' })
-  getProductsByArrayIds(@Args('arrayIds', { type: () => [Int] }) arrayIds: number[]): Promise<Product[]> {
+  getProductsByArrayIds(
+    @Args('arrayIds', { type: () => [Int] }) arrayIds: number[]
+  ): Promise<Product[]> {
     return this.productsService.getProductsByArrayIds(arrayIds);
   }
 
