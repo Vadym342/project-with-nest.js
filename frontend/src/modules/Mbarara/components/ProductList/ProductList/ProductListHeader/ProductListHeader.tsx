@@ -1,4 +1,4 @@
-import { MenuItem, Select } from "@mui/material";
+import { MenuItem, Select } from '@mui/material';
 import ViewComfyIcon from '@mui/icons-material/ViewComfy';
 import ViewColumnIcon from '@mui/icons-material/ViewColumn';
 

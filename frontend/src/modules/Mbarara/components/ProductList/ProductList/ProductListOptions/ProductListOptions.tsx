@@ -1,6 +1,5 @@
 import { Checkbox, FormControlLabel, FormGroup, Rating, TextField, Typography } from '@mui/material';
-import React from 'react';
-import { forwardRef, useState } from 'react';
+import React, { useState } from 'react';
 import NumberFormat, { InputAttributes } from 'react-number-format';
 
 interface CustomProps {
@@ -10,28 +9,28 @@ interface CustomProps {
 
 const NumberFormatCustom = React.forwardRef<
   NumberFormat<InputAttributes>,
-  CustomProps
->(function NumberFormatCustom(props, ref) {
-  const { onChange, ...other } = props;
+  CustomProps>
+  (function NumberFormatCustom(props, ref) {
+    const { onChange, ...other } = props;
 
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={ref}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value,
-          },
-        });
-      }}
-      thousandSeparator
-      isNumericString
-      prefix="$"
-    />
-  );
-});
+    return (
+      <NumberFormat
+        {...other}
+        getInputRef={ref}
+        onValueChange={(values) => {
+          onChange({
+            target: {
+              name: props.name,
+              value: values.value,
+            },
+          });
+        }}
+        thousandSeparator
+        isNumericString
+        prefix='$'
+      />
+    );
+  });
 
 interface State {
   startPrice: string;
@@ -42,7 +41,7 @@ const ProductListOptions = () => {
 
   const [priceRange, setPriceRange] = useState<State>({
     startPrice: '0',
-    endPrice: '500000',
+    endPrice: '1000',
   });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPriceRange({
@@ -68,12 +67,12 @@ const ProductListOptions = () => {
             <TextField
               value={priceRange.startPrice}
               onChange={handleChange}
-              name="startPrice"
-              id="formatted-numberformat-input"
+              name='startPrice'
+              id='formatted-numberformat-input'
               InputProps={{
                 inputComponent: NumberFormatCustom as any,
               }}
-              variant="standard"
+              variant='standard'
             />
           </div>
           <div style={{ margin: '5px' }}>
@@ -83,12 +82,12 @@ const ProductListOptions = () => {
             <TextField
               value={priceRange.endPrice}
               onChange={handleChange}
-              name="endPrice"
-              id="formatted-numberformat-input"
+              name='endPrice'
+              id='formatted-numberformat-input'
               InputProps={{
                 inputComponent: NumberFormatCustom as any,
               }}
-              variant="standard"
+              variant='standard'
             />
           </div>
         </div>
@@ -98,10 +97,10 @@ const ProductListOptions = () => {
             Brand
           </div>
           <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Adidas" />
-            <FormControlLabel control={<Checkbox />} label="Nike" />
-            <FormControlLabel control={<Checkbox />} label="Puma" />
-            <FormControlLabel control={<Checkbox />} label="Reebok" />
+            <FormControlLabel control={<Checkbox />} label='Adidas' />
+            <FormControlLabel control={<Checkbox />} label='Nike' />
+            <FormControlLabel control={<Checkbox />} label='Puma' />
+            <FormControlLabel control={<Checkbox />} label='Reebok' />
           </FormGroup>
         </div>
 
@@ -109,12 +108,12 @@ const ProductListOptions = () => {
           <div style={{ margin: '5px', fontWeight: 500 }}>
             Rating
           </div>
-          <Typography component="legend">Read only</Typography>
-          <Rating name="read-only" value={5} readOnly />
-          <Typography component="legend">Disabled</Typography>
-          <Rating name="disabled" value={3} disabled />
-          <Typography component="legend">No rating given</Typography>
-          <Rating name="no-value" value={null} />
+          <Typography component='legend'>Read only</Typography>
+          <Rating name='read-only' value={5} readOnly />
+          <Typography component='legend'>Disabled</Typography>
+          <Rating name='disabled' value={3} disabled />
+          <Typography component='legend'>No rating given</Typography>
+          <Rating name='no-value' value={null} />
         </div>
       </div>
     </div>

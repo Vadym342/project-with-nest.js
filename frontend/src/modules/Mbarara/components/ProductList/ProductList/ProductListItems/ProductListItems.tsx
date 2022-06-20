@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { Box, Pagination } from '@mui/material';
+import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { GET_ALLPRODUCTS, GET_ALLPRODUCTS1 } from '../../../../../../redux/requests/mainReuqest';
@@ -13,7 +13,7 @@ const ProductListItems = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(10);
   const pageSize = 6;
-  
+
   const handlePages = (updatePage: number) => {
     setPage(updatePage);
   }

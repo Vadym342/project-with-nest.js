@@ -4,7 +4,6 @@ import { Organization } from '../../organizations/entities/organization.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import {
   BelongsTo,
-  BelongsToMany,
   Column,
   DataType,
   ForeignKey,

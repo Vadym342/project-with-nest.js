@@ -1,13 +1,8 @@
-import { useParams } from 'react-router-dom';
 import ProductListHeader from './ProductListHeader/ProductListHeader';
 import ProductListItems from './ProductListItems/ProductListItems';
 import ProductListOptions from './ProductListOptions/ProductListOptions';
 
 const ProductList = () => {
-  const { id: categoryId } = useParams();
-
-
-
   return (
     <div>
       <div style={{ width: '100%' }}>
