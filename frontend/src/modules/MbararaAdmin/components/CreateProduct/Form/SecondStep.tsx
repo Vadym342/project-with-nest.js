@@ -14,7 +14,7 @@ const SecondStep = () => {
     variant,
     margin
   } = useContext(AppContext)
-  const { brand, model, description, feature, producer } = formValues
+  const { brand, model, description, feature, producer } = formValues;
 
   const isError = useCallback(
     () =>
@@ -24,7 +24,7 @@ const SecondStep = () => {
           formValues[name].error
       ),
     [formValues, brand, model, description, feature, producer]
-  )
+  );
 
   return (
     <>

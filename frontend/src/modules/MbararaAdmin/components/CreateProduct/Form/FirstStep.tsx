@@ -12,7 +12,7 @@ const FirstStep = () => {
   const { formValues, handleChange, handleNext, variant, margin } = useContext(
     AppContext
   )
-  const { productName, price, discount, category, imageKey, rating } = formValues
+  const { productName, price, discount, category, imageKey, rating } = formValues;
   const [imageKeyValue, setImageKeyValue] = useState(imageKey.value);
 
   // Check if all values are not empty and if there are some errors
@@ -25,7 +25,7 @@ const FirstStep = () => {
       ),
 
     [formValues, productName, price, discount, category, imageKeyValue, rating]
-  )
+  );
 
   const { data, error, loading } = useQuery(GET_CATEGORIES);
   const categories = data?.getAllCategories;
@@ -33,7 +33,12 @@ const FirstStep = () => {
   const [file, setFile] = useState('');
   const [images, setImages] = useState([]);
 
-  const [uploadImage, { data: dataImage, loading: loadingImage, error: errorImage }] = useMutation(UPLOAD_IMAGE);
+  const [uploadImage,
+    {
+      data: dataImage,
+      loading: loadingImage,
+      error: errorImage
+    }] = useMutation(UPLOAD_IMAGE);
 
   const submit = async (event: any) => {
     event.preventDefault()

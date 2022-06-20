@@ -77,16 +77,18 @@ const RegistrationForm = () => {
           Please fill all fields to continue
         </div>
         <Box
-          component="form"
+          component='form'
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
         >
           <div>
+
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Name:</label>
             </div>
-            <OutlinedInput placeholder="Vasyan"
+
+            <OutlinedInput placeholder='Vasyan'
               style={authFormsStyle.Field}
               sx={{
                 '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
@@ -99,16 +101,18 @@ const RegistrationForm = () => {
                 })
               } />
           </div>
+
           <div style={validationStyle.textBlock}>
             {errors?.name && (
               <p>{errors?.name?.message || 'Error, try again'}</p>
             )}
           </div>
+
           <div style={authFormsStyle.IntervalBtwnField}>
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Email:</label>
             </div>
-            <OutlinedInput placeholder="example@gmail.com"
+            <OutlinedInput placeholder='example@gmail.com'
               style={authFormsStyle.Field}
               sx={{
                 '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
@@ -121,17 +125,19 @@ const RegistrationForm = () => {
                 })
               } />
           </div>
+
           <div style={validationStyle.textBlock}>
             {errors?.email && (
               <p>{errors?.email?.message || 'Error, try again'}</p>
             )}
           </div>
+
           <div style={authFormsStyle.IntervalBtwnField}>
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Password:</label>
             </div>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id='outlined-adornment-password'
               type={registerForm.showPassword ? 'text' : 'password'}
               style={authFormsStyle.Field}
               sx={{
@@ -139,12 +145,12 @@ const RegistrationForm = () => {
               }}
               value={registerForm.password}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position='end'>
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label='toggle password visibility'
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
+                    edge='end'
                   >
                     {registerForm.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -161,15 +167,16 @@ const RegistrationForm = () => {
               }
             />
           </div>
+          
           <div style={validationStyle.textBlock}>
             {errors?.password && (
               <p>{errors?.password?.message || 'Error, try again'}</p>
             )}
           </div>
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2, background: '#d23f57' }}
           >
             Create Account

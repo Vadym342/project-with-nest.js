@@ -35,12 +35,19 @@ const Confirm = () => {
       loading: productLoading,
       error: productError
     }] = useMutation(CREATE_PRODUCT);
-  const { data: categoryValue, error: categoryError, loading: categoryLoading } = useQuery(GET_CATEGORY_BY_ID, {
+
+  const {
+    data: categoryValue,
+    error: categoryError,
+    loading: categoryLoading
+  } = useQuery(GET_CATEGORY_BY_ID, {
     variables: {
       id: +category.value
     }
   });
+
   const [categoryName, setCategoryName] = useState('');
+
   const handleSubmit = () => {
     createProduct({
       variables: {
@@ -79,7 +86,7 @@ const Confirm = () => {
         }
       })
     }
-  }, [productData, specificationData, categoryValue, updateProductData])
+  }, [productData, specificationData, categoryValue, updateProductData]);
 
   return (
     <>

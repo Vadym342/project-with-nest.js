@@ -12,17 +12,14 @@ export class OrdersService {
     @InjectModel(Order) private orderRepository: typeof Order,
     @InjectModel(User) private userRepository: typeof User,
     @InjectModel(OrderItem) private orderItemRepository: typeof OrderItem,
-  ) { }
+  ) {}
 
   async createOrder(orderDto: CreateOrderDto): Promise<Order> {
-    //new field in model TOTAL PRICE, items.foreach 
+    //new field in model TOTAL PRICE, items.foreach
     const user = await this.userRepository.findOne({
       where: { id: orderDto.ownerId },
     });
     if (user) {
-      // orderDto?.items?.forEach(el => {
-      //   this.orderItemRepository.create(el);
-      // })
       return await this.orderRepository.create(orderDto);
     }
   }

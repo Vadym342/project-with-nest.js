@@ -7,7 +7,7 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-} from "@apollo/client";
+} from '@apollo/client';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import { StepsProvider } from './modules/MbararaAdmin/components/CreateProduct/Context/Context';
@@ -21,7 +21,7 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
   //@ts-ignore
   link: createUploadLink({
-    uri: "http://localhost:5001/graphql",
+    uri: 'http://localhost:5001/graphql',
   }),
 });
 root.render(

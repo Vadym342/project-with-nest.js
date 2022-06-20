@@ -3,11 +3,10 @@ import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import bcrypt from 'bcrypt';
 import { enCodePassword } from '../../utils/bcrypt';
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userRepository: typeof User) { }
+  constructor(@InjectModel(User) private userRepository: typeof User) {}
 
   async createUser(userDto: CreateUserDto): Promise<User> {
     const password = enCodePassword(userDto.password);
@@ -25,8 +24,8 @@ export class UsersService {
   async getUserByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne({
       where: {
-        email: email
-      }
+        email: email,
+      },
     });
   }
 

@@ -6,7 +6,9 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoriesService {
-  constructor(@InjectModel(Category) private CategoryRepository: typeof Category) { }
+  constructor(
+    @InjectModel(Category) private CategoryRepository: typeof Category,
+  ) {}
 
   async createCategory(CategoryDto: CreateCategoryDto): Promise<Category> {
     return await this.CategoryRepository.create(CategoryDto);
@@ -14,9 +16,7 @@ export class CategoriesService {
 
   async getAllCategories(): Promise<Category[]> {
     return await this.CategoryRepository.findAll({
-      order: [
-        ['name', 'ASC']
-      ]
+      order: [['name', 'ASC']],
     });
   }
 
@@ -24,7 +24,10 @@ export class CategoriesService {
     return await this.CategoryRepository.findByPk(id);
   }
 
-  async updateCategory(id: number, updateCategoryDto: UpdateCategoryDto): Promise<Category> {
+  async updateCategory(
+    id: number,
+    updateCategoryDto: UpdateCategoryDto,
+  ): Promise<Category> {
     const Category = await this.CategoryRepository.findByPk(id);
     if (Category) {
       await Category.update(updateCategoryDto);

@@ -1,7 +1,7 @@
-import { Menu, MenuItem } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../../../hooks/hook";
-import { setUser, userSelector } from "../../../../../redux";
-import ProfileModal from "./ProfileModal/ProfileModal";
+import { Menu, MenuItem } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../../../../hooks/hook';
+import { setUser, userSelector } from '../../../../../redux';
+import ProfileModal from './ProfileModal/ProfileModal';
 
 interface ProfileMenuArgs {
   menuId: string;

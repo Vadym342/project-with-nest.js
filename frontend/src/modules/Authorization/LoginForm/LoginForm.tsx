@@ -100,7 +100,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
           Login
         </div>
         <Box
-          component="form"
+          component='form'
           onSubmit={handleSubmit(onSubmit)}
           noValidate
           sx={{ mt: 1 }}
@@ -109,7 +109,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
             <div style={authFormsStyle.FieldLabel as React.CSSProperties}>
               <label style={authFormsStyle.FieldLabelText}>Email:</label>
             </div>
-            <OutlinedInput placeholder="example@gmail.com"
+            <OutlinedInput placeholder='example@gmail.com'
               style={authFormsStyle.Field}
               sx={{
                 '& .MuiOutlinedInput-input': authFormsStyle.FieldOverride
@@ -132,7 +132,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
               <label style={authFormsStyle.FieldLabelText}>Password:</label>
             </div>
             <OutlinedInput
-              id="outlined-adornment-password"
+              id='outlined-adornment-password'
               type={loginForm.showPassword ? 'text' : 'password'}
               style={authFormsStyle.Field}
               sx={{
@@ -140,12 +140,12 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
               }}
               value={loginForm.password}
               endAdornment={
-                <InputAdornment position="end">
+                <InputAdornment position='end'>
                   <IconButton
-                    aria-label="toggle password visibility"
+                    aria-label='toggle password visibility'
                     onClick={handleClickShowPassword}
                     onMouseDown={handleMouseDownPassword}
-                    edge="end"
+                    edge='end'
                   >
                     {loginForm.showPassword ? <VisibilityOff /> : <Visibility />}
                   </IconButton>
@@ -173,9 +173,9 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
             }
           </div>
           <Button
-            type="submit"
+            type='submit'
             fullWidth
-            variant="contained"
+            variant='contained'
             sx={{ mt: 3, mb: 2, background: '#d23f57' }}
           >
             Login

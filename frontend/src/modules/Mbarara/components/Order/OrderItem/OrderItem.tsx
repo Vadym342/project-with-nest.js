@@ -1,5 +1,6 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useState } from 'react';
+import { consts } from '../../../../../consts/consts';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/hook';
 import { deleteOrderItem, orderItemsSelector, setOrderItems, updateOrderItem } from '../../../../../redux';
 import Quantity from '../../../../../shared/Buttons/Quantity';
@@ -86,7 +87,7 @@ const OrderItem = ({ id, name, image, orderedPrice, quantityInc }: OrderItemArgs
       <div style={{ flexGrow: 1 }}>
         <img
           style={{ height: '50px', width: '80px', marginLeft: '20px' }}
-          src={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
+          src={`${consts.bucketUrl}${image}`}
           alt='photo'
         />
       </div>

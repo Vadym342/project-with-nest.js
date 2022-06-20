@@ -1,11 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import {
-  Column,
-  DataType,
-  HasOne,
-  Model,
-  Table,
-} from 'sequelize-typescript';
+import { Column, DataType, HasOne, Model, Table } from 'sequelize-typescript';
 import { Product } from '../../products/entities/product.entity';
 
 @ObjectType()
@@ -38,7 +32,7 @@ export class Specification extends Model<Specification> {
 
   @Column({ type: DataType.STRING, allowNull: true })
   @Field({ nullable: true })
-  producer:string;
+  producer: string;
 
   @HasOne(() => Product)
   products: Product;

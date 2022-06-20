@@ -11,6 +11,11 @@ import { User } from '../users/entities/user.entity';
 
 @Module({
   imports: [SequelizeModule.forFeature([Order, User, OrderItem, Shipment])],
-  providers: [OrdersResolver, OrdersService, OrderItemsService, ShipmentsService],
+  providers: [
+    OrdersResolver,
+    OrdersService,
+    OrderItemsService,
+    ShipmentsService,
+  ],
 })
 export class OrdersModule {}

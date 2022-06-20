@@ -2,7 +2,6 @@ import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/hook';
 import Dashboard from '../../modules/MbararaAdmin/components/Dashboard/Dashboard';
-import MenuAppBar from '../../modules/MbararaAdmin/components/SideBar/AppBar';
 import { userSelector } from '../../redux';
 
 
@@ -13,10 +12,11 @@ const MbararaAdmin = () => {
   const handleUnAuthorized = () => {
     history('/login');
   }
+
   return (
     <div>
       {
-        user?.user?.role === "ADMIN" ? (
+        user?.user?.role === 'ADMIN' ? (
           <>
             <Dashboard />
           </>

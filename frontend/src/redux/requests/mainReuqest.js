@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client';
 
 const GET_FLASHDEALSPRODUCT = gql`
 query FlashDeals($page:Int!, $pageSize:Int!){

@@ -37,13 +37,12 @@ const CreateCategory = () => {
     if(error){
       console.log(JSON.stringify(error, null, 2));
     }
-
   }, [data])
 
   return (
     <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
       <Box
-        component="form"
+        component='form'
         onSubmit={handleSubmit(onSubmit)}
         noValidate
         sx={{ mt: 1 }}
@@ -80,7 +79,7 @@ const CreateCategory = () => {
           </Grid>
           <Grid item xs={12} sm={12}>
             <Button
-              type="submit"
+              type='submit'
               variant='contained'
               color='primary'
               sx={{ mt: 3, ml: 1 }}

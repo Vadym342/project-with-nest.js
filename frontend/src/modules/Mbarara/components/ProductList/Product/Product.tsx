@@ -4,12 +4,13 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Box } from '@mui/material';
 import productStyle from './productStyle';
 import Quantity from '../../../../../shared/Buttons/Quantity';
 import { useAppDispatch, useAppSelector } from '../../../../../hooks/hook';
 import { deleteOrderItem, orderItemsSelector, setOrderItems, updateOrderItem } from '../../../../../redux';
+import { consts } from '../../../../../consts/consts';
 
 interface ProductArgs {
   id: number;
@@ -54,47 +55,42 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
     }
   }
 
+  const addOrderItemsObj = {
+    productId: id,
+    orderedPrice: price - ((price * discount) / 100),
+    quantity: quantity + 1
+  }
+
+  const deleteOrderItemsObj = {
+    productId: id,
+    orderedPrice: price - ((price * discount) / 100),
+    quantity: quantity - 1
+  }
+
   const handleIncreaseQuantity = useCallback(() => {
     setQuantity(quantity + 1);
     if (orderItems.length === 0) {
-      dispatch(setOrderItems({
-        productId: id,
-        orderedPrice: price - ((price * discount) / 100),
-        quantity: quantity + 1
-      }))
+      dispatch(setOrderItems(addOrderItemsObj))
     } else {
       for (let obj of orderItems) {
         if (obj.productId === id) {
-          dispatch(updateOrderItem({
-            productId: id,
-            orderedPrice: price - ((price * discount) / 100),
-            quantity: quantity + 1
-          }))
+          dispatch(updateOrderItem(addOrderItemsObj))
         }
         if (obj.productId !== id) {
           dispatch(deleteOrderItem(id))
-          dispatch(setOrderItems({
-            productId: id,
-            orderedPrice: price - ((price * discount) / 100),
-            quantity: quantity + 1
-          }))
+          dispatch(setOrderItems(addOrderItemsObj))
         }
       }
     }
-  }, [quantity])
+  }, [quantity]);
+
   const handleDecreaseQuantity = () => {
     setQuantity(quantity - 1);
     for (let obj of orderItems) {
-      if (obj.productId === id) {
-        if (obj.quantity > 1) {
-          dispatch(updateOrderItem({
-            productId: id,
-            orderedPrice: price - ((price * discount) / 100),
-            quantity: quantity - 1
-          }))
-        } else {
-          dispatch(deleteOrderItem(id))
-        }
+      if (obj.productId === id && obj.quantity > 1) {
+        dispatch(updateOrderItem(deleteOrderItemsObj))
+      } else {
+        dispatch(deleteOrderItem(id))
       }
     }
   }
@@ -106,7 +102,7 @@ const Product = ({ id, name, price, rating, isFavorite, discount, image }: Produ
           style={{ backgroundSize: 'cover' }}
           component='img'
           height='110'
-          image={`https://shopimages54643.s3.eu-west-2.amazonaws.com/${image}`}
+          image={`${consts.bucketUrl}${image}`}
           alt={name}
         />
         {

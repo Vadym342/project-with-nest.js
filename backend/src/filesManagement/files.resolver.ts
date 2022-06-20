@@ -6,17 +6,14 @@ import { imageFileFilter } from './file.helper';
 import { FileService } from './files.service';
 @Resolver()
 export class FileResolver {
-  //util.promisify 
-  constructor(
-    private readonly filesService: FileService,
-  ) { }
+  //util.promisify
+  constructor(private readonly filesService: FileService) {}
 
   @Mutation(() => String)
-  async uploadFile(@Args({ name: 'file', type: () => GraphQLUpload })
-  {
-    createReadStream,
-    filename,
-  }: FileUpload) {
+  async uploadFile(
+    @Args({ name: 'file', type: () => GraphQLUpload })
+    { createReadStream, filename }: FileUpload,
+  ) {
     if (!imageFileFilter(filename)) {
       return Promise.reject(new Error('Only image files are allowed!'));
     }
@@ -25,13 +22,13 @@ export class FileResolver {
       createReadStream()
         .pipe(createWriteStream(`./uploads/${path}`))
         .on('error', error => reject(error))
-        .on('finish', () => resolve(`${path}`))
+        .on('finish', () => resolve(`${path}`)),
     );
   }
 
-  @Query(() => String, { name: "getImage" })
+  @Query(() => String, { name: 'getImage' })
   async getImage(@Args('key', { type: () => String }) key: string) {
     const res = await this.filesService.getFile(key);
-    return `data:image/*;base64,${res.Body.toString("base64")}`
+    return `data:image/*;base64,${res.Body.toString('base64')}`;
   }
 }

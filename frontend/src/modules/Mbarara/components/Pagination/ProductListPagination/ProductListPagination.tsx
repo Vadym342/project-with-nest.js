@@ -1,7 +1,4 @@
-import { Button, Pagination } from "@mui/material";
-import React from "react";
-import styles from "./ProductListPaginationStyles";
-
+import { Pagination } from '@mui/material';
 
 export interface Props {
   page: number;

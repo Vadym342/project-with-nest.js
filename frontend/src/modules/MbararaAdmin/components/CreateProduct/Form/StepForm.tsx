@@ -9,10 +9,8 @@ import SecondStep from './SecondStep';
 import Confirm from './Confirm';
 import Success from './Success';
 import { AppContext } from '../Context/Context';
+import { consts } from '../../../../../consts/consts';
 
-
-// Step titles
-const labels = ['Product', 'Specification', 'Confirmation']
 const handleSteps = (step: number) => {
   switch (step) {
     case 0:
@@ -31,7 +29,7 @@ const StepForm = () => {
 
   return (
     <>
-      {activeStep === labels.length ? (
+      {activeStep === consts.stepLabels.length ? (
         <Success />
       ) : (
         <>
@@ -41,7 +39,7 @@ const StepForm = () => {
             </Typography>
           </Box>
           <Stepper activeStep={activeStep} sx={{ py: 3 }} alternativeLabel>
-            {labels.map((label) => (
+            {consts.stepLabels.map((label) => (
               <Step key={label}>
                 <StepLabel>{label}</StepLabel>
               </Step>

@@ -10,7 +10,8 @@ export class CategoriesResolver {
 
   @Mutation(() => Category)
   createCategory(
-    @Args('CategoryDto', { type: () => CreateCategoryDto }) CategoryDto: CreateCategoryDto,
+    @Args('CategoryDto', { type: () => CreateCategoryDto })
+    CategoryDto: CreateCategoryDto,
   ): Promise<Category> {
     return this.categoriesService.createCategory(CategoryDto);
   }
@@ -21,7 +22,9 @@ export class CategoriesResolver {
   }
 
   @Query(() => Category, { name: 'getCategoryById' })
-  getCategoryById(@Args('id', { type: () => Int }) id: number): Promise<Category> {
+  getCategoryById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Category> {
     return this.categoriesService.getCategoryById(id);
   }
 
@@ -30,11 +33,16 @@ export class CategoriesResolver {
     @Args('updateCategoryDto', { type: () => UpdateCategoryDto })
     updateCategoryDto: UpdateCategoryDto,
   ): Promise<Category> {
-    return this.categoriesService.updateCategory(updateCategoryDto.id, updateCategoryDto);
+    return this.categoriesService.updateCategory(
+      updateCategoryDto.id,
+      updateCategoryDto,
+    );
   }
 
   @Mutation(() => Category)
-  removeCategoryById(@Args('id', { type: () => Int }) id: number): Promise<Category> {
+  removeCategoryById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Category> {
     return this.categoriesService.removeCategoryById(id);
   }
 }

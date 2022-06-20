@@ -21,13 +21,12 @@ import { User } from './models/users/entities/user.entity';
 import { UsersModule } from './models/users/users.module';
 import { Product } from './models/products/entities/product.entity';
 import { CategoriesModule } from './models/categories/categories.module';
-import { FileResolver } from './filesManagement/files.resolver';
 import { MulterModule } from '@nestjs/platform-express';
 import { FileModule } from './filesManagement/file.module';
 @Module({
   imports: [
     MulterModule.register({
-      dest:'./files',
+      dest: './files',
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -53,7 +52,7 @@ import { FileModule } from './filesManagement/file.module';
           Category,
           Specification,
           Shipment,
-          OrderItem
+          OrderItem,
         ],
         autoLoadModels: true,
       }),
@@ -68,8 +67,7 @@ import { FileModule } from './filesManagement/file.module';
     SpecificationsModule,
     ShipmentsModule,
     OrderItemsModule,
-    //FileResolver,
-    FileModule
+    FileModule,
   ],
 })
-export class AppModule { }
+export class AppModule {}

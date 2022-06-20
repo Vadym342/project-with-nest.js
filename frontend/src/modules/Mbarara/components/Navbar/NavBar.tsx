@@ -1,11 +1,5 @@
 import { styled, alpha } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import InputBase from '@mui/material/InputBase';
-import Badge from '@mui/material/Badge';
+import { AppBar, Box, Toolbar, IconButton, Typography, InputBase, Badge } from '@mui/material';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -112,6 +106,7 @@ const NavBar = () => {
               Mbarara
             </Link>
           </Typography>
+
           <IconButton
             onClick={handlerCategoryMenuOpen}
             size='large'
@@ -123,6 +118,7 @@ const NavBar = () => {
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
+
           <Search style={navbarStyle.Search}>
             <SearchIconWrapper>
               <SearchIcon style={navbarStyle.SearchIcon} />
@@ -132,6 +128,7 @@ const NavBar = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+
           <Box sx={{ flexGrow: 1 }} />
           {
             user?.token && user?.user?.role === 'ADMIN' && (
@@ -144,6 +141,7 @@ const NavBar = () => {
               </Box>
             )
           }
+
           <Box sx={navbarStyle.AccountBox}>
             <IconButton
               size='large'
@@ -168,11 +166,13 @@ const NavBar = () => {
           </Box>
         </Toolbar>
       </AppBar>
+
       <CategoryMenu
         categoryAnchorEl={categoryAnchorEl}
         isCategoryMenuOpen={isCategoryMenuOpen}
         handleCategoryMenuClose={handleCategoryMenuClose}
       />
+
       <ProfileMenu
         menuId={menuId}
         anchorEl={anchorEl}
@@ -180,6 +180,7 @@ const NavBar = () => {
         setAnchorEl={setAnchorEl}
         handleMenuClose={handleMenuClose}
       />
+
       {
         orderAnchorEl && (
           <Sidebar

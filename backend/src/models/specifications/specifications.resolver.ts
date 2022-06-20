@@ -4,13 +4,14 @@ import { CreateSpecificationDto } from './dto/create-specifications.dto';
 import { UpdateSpecificationDto } from './dto/update-specifications.dto';
 import { Specification } from './entities/specification.entity';
 
-@Resolver(() => Specification )
+@Resolver(() => Specification)
 export class SpecificationsResolver {
   constructor(private readonly pecificationsService: SpecificationsService) {}
 
   @Mutation(() => Specification)
   createSpecification(
-    @Args('SpecificationDto', { type: () => CreateSpecificationDto }) SpecificationDto: CreateSpecificationDto,
+    @Args('SpecificationDto', { type: () => CreateSpecificationDto })
+    SpecificationDto: CreateSpecificationDto,
   ): Promise<Specification> {
     return this.pecificationsService.createSpecification(SpecificationDto);
   }
@@ -21,7 +22,9 @@ export class SpecificationsResolver {
   }
 
   @Query(() => Specification, { name: 'getSpecificationById' })
-  getSpecificationById(@Args('id', { type: () => Int }) id: number): Promise<Specification> {
+  getSpecificationById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Specification> {
     return this.pecificationsService.getSpecificationById(id);
   }
 
@@ -30,11 +33,16 @@ export class SpecificationsResolver {
     @Args('updateSpecificationDto', { type: () => UpdateSpecificationDto })
     updateSpecificationDto: UpdateSpecificationDto,
   ): Promise<Specification> {
-    return this.pecificationsService.updateSpecification(updateSpecificationDto.id, updateSpecificationDto);
+    return this.pecificationsService.updateSpecification(
+      updateSpecificationDto.id,
+      updateSpecificationDto,
+    );
   }
 
   @Mutation(() => Specification)
-  removeSpecificationById(@Args('id', { type: () => Int }) id: number): Promise<Specification> {
+  removeSpecificationById(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<Specification> {
     return this.pecificationsService.removeSpecificationById(id);
   }
 }

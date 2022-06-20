@@ -1,4 +1,3 @@
-import { styled } from '@mui/material/styles';
 import List from '@mui/material/List';
 import { ShoppingBag } from '@mui/icons-material';
 import OrderItem from '../OrderItem/OrderItem';
@@ -9,17 +8,6 @@ import { GET_PRODUCTS_BY_IDS } from '../../../../../redux/requests/orderRequest'
 import { useQuery } from '@apollo/client';
 import { useEffect, useState } from 'react';
 import { Box, Drawer } from '@mui/material';
-
-const SidebarBox = styled('div')(({ theme }) => ({
-  width: '100%',
-  background: '#F6F9FC',
-  height: '86vh',
-  color: '#0f3460',
-  right: 0,
-  position: 'absolute',
-  boxShadow: '-5px 0px 5px 0px #aaaaaa',
-  zIndex: 10
-}));
 
 interface OrderMenuArgs {
   orderAnchorEl: Element | ((element: Element) => Element) | null | undefined;
@@ -59,7 +47,7 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
   }
 
   const handleCheckout = () => {
-
+    console.log(orderMappedItems);
   }
 
   const sum = handleMapOrderItems('sum');
@@ -70,14 +58,15 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
       arrayIds: arrayOfIds
     }
   });
+
   useEffect(() => {
     if (data) {
       const result = data.getProductsByArrayIds.map((t1: getProductsByArrayIdsArgs) =>
         ({ ...t1, ...orderItems.find((t2: orderItemsArgs) => t2.productId === t1.id) }))
       setOrderMappedItems(result);
-      console.log(result)
     }
-  }, [data])
+  }, [data]);
+
   return (
     <Drawer anchor='right' open={isOrderMenuOpen} onClose={handleOrderMenuClose}>
       <Box p={2} width='300px' textAlign={'center'} role='presentation'>
@@ -90,6 +79,7 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
               {orderItems.length} item
             </div>
           </div>
+
           <div style={orderItems.length > 4 ?{ height: '250px', overflow: 'scroll' }: {}}>
             {
               orderMappedItems?.map((orderItem: any) => (
@@ -103,8 +93,8 @@ const Sidebar = ({ orderAnchorEl, isOrderMenuOpen, handleOrderMenuClose }: Order
                 />
               ))
             }
-
           </div>
+
           <div style={{
             display: 'flex',
             flexDirection: 'column',
