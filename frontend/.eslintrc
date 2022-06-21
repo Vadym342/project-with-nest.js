@@ -29,8 +29,14 @@
         "react/react-in-jsx-scope": "off",
         "@typescript-eslint/ban-ts-comment": "off",
         "@typescript-eslint/ban-types": "off",
+        "@typescript-eslint/no-explicit-any": "off",
         "react/no-unescaped-entities": 0,
-        "eslint no-empty-function":"off",
-        "max-len": ["warn", { "code": 120 }]
+        "eslint no-empty-function": "off",
+        "max-len": [
+            "warn",
+            {
+                "code": 120
+            }
+        ]
     }
 }
