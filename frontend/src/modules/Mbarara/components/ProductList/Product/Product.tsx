@@ -150,9 +150,9 @@ const Product = ({
             {discount ? (
               <>
                 <div style={productStyle.PriceDiscText}>
-                  {price - (price * discount) / 100}$
+                  {(price - (price * discount) / 100).toFixed(2)}$
                 </div>
-                <div style={productStyle.PriceText}>{price}$</div>
+                <div style={productStyle.PriceText}>{price.toFixed(2)}$</div>
               </>
             ) : (
               <div style={productStyle.PriceDiscText}>{price}$</div>

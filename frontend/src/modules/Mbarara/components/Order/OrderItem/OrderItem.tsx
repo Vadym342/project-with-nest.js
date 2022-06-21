@@ -32,35 +32,35 @@ const OrderItem = ({
     dispatch(deleteOrderItem(id));
   };
 
+  const addOrderItemsObj = {
+    productId: id,
+    orderedPrice,
+    quantity: quantity + 1,
+  };
+
+  const deleteOrderItemsObj = {
+    productId: id,
+    orderedPrice,
+    quantity: quantity - 1,
+  };
+
   const handleIncreaseQuantity = () => {
     setQuantity(quantity + 1);
     if (orderItems.length === 0) {
       dispatch(
-        setOrderItems({
-          productId: id,
-          orderedPrice,
-          quantity: quantity + 1,
-        })
+        setOrderItems(addOrderItemsObj)
       );
     } else {
       for (const obj of orderItems) {
         if (obj.productId === id) {
           dispatch(
-            updateOrderItem({
-              productId: id,
-              orderedPrice,
-              quantity: quantity + 1,
-            })
+            updateOrderItem(addOrderItemsObj)
           );
         }
         if (obj.productId !== id) {
           dispatch(deleteOrderItem(id));
           dispatch(
-            setOrderItems({
-              productId: id,
-              orderedPrice,
-              quantity: quantity + 1,
-            })
+            setOrderItems(addOrderItemsObj)
           );
         }
       }
@@ -70,22 +70,17 @@ const OrderItem = ({
     if (quantity > 1) {
       setQuantity(quantity - 1);
       for (const obj of orderItems) {
-        if (obj.productId === id) {
-          if (obj.quantity > 1) {
-            dispatch(
-              updateOrderItem({
-                productId: id,
-                orderedPrice,
-                quantity: quantity - 1,
-              })
-            );
-          } else {
-            dispatch(deleteOrderItem(id));
-          }
+        if (obj.productId === id && obj.quantity > 1) {
+          dispatch(
+            updateOrderItem(deleteOrderItemsObj)
+          );
+        } else {
+          dispatch(deleteOrderItem(id));
         }
       }
     }
   };
+
   return (
     <div
       style={{
@@ -105,6 +100,7 @@ const OrderItem = ({
           />
         </div>
       </div>
+
       <div style={{ flexGrow: 1 }}>
         <img
           style={{ height: '50px', width: '80px', marginLeft: '20px' }}
@@ -112,6 +108,7 @@ const OrderItem = ({
           alt='photo'
         />
       </div>
+
       <div
         style={{
           flexGrow: 1,
@@ -122,9 +119,9 @@ const OrderItem = ({
       >
         <div>{name.length > 15 ? `${name.substr(0, 15)}...` : name}</div>
         <div style={{ fontSize: '8px', marginTop: '5px' }}>
-          {orderedPrice} x {quantity}
+          {orderedPrice.toFixed(2)} x {quantity}
         </div>
-        <div style={{ marginTop: '5px' }}>{orderedPrice * quantity}</div>
+        <div style={{ marginTop: '5px' }}>{(orderedPrice * quantity).toFixed(2)}</div>
       </div>
       <div style={{ marginRight: '10px' }}>
         <CloseIcon onClick={handleDeleteItem} />

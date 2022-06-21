@@ -68,16 +68,18 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
         };
         dispatch(setUser(user));
         localStorage.setItem('user', JSON.stringify(user));
-        history('/');
+        history('/', {
+          replace: false
+        });
       }
     }
   }, [data, error]);
 
   const handleChange =
     (prop: keyof FormValues) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setLoginForm({ ...loginForm, [prop]: event.target.value });
-    };
+      (event: React.ChangeEvent<HTMLInputElement>) => {
+        setLoginForm({ ...loginForm, [prop]: event.target.value });
+      };
 
   const handleClickShowPassword = () => {
     setLoginForm({
@@ -91,7 +93,7 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
   ) => {
     event.preventDefault();
   };
-  
+
   return (
     <Box>
       <CssBaseline />
