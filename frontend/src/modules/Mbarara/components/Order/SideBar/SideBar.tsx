@@ -146,7 +146,7 @@ const Sidebar = ({
                 }}
                 onClick={handleCheckout}
               >
-                Checkout Now (${sum})
+                Checkout Now (${Number(sum).toFixed(2)})
               </Button>
               <Button
                 fullWidth
