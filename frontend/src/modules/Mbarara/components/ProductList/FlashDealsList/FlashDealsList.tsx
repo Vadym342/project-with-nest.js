@@ -27,9 +27,7 @@ const FlashDealsList = () => {
 
   if (error) return <div>Error Page</div>;
 
-  if (loading) return <div>Spinner...</div>;
-
-  const products = data.getFlashDealsProducts;
+  const products = data?.getFlashDealsProducts;
 
   return (
     <Box style={flashDealsStyle.MainBox}>
@@ -46,7 +44,7 @@ const FlashDealsList = () => {
           flexWrap: 'wrap',
         }}
       >
-        {products.map((product: any) => (
+        {products?.map((product: any) => (
           <Product
             key={product.id}
             id={product.id}

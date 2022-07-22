@@ -203,10 +203,14 @@ const Confirm = () => {
       </List>
 
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 3 }}>
-        <Button sx={{ mr: 1 }} onClick={handleBack}>
+        <Button sx={{ mr: 1, marginTop:'5px' }} onClick={handleBack}>
           Back
         </Button>
-        <Button variant='contained' color='success' onClick={handleSubmit}>
+        <Button variant='outlined'
+          sx={{
+            fontSize: '13px',
+            marginTop: '5px',
+          }} onClick={handleSubmit}>
           Confirm & Continue
         </Button>
       </Box>
