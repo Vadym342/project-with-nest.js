@@ -1,3 +1,8 @@
+const Regex = {
+    email: /[^@\s]+@[^@\s]+/,
+    password: /^[a-zA-Z]{5,50}$/,
+};
+
 const valRequired = {
     required: 'Field is required',
     maxLength: {

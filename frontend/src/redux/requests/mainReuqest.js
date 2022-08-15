@@ -62,6 +62,15 @@ mutation CreateCategory($name: String!){
 }
 `
 
+const DELETE_CATEGORY = gql`
+mutation DeleteCategory($id: Int!){
+  removeCategoryById(id: $id){
+    id,
+    name
+  }
+}
+`
+
 const GET_CATEGORY_BY_ID = gql`
 query GetCategoryById($id: Int!) {
   getCategoryById(id:$id){
@@ -74,5 +83,5 @@ query GetCategoryById($id: Int!) {
 export {
   GET_CATEGORIES, GET_CATEGORY_BY_ID,
   CREATE_CATEGORY, GET_FLASHDEALSPRODUCT, GET_ALLPRODUCTS,
-  GET_ALLPRODUCTS1
+  GET_ALLPRODUCTS1, DELETE_CATEGORY
 };

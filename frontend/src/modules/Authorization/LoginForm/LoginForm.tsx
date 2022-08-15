@@ -160,7 +160,6 @@ const LoginForm = ({ handleMenuClose }: LoginFormArgs) => {
               }
               {...register('password', valRequired)}
               onChange={e => {
-                handleChange('password');
                 setLoginForm({
                   ...loginForm,
                   password: e.target.value,

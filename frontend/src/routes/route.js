@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import { useAppSelector } from '../hooks/hook';
 import ProductList from '../modules/Mbarara/components/ProductList/ProductList/ProductList';
-import CreateCategory from '../modules/MbararaAdmin/components/CreateCategory/CreateCategory';
+import CreateCategory from '../modules/MbararaAdmin/components/CategoryPage/CreateCategory';
 import CreateProduct from '../modules/MbararaAdmin/components/CreateProduct/CreateProduct';
 import Login from '../pages/Authorization/Login';
 import Registration from '../pages/Authorization/Registration';
@@ -11,6 +11,7 @@ import { userSelector } from '../redux';
 import PrivateRoute from './privateRoute';
 import PublicRoute from './publicRoute';
 import routes from './routesPath';
+import CategoryPage from './../modules/MbararaAdmin/components/CategoryPage/CategoryPage';
 
 const Router = () => {
   const user = useAppSelector(userSelector);
@@ -27,7 +28,7 @@ const Router = () => {
         <Route element={<PrivateRoute user={user} />}>
           <Route exact path={routes.AuthRoutes.pathToAdmin} element={<MbararaAdmin />} />
           <Route exact path={routes.AuthRoutes.pathToCreateProduct} element={<CreateProduct />} />
-          <Route exact path={routes.AuthRoutes.pathToCreateCategory} element={<CreateCategory />} />
+          <Route exact path={routes.AuthRoutes.pathToCreateCategory} element={<CategoryPage />} />
         </Route>
 
         <Route

@@ -21,7 +21,7 @@ type FormValues = {
 const CreateCategory = () => {
   const [createCategory, { data, loading, error }] =
     useMutation(CREATE_CATEGORY);
-
+    
   const {
     register,
     formState: { errors },
@@ -49,7 +49,7 @@ const CreateCategory = () => {
   }, [data]);
 
   return (
-    <Container component='main' maxWidth='sm' sx={{ mb: 4 }}>
+    <>
       <Box
         component='form'
         onSubmit={handleSubmit(onSubmit)}
@@ -98,7 +98,7 @@ const CreateCategory = () => {
           </Grid>
         </Paper>
       </Box>
-    </Container>
+    </>
   );
 };
 
