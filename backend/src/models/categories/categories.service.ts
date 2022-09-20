@@ -39,6 +39,7 @@ export class CategoriesService {
   async removeCategoryById(id: number): Promise<Category> {
     const Category = await this.CategoryRepository.findByPk(id);
     if (Category) {
+      //?cascade!
       await Category.destroy();
       return Category;
     }
