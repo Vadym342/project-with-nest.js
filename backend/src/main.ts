@@ -6,6 +6,7 @@ import { config } from 'aws-sdk';
 
 const start = async () => {
   try {
+    //graphql ui crash
     const app = await NestFactory.create(AppModule);
     const configService = app.get(ConfigService);
     config.update({
